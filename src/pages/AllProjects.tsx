@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
@@ -235,6 +235,35 @@ const AllProjects = () => {
       [offerId]: !prev[offerId],
     }));
   };
+
+  // Filter projects based on search query and other filters
+  const filteredProjects = useMemo(() => {
+    let filtered = [...projectList];
+
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      filtered = filtered.filter(project => 
+        project.name.toLowerCase().includes(query) ||
+        project.location.toLowerCase().includes(query) ||
+        project.type.toLowerCase().includes(query) ||
+        project.builder.toLowerCase().includes(query) ||
+        project.status.toLowerCase().includes(query)
+      );
+    }
+
+    // Apply "hide already seen" filter
+    if (hideAlreadySeen) {
+      filtered = filtered.filter(project => !project.isViewed);
+    }
+
+    // Apply verified properties filter
+    if (verifiedProperties) {
+      filtered = filtered.filter(project => project.reraApproved);
+    }
+
+    return filtered;
+  }, [projectList, searchQuery, hideAlreadySeen, verifiedProperties]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -756,13 +785,22 @@ const AllProjects = () => {
           <div className="lg:col-span-3">
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {projectList.map((project) => (
-                <ProjectCard 
-                  key={project.id} 
-                  project={project} 
-                  onLikeToggle={handleLikeToggle}
-                />
-              ))}
+              {filteredProjects.length > 0 ? (
+                filteredProjects.map((project) => (
+                  <ProjectCard 
+                    key={project.id} 
+                    project={project} 
+                    onLikeToggle={handleLikeToggle}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-12">
+                  <div className="text-gray-500 text-lg mb-2">No projects found</div>
+                  <div className="text-gray-400 text-sm">
+                    {searchQuery ? `No results for "${searchQuery}"` : "Try adjusting your filters"}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Limited Offers Section */}
@@ -805,15 +843,17 @@ const AllProjects = () => {
             </section>
 
             {/* More Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {projectList.slice(0, 4).map((project) => (
-                <ProjectCard 
-                  key={`bottom-${project.id}`} 
-                  project={project} 
-                  onLikeToggle={handleLikeToggle}
-                />
-              ))}
-            </div>
+            {filteredProjects.length > 4 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                {filteredProjects.slice(4, 8).map((project) => (
+                  <ProjectCard 
+                    key={`bottom-${project.id}`} 
+                    project={project} 
+                    onLikeToggle={handleLikeToggle}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
