@@ -345,43 +345,22 @@ const ProjectDetails = () => {
             </div>
           </div>
           
-          {/* Building Complex Visualization */}
-          <div className="relative w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <img
-              src={projectAerial}
-              alt="Suji Platinum Building Complex"
-              className="w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
+              alt="Building View 1"
+              className="w-full h-48 object-cover rounded-lg"
             />
-            
-            {/* Gradient overlay for better contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20" />
-            
-            {/* View Brochure Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Button 
-                size="lg"
-                className="bg-white hover:bg-white/90 text-primary font-semibold px-8 py-3 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                View Brochure
-              </Button>
-            </div>
-            
-            {/* Project Info Overlay - Bottom Left */}
-            <div className="absolute bottom-6 left-6 text-white">
-              <h3 className="text-2xl font-bold mb-2">Suji Platinum</h3>
-              <p className="text-white/90 flex items-center">
-                <MapPin className="h-4 w-4 mr-1" />
-                Vikhroli, Central Mumbai Suburbs
-              </p>
-            </div>
-            
-            {/* Price Badge - Bottom Right */}
-            <div className="absolute bottom-6 right-6">
-              <div className="bg-white/95 backdrop-blur-sm rounded-lg px-4 py-2">
-                <p className="text-sm text-gray-600">Starting from</p>
-                <p className="text-xl font-bold text-primary">₹78L - 1.24Cr</p>
-              </div>
-            </div>
+            <img
+              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"
+              alt="Building View 2"
+              className="w-full h-48 object-cover rounded-lg"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop"
+              alt="Building View 3"
+              className="w-full h-48 object-cover rounded-lg"
+            />
           </div>
           
           <div className="text-center mt-6">
