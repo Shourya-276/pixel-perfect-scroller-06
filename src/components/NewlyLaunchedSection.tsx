@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Bed, Bath, Home } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { MapPin, Bed, Home } from "lucide-react";
 
 const properties = [
   {
@@ -14,58 +13,54 @@ const properties = [
   },
   {
     id: 2,
-    name: "RNA NG Royal Park",
-    location: "Kanjurmarg", 
-    price: "₹1.48 Cr",
-    beds: "1 bhk, 2 bhk",
+    name: "Lodha Amara",
+    location: "Thane", 
+    price: "₹2.25 Cr",
+    beds: "2 bhk, 3 bhk",
     type: "Residential",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
   },
   {
     id: 3,
-    name: "RNA NG Royal Park",
-    location: "Kanjurmarg",
-    price: "₹1.48 Cr", 
+    name: "Godrej Properties",
+    location: "Vikhroli",
+    price: "₹1.85 Cr", 
     beds: "1 bhk, 2 bhk",
     type: "Residential",
     image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop"
   },
   {
     id: 4,
-    name: "RNA NG Royal Park",
-    location: "Kanjurmarg",
-    price: "₹1.48 Cr",
-    beds: "1 bhk, 2 bhk", 
+    name: "Mahindra Lifespaces",
+    location: "Bhandup",
+    price: "₹1.95 Cr",
+    beds: "2 bhk, 3 bhk", 
     type: "Residential",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop"
+  },
+  {
+    id: 5,
+    name: "Oberoi Realty",
+    location: "Goregaon",
+    price: "₹3.45 Cr",
+    beds: "3 bhk, 4 bhk", 
+    type: "Luxury",
+    image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&h=300&fit=crop"
+  },
+  {
+    id: 6,
+    name: "Tata Housing",
+    location: "Mulund",
+    price: "₹2.15 Cr",
+    beds: "2 bhk, 3 bhk", 
+    type: "Residential",
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop"
   }
 ];
 
 const NewlyLaunchedSection = () => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-    let animationFrame: number;
-    let scrollAmount = 0;
-    const speed = 1; // px per frame
-    const animate = () => {
-      if (scrollContainer) {
-        scrollAmount += speed;
-        if (scrollAmount >= scrollContainer.scrollWidth / 2) {
-          scrollAmount = 0;
-        }
-        scrollContainer.scrollLeft = scrollAmount;
-      }
-      animationFrame = requestAnimationFrame(animate);
-    };
-    animate();
-    return () => cancelAnimationFrame(animationFrame);
-  }, []);
-
-  // Duplicate properties for infinite loop effect
-  const allProperties = [...properties, ...properties];
+  // Create multiple duplicates for seamless loop
+  const allProperties = [...properties, ...properties, ...properties];
 
   return (
     <section className="py-12 bg-gray-50">
@@ -79,58 +74,57 @@ const NewlyLaunchedSection = () => {
         </div>
 
         {/* Animated horizontal scroll */}
-        <div className="overflow-x-hidden mb-12">
-          <div
-            ref={scrollRef}
-            className="flex gap-6 w-max animate-none"
-            style={{ scrollBehavior: "auto", minWidth: "100%" }}
-          >
+        <div className="overflow-hidden mb-12 relative">
+          {/* Flowing animation container */}
+          <div className="flex gap-6 animate-slide-left" style={{ width: 'max-content' }}>
             {allProperties.map((property, idx) => (
               <div
                 key={property.id + '-' + idx}
-                className="relative bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group h-80 min-w-[300px] max-w-xs w-full"
-                style={{ flex: "0 0 300px" }}
+                className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105 group h-80 w-[320px] flex-shrink-0"
               >
                 {/* Background image */}
                 <img
                   src={property.image}
                   alt={property.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                
                 {/* Content overlay */}
-                <div className="absolute inset-0 flex flex-col justify-between p-4 text-white">
-                  {/* Top badge */}
+                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
+                  {/* Top badge with glow effect */}
                   <div className="flex justify-start">
-                    <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
+                    <div className="bg-primary/90 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg border border-white/20">
                       {property.type}
                     </div>
                   </div>
+                  
                   {/* Bottom content */}
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-bold">{property.name}</h3>
-                    <div className="flex items-center">
+                  <div className="space-y-3 transform transition-transform duration-300 group-hover:translate-y-0">
+                    <h3 className="text-xl font-bold tracking-wide">{property.name}</h3>
+                    <div className="flex items-center text-white/90">
                       <MapPin className="h-4 w-4 mr-2" />
                       <span className="text-sm">{property.location}</span>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-white/90">
                       <Bed className="h-4 w-4 mr-2" />
                       <span className="text-sm">{property.beds}</span>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center text-white/90">
                       <Home className="h-4 w-4 mr-2" />
-                      <span className="text-sm">Residential</span>
+                      <span className="text-sm">{property.type}</span>
                     </div>
-                    <div className="flex items-center justify-between">
+                    
+                    <div className="flex items-center justify-between pt-2">
                       <div>
-                        <div className="text-sm opacity-90">Starting At</div>
-                        <div className="text-lg font-bold">{property.price}</div>
+                        <div className="text-sm opacity-80">Starting At</div>
+                        <div className="text-xl font-bold text-white">{property.price}</div>
                       </div>
                       <Button 
                         variant="secondary" 
                         size="sm"
-                        className="bg-white text-gray-800 hover:bg-gray-100"
+                        className="bg-white/95 text-gray-800 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
                       >
                         View Details
                       </Button>
@@ -140,6 +134,10 @@ const NewlyLaunchedSection = () => {
               </div>
             ))}
           </div>
+          
+          {/* Fade edges for smooth visual effect */}
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none z-10" />
         </div>
 
         <div className="text-center">

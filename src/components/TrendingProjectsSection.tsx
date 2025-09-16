@@ -99,69 +99,79 @@ const TrendingProjectsSection = () => {
           ))}
         </div>
 
-        {/* Projects carousel */}
+        {/* Projects carousel with enhanced animation */}
         <Carousel
           plugins={[
             Autoplay({
-              delay: 3000,
+              delay: 2500,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
             }),
           ]}
           className="w-full"
           opts={{
             align: "start",
             loop: true,
+            slidesToScroll: 1,
+            duration: 25,
           }}
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-6">
             {projects.map((project) => (
-              <CarouselItem key={project.id} className="pl-4 md:basis-1/2 lg:basis-1/4">
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+              <CarouselItem key={project.id} className="pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 hover:scale-105 group">
                   {/* Project image */}
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-72 overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.name}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-700 ease-out"
                     />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    {/* Enhanced gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                    
+                    {/* Animated shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
                     
                     {/* Content overlay */}
-                    <div className="absolute inset-0 flex flex-col justify-between p-4 text-white">
-                      {/* Project name */}
-                      <h3 className="text-xl font-bold">{project.name}</h3>
+                    <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
+                      {/* Project name with animated underline */}
+                      <div className="relative">
+                        <h3 className="text-xl font-bold tracking-wide group-hover:text-white transition-colors duration-300">{project.name}</h3>
+                        <div className="w-0 h-0.5 bg-primary mt-2 group-hover:w-full transition-all duration-500 ease-out" />
+                      </div>
                       
-                      {/* Bottom content */}
-                      <div className="space-y-2">
-                        <div className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-2" />
-                          <span className="text-sm">{project.location}</span>
+                      {/* Bottom content with staggered animation */}
+                      <div className="space-y-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <div className="flex items-center text-white/90 hover:text-white transition-colors duration-200">
+                          <MapPin className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                          <span className="text-sm font-medium">{project.location}</span>
                         </div>
                         
-                        <div className="flex items-center">
-                          <Bed className="h-4 w-4 mr-2" />
-                          <span className="text-sm">{project.beds}</span>
+                        <div className="flex items-center text-white/90 hover:text-white transition-colors duration-200">
+                          <Bed className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                          <span className="text-sm font-medium">{project.beds}</span>
                         </div>
                         
-                        <div className="flex items-center">
-                          <Home className="h-4 w-4 mr-2" />
-                          <span className="text-sm">{project.type}</span>
+                        <div className="flex items-center text-white/90 hover:text-white transition-colors duration-200">
+                          <Home className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                          <span className="text-sm font-medium">{project.type}</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Price section */}
-                  <div className="p-4 bg-white">
+                  {/* Enhanced price section */}
+                  <div className="p-5 bg-white group-hover:bg-gray-50 transition-colors duration-300">
                     <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-sm text-gray-600">Starting At</div>
-                        <div className="text-lg font-bold text-gray-800">{project.price}</div>
+                      <div className="space-y-1">
+                        <div className="text-sm text-gray-600 font-medium">Starting At</div>
+                        <div className="text-xl font-bold text-gray-800 group-hover:text-primary transition-colors duration-300">{project.price}</div>
                       </div>
                       <Button 
                         variant="outline" 
                         size="sm"
-                        className="text-primary border-primary hover:bg-primary hover:text-white"
+                        className="text-primary border-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
                       >
                         View Details
                       </Button>
@@ -171,8 +181,8 @@ const TrendingProjectsSection = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4" />
-          <CarouselNext className="right-4" />
+          <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
+          <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
         </Carousel>
 
         {/* View more button */}
