@@ -41,25 +41,25 @@ const Blogs = () => {
       <section className="py-12" style={{ backgroundColor: '#0D6ABC' }}>
         <div className="container mx-auto px-6">
           {/* Section header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-white">Blogs and Articles</h1>
+          <div className="mb-6 lg:mb-8">
+            <h1 className="text-3xl lg:text-4xl font-bold text-white text-center lg:text-left">Blogs and Articles</h1>
           </div>
 
           {/* Featured blogs grid - matching exact layout from image */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             {/* Left side - Large featured card */}
-            <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-80">
+            <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64 lg:h-80">
               <img
                 src={blogHero1}
                 alt="Common Mistakes in Real Estate Investing"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <h3 className="text-xl font-bold mb-2 leading-tight">Common Mistakes in Real Estate Investing</h3>
-                <p className="text-sm text-gray-200 mb-4 opacity-90">Real estate investing is one of the most popular ways to...</p>
+              <div className="absolute bottom-4 left-4 right-4 text-white lg:bottom-6 lg:left-6 lg:right-6">
+                <h3 className="text-lg lg:text-xl font-bold mb-1 leading-tight lg:mb-2">Common Mistakes in Real Estate Investing</h3>
+                <p className="text-xs lg:text-sm text-gray-200 mb-2 opacity-90 lg:mb-4">Real estate investing is one of the most popular ways to...</p>
                 <Button 
-                  className="bg-white text-black hover:bg-gray-100 rounded-md px-4 py-2 text-sm font-medium"
+                  className="bg-white text-black hover:bg-gray-100 rounded-md px-3 py-1.5 text-xs font-medium lg:px-4 lg:py-2 lg:text-sm"
                   onClick={() => window.location.href = '/blogs/common-mistakes-real-estate'}
                 >
                   Read more
@@ -68,19 +68,19 @@ const Blogs = () => {
             </div>
 
             {/* Right side - Top medium card + bottom 3 small cards */}
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               {/* Top medium card */}
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-36">
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-32 lg:h-36">
                 <img
                   src={blogHero2}
                   alt="Emerging Real Estate Markets to Watch"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="text-base font-bold mb-3 leading-tight">Emerging Real Estate Markets to Watch</h3>
+                <div className="absolute bottom-3 left-3 right-3 text-white lg:bottom-4 lg:left-4 lg:right-4">
+                  <h3 className="text-sm lg:text-base font-bold mb-2 leading-tight lg:mb-3">Emerging Real Estate Markets to Watch</h3>
                   <Button 
-                    className="bg-white text-black hover:bg-gray-100 rounded-md px-3 py-1.5 text-sm font-medium"
+                    className="bg-white text-black hover:bg-gray-100 rounded-md px-2 py-1 text-xs font-medium lg:px-3 lg:py-1.5 lg:text-sm"
                     onClick={() => window.location.href = '/blogs/emerging-markets'}
                   >
                     Read more
@@ -89,8 +89,8 @@ const Blogs = () => {
               </div>
 
               {/* Bottom row of 3 small cards */}
-              <div className="grid grid-cols-3 gap-3">
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-32">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
                   <img
                     src={blogCard1}
                     alt="What's happening Know more"
@@ -109,7 +109,7 @@ const Blogs = () => {
                   </div>
                 </div>
 
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-32">
+                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
                   <img
                     src={blogCard2}
                     alt="What's happening Know more"
@@ -128,7 +128,7 @@ const Blogs = () => {
                   </div>
                 </div>
 
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-32">
+                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
                   <img
                     src={blogCard3}
                     alt="What's happening Know more"
@@ -153,23 +153,23 @@ const Blogs = () => {
       </section>
 
       {/* Blog Posts List Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-6">
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8">
             {blogPosts.map((post) => (
-              <div key={post.id} className="flex flex-col md:flex-row gap-6 p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div key={post.id} className="flex flex-col md:flex-row gap-4 lg:gap-6 p-4 lg:p-6 bg-white rounded-lg shadow-sm border border-gray-100">
                 <div className="md:w-64 flex-shrink-0">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-48 md:h-32 object-cover rounded-lg"
+                    className="w-full h-40 md:h-32 object-cover rounded-lg"
                   />
                 </div>
                 <div className="flex-1">
-                  <div className="text-sm text-gray-500 mb-2">{post.date}</div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{post.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{post.subtitle}</p>
-                  <Button style={{ backgroundColor: '#0D6ABC' }} className="hover:opacity-90">
+                  <div className="text-xs lg:text-sm text-gray-500 mb-1 lg:mb-2">{post.date}</div>
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2 lg:mb-3">{post.title}</h3>
+                  <p className="text-sm text-gray-600 mb-3 leading-relaxed lg:mb-4">{post.subtitle}</p>
+                  <Button style={{ backgroundColor: '#0D6ABC' }} className="hover:opacity-90 text-sm px-3 py-1.5 h-auto lg:px-4 lg:py-2">
                     Read more
                   </Button>
                 </div>
@@ -178,11 +178,11 @@ const Blogs = () => {
           </div>
 
           {/* Load more button */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-10 lg:mt-12">
             <Button 
               size="lg" 
               style={{ backgroundColor: '#0D6ABC' }} 
-              className="hover:opacity-90 px-12 py-3 text-lg"
+              className="hover:opacity-90 px-8 py-3 text-base lg:px-12 lg:py-3 lg:text-lg"
             >
               Load more
             </Button>

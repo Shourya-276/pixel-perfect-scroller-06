@@ -52,15 +52,15 @@ const BlogsAndArticlesSection = () => {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Blogs and Articles</h2>
+        <div className="text-center mb-8 lg:mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Blogs and Articles</h2>
         </div>
 
         {/* Blogs grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8 lg:mb-12">
           {/* First row - 2 small cards + 1 large card */}
-          <div className="md:col-span-1">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+          <div className="sm:col-span-1">
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
               <img
                 src={blogs[0].image}
                 alt={blogs[0].title}
@@ -68,17 +68,17 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-sm mb-2">{blogs[0].date}</div>
-                <h3 className="text-lg font-bold">{blogs[0].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-2 underline">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[0].date}</div>
+                <h3 className="text-base sm:text-lg font-bold">{blogs[0].title}</h3>
+                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
                   Read more
                 </Button>
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-1">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+          <div className="sm:col-span-1">
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
               <img
                 src={blogs[1].image}
                 alt={blogs[1].title}
@@ -86,17 +86,17 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-sm mb-2">{blogs[1].date}</div>
-                <h3 className="text-lg font-bold">{blogs[1].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-2 underline">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[1].date}</div>
+                <h3 className="text-base sm:text-lg font-bold">{blogs[1].title}</h3>
+                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
                   Read more
                 </Button>
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-2">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
               <img
                 src={blogs[2].image}
                 alt={blogs[2].title}
@@ -104,10 +104,10 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-sm mb-2">{blogs[2].date}</div>
-                <h3 className="text-2xl font-bold mb-2">{blogs[2].title}</h3>
-                <p className="text-sm text-gray-200 mb-3">{blogs[2].subtitle}</p>
-                <Button className="bg-primary hover:bg-primary/90">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[2].date}</div>
+                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{blogs[2].title}</h3>
+                <p className="text-xs sm:text-sm text-gray-200 mb-2 sm:mb-3">{blogs[2].subtitle}</p>
+                <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
                   Read more
                 </Button>
               </div>
@@ -115,8 +115,8 @@ const BlogsAndArticlesSection = () => {
           </div>
 
           {/* Second row - 1 wide card + 2 small cards */}
-          <div className="md:col-span-2">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
               <img
                 src={blogs[3].image}
                 alt={blogs[3].title}
@@ -124,18 +124,18 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-sm mb-2">{blogs[3].date}</div>
-                <h3 className="text-2xl font-bold mb-2">{blogs[3].title}</h3>
-                <p className="text-sm text-gray-200 mb-3">{blogs[3].subtitle}</p>
-                <Button className="bg-primary hover:bg-primary/90">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[3].date}</div>
+                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{blogs[3].title}</h3>
+                <p className="text-xs sm:text-sm text-gray-200 mb-2 sm:mb-3">{blogs[3].subtitle}</p>
+                <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
                   Read More
                 </Button>
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-1">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+          <div className="sm:col-span-1">
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
               <img
                 src={blogs[4].image}
                 alt={blogs[4].title}
@@ -143,17 +143,17 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-sm mb-2">{blogs[4].date}</div>
-                <h3 className="text-lg font-bold">{blogs[4].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-2 underline">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[4].date}</div>
+                <h3 className="text-base sm:text-lg font-bold">{blogs[4].title}</h3>
+                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
                   Read more
                 </Button>
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-1">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64">
+          <div className="sm:col-span-1">
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
               <img
                 src={blogs[5].image}
                 alt={blogs[5].title}
@@ -161,9 +161,9 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-sm mb-2">{blogs[5].date}</div>
-                <h3 className="text-lg font-bold">{blogs[5].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-2 underline">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[5].date}</div>
+                <h3 className="text-base sm:text-lg font-bold">{blogs[5].title}</h3>
+                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
                   Read more
                 </Button>
               </div>
@@ -172,8 +172,8 @@ const BlogsAndArticlesSection = () => {
         </div>
 
         {/* View more button */}
-        <div className="text-center">
-          <Button size="lg" className="bg-primary hover:bg-primary/90 px-12 py-3 text-lg">
+        <div className="text-center mt-8 lg:mt-12">
+          <Button size="lg" className="bg-primary hover:bg-primary/90 px-8 py-3 text-base lg:px-12 lg:py-3 lg:text-lg">
             View more
           </Button>
         </div>

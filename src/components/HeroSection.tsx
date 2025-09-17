@@ -32,49 +32,49 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-10 pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
-          <div className="text-primary-foreground">
-            <h1 className="text-5xl font-bold mb-6 leading-tight">
+          <div className="text-primary-foreground text-center lg:text-left">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               Discover<br />
               Mumbai Homes
             </h1>
             
             {/* Search bar */}
-            <div className="bg-white rounded-lg p-2 mb-6 flex items-center shadow-lg">
-              <Search className="text-gray-400 ml-3 h-5 w-5" />
+            <div className="bg-white rounded-lg p-2 mb-6 flex flex-col sm:flex-row items-center shadow-lg">
+              <Search className="text-gray-400 ml-3 h-5 w-5 mb-2 sm:mb-0" />
               <Input
                 placeholder="Enter Locality / Project / Society / Landmark"
-                className="border-0 bg-transparent focus-visible:ring-0 text-gray-700 flex-1"
+                className="border-0 bg-transparent focus-visible:ring-0 text-gray-700 flex-1 w-full sm:w-auto mb-2 sm:mb-0"
               />
-              <Button className="bg-primary hover:bg-primary/90 px-6">
+              <Button className="bg-primary hover:bg-primary/90 px-6 w-full sm:w-auto">
                 <MapPin className="h-4 w-4 mr-2" />
                 Search
               </Button>
             </div>
             
-            <p className="text-lg mb-4 opacity-90">
+            <p className="text-base lg:text-lg mb-4 opacity-90">
               Discover the Perfect Residential Destination with Mumbai Homes,<br />
               Offering a Variety of Options to Suit your Lifestyle Needs
             </p>
             
-            <p className="text-xl font-semibold mb-8">
+            <p className="text-lg lg:text-xl font-semibold mb-8">
               100% Happiness With 0% Brokerage
             </p>
             
-            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
+            <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100 px-8 py-3 text-base lg:text-lg font-semibold">
               Enquiry Now
             </Button>
           </div>
 
           {/* Right content - Building image */}
-          <div className="relative">
+          <div className="relative mt-8 lg:mt-0">
             <img
               src={buildingComplex}
               alt="Mumbai residential buildings"
-              className="w-full h-auto rounded-lg"
+              className="w-full h-auto rounded-lg max-w-lg mx-auto"
             />
             
             {/* Circular badge with rotating animation */}
-            <div className="absolute bottom-10 left-10 w-24 h-24 animate-spin-slow">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-24 animate-spin-slow md:w-32 md:h-32">
               <img
                 src={exploreNowBadge}
                 alt="Explore Now"

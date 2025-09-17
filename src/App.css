@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+
+.enquiry-button-pointer {
+  position: relative;
+}
+
+.enquiry-button-pointer::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px; /* Adjust this value to control how much the pointer extends */
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent; /* Size of the triangle */
+  border-bottom: 10px solid transparent; /* Size of the triangle */
+  border-right: 10px solid #0D6ABC; /* Color of the pointer, should match button bg */
+  z-index: 10;
+}

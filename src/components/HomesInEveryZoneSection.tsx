@@ -42,16 +42,16 @@ const HomesInEveryZoneSection = () => {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Homes in Every Zone</h2>
+        <div className="text-center mb-8 lg:mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Homes in Every Zone</h2>
         </div>
 
         {/* Zones grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {zones.map((zone) => (
             <div
               key={zone.id}
-              className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer h-64"
+              className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer h-56 sm:h-64"
             >
               <img
                 src={zone.image}
@@ -63,8 +63,8 @@ const HomesInEveryZoneSection = () => {
               
               {/* Content overlay */}
               <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
-                <h3 className="text-3xl font-bold mb-2">{zone.name}</h3>
-                <p className="text-lg">{zone.projects}</p>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-2">{zone.name}</h3>
+                <p className="text-base sm:text-lg">{zone.projects}</p>
               </div>
             </div>
           ))}

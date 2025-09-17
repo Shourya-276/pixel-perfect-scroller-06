@@ -11,6 +11,14 @@ import projectAerial from "@/assets/project-aerial.png";
 import floorPlan from "@/assets/floor-plan.png";
 import ProjectInfoBox from "@/components/ProjectInfoBox";
 import EnquiryFormModal from "@/components/EnquiryFormModal";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const amenitiesList = [
   { icon: "🏊", name: "Swimming pool" },
@@ -122,20 +130,22 @@ const ProjectDetails = () => {
         {/* Enquiry Now Button */}
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-40">
           <Button 
-            className="bg-[#0D6ABC] hover:bg-[#0D6ABC]/90 text-white w-12 h-48 px-0 py-0 rounded-full shadow-lg writing-mode-vertical flex items-center justify-center"
+            className="bg-[#0D6ABC] hover:bg-[#0D6ABC]/90 text-white w-12 h-64 px-0 rounded-l-lg rounded-r-lg shadow-lg flex items-center justify-center enquiry-button-pointer"
+            style={{ writingMode: 'vertical-lr' }}
             onClick={() => setShowEnquiryModal(true)}
           >
-            Enquire Now
+            Enquiry Now
           </Button>
         </div>
       </section>
 
       {/* Project Info Section */}
-      <section className="py-8">
-        <div className="container mx-auto px-6">
-          {/* Suji Platinum Section (true edge-to-edge bg-[#EDF4FC], no container constraint) */}
-          <div className="mb-8 w-full py-6 bg-[#EDF4FC]">
-            <div className="grid lg:grid-cols-3 gap-8 px-6 max-w-screen-2xl mx-auto relative">
+      <section>
+        
+        {/* Suji Platinum Section (true edge-to-edge bg-[#EDF4FC], no container constraint) */}
+        <div className="mb-8 w-full py-12 bg-[#EDF4FC]">
+          <div className="container mx-auto px-6">
+            <div className="grid lg:grid-cols-3 gap-8 relative">
               {/* Left: Project Details */}
               <div className="lg:col-span-2">
                 <div className="flex items-center justify-between mb-4">
@@ -192,7 +202,9 @@ const ProjectDetails = () => {
               </div>
             </div>
           </div>
-
+        </div>
+        
+        <div className="container mx-auto px-6">
           {/* About Project Section (no box, just content) */}
           <div className="mb-8">
             <h2 className="text-xl font-bold mb-4">About Project</h2>
@@ -255,7 +267,7 @@ const ProjectDetails = () => {
       </section>
 
       {/* Floor Plans Section */}
-      <section className="py-8 bg-[#0D6ABC]">
+      <section className="py-8 bg-[#EDF4FC]">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-8">
             <div>
@@ -266,7 +278,7 @@ const ProjectDetails = () => {
               />
             </div>
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-white">Floor Plans and Configuration</h2>
+              <h2 className="text-2xl font-bold mb-6 text-black">Floor Plans and Configuration</h2>
               <div className="flex space-x-4 mb-6">
                 <Button variant="outline" className="bg-blue-600 text-white border-blue-600">1 BHK</Button>
                 <Button variant="outline">2 BHK</Button>
@@ -296,10 +308,10 @@ const ProjectDetails = () => {
       </section>
 
       {/* Virtual Tour Section */}
-      <section className="py-8">
+      <section className="py-8 bg-white">
         <div className="container mx-auto px-6">
           <h2 className="text-2xl font-bold mb-6 text-center">Virtual Tour</h2>
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-full mx-auto">
             <div className="relative h-96 bg-gray-900 rounded-lg overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop"
@@ -317,7 +329,7 @@ const ProjectDetails = () => {
       </section>
 
       {/* Location Section */}
-      <section className="py-8 bg-[#EDF4FC]">
+      <section className="py-12 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center space-x-8 text-sm text-gray-600">
@@ -327,7 +339,7 @@ const ProjectDetails = () => {
             </div>
           </div>
           
-          <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden mb-6">
+          <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden mb-12">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.8!2d72.9!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1"
               width="100%"
@@ -345,61 +357,171 @@ const ProjectDetails = () => {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
-              alt="Building View 1"
-              className="w-full h-48 object-cover rounded-lg"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"
-              alt="Building View 2"
-              className="w-full h-48 object-cover rounded-lg"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop"
-              alt="Building View 3"
-              className="w-full h-48 object-cover rounded-lg"
-            />
-          </div>
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 0,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+              duration: 7000,
+            }}
+          >
+            <CarouselContent className="-ml-6">
+              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <div className="relative group rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
+                    alt="Building View 1"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="secondary" size="lg" className="bg-white/90 hover:bg-white text-blue-600">
+                      View Brochure
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <div className="relative group rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"
+                    alt="Building View 2"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="secondary" size="lg" className="bg-white/90 hover:bg-white text-blue-600">
+                      View Brochure
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <div className="relative group rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop"
+                    alt="Building View 3"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="secondary" size="lg" className="bg-white/90 hover:bg-white text-blue-600">
+                      View Brochure
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <div className="relative group rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
+                    alt="Building View 1"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="secondary" size="lg" className="bg-white/90 hover:bg-white text-blue-600">
+                      View Brochure
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+
+              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <div className="relative group rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"
+                    alt="Building View 2"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="secondary" size="lg" className="bg-white/90 hover:bg-white text-blue-600">
+                      View Brochure
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+              
+              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <div className="relative group rounded-lg overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop"
+                    alt="Building View 3"
+                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Button variant="secondary" size="lg" className="bg-white/90 hover:bg-white text-blue-600">
+                      View Brochure
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+
+            </CarouselContent>
+            <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
+            <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
+          </Carousel>
           
-          <div className="text-center mt-6">
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              View Brochure
-            </Button>
-          </div>
         </div>
       </section>
 
       {/* Similar Recommendations */}
-      <section className="py-8">
+      <section className="py-8 bg-[#EDF4FC]">
         <div className="container mx-auto px-6">
           <h2 className="text-2xl font-bold mb-6 text-center">Similar Recommendations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {similarProjects.map((project) => (
-              <div key={project.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="font-semibold mb-2">{project.name}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{project.type}</p>
-                  <div className="flex items-center text-sm text-gray-600 mb-2">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    {project.location}
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 5000,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+              duration: 5000,
+            }}
+          >
+            <CarouselContent className="-ml-6">
+              {similarProjects.map((project) => (
+                <CarouselItem key={project.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                  <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.name}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-2">{project.name}</h3>
+                      <p className="text-sm text-gray-600 mb-2">{project.type}</p>
+                      <div className="flex items-center text-sm text-gray-600 mb-2">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        {project.location}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold">{project.price}</span>
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                          View Details
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold">{project.price}</span>
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                      View Details
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
+            <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
+          </Carousel>
         </div>
       </section>
 

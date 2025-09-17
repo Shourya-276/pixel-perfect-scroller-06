@@ -1,5 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Bed, Home } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const properties = [
   {
@@ -60,7 +68,7 @@ const properties = [
 
 const NewlyLaunchedSection = () => {
   // Create multiple duplicates for seamless loop
-  const allProperties = [...properties, ...properties, ...properties];
+  const allProperties = [...properties];
 
   return (
     <section className="py-12 bg-gray-50">
@@ -74,73 +82,86 @@ const NewlyLaunchedSection = () => {
         </div>
 
         {/* Animated horizontal scroll */}
-        <div className="overflow-hidden mb-12 relative">
-          {/* Flowing animation container */}
-          <div className="flex gap-6 animate-slide-left" style={{ width: 'max-content' }}>
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 0,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+            duration: 5000,
+          }}
+        >
+          <CarouselContent className="-ml-6">
             {allProperties.map((property, idx) => (
-              <div
-                key={property.id + '-' + idx}
-                className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105 group h-80 w-[320px] flex-shrink-0"
-              >
-                {/* Background image */}
-                <img
-                  src={property.image}
-                  alt={property.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                
-                {/* Content overlay */}
-                <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
-                  {/* Top badge with glow effect */}
-                  <div className="flex justify-start">
-                    <div className="bg-primary/90 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg border border-white/20">
-                      {property.type}
-                    </div>
-                  </div>
+              <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <div
+                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105 group h-80 w-full flex-shrink-0"
+                >
+                  {/* Background image */}
+                  <img
+                    src={property.image}
+                    alt={property.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                   
-                  {/* Bottom content */}
-                  <div className="space-y-3 transform transition-transform duration-300 group-hover:translate-y-0">
-                    <h3 className="text-xl font-bold tracking-wide">{property.name}</h3>
-                    <div className="flex items-center text-white/90">
-                      <MapPin className="h-4 w-4 mr-2" />
-                      <span className="text-sm">{property.location}</span>
-                    </div>
-                    <div className="flex items-center text-white/90">
-                      <Bed className="h-4 w-4 mr-2" />
-                      <span className="text-sm">{property.beds}</span>
-                    </div>
-                    <div className="flex items-center text-white/90">
-                      <Home className="h-4 w-4 mr-2" />
-                      <span className="text-sm">{property.type}</span>
+                  {/* Content overlay */}
+                  <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
+                    {/* Top badge with glow effect */}
+                    <div className="flex justify-start">
+                      <div className="bg-primary/90 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg border border-white/20">
+                        {property.type}
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between pt-2">
-                      <div>
-                        <div className="text-sm opacity-80">Starting At</div>
-                        <div className="text-xl font-bold text-white">{property.price}</div>
+                    {/* Bottom content */}
+                    <div className="space-y-3 transform transition-transform duration-300 group-hover:translate-y-0">
+                      <h3 className="text-xl font-bold tracking-wide">{property.name}</h3>
+                      <div className="flex items-center text-white/90">
+                        <MapPin className="h-4 w-4 mr-2" />
+                        <span className="text-sm">{property.location}</span>
                       </div>
-                      <Button 
-                        variant="secondary" 
-                        size="sm"
-                        className="bg-white/95 text-gray-800 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
-                      >
-                        View Details
-                      </Button>
+                      <div className="flex items-center text-white/90">
+                        <Bed className="h-4 w-4 mr-2" />
+                        <span className="text-sm">{property.beds}</span>
+                      </div>
+                      <div className="flex items-center text-white/90">
+                        <Home className="h-4 w-4 mr-2" />
+                        <span className="text-sm">{property.type}</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-between pt-2">
+                        <div>
+                          <div className="text-sm opacity-80">Starting At</div>
+                          <div className="text-xl font-bold text-white">{property.price}</div>
+                        </div>
+                        <Button 
+                          variant="secondary" 
+                          size="sm"
+                          className="bg-white/95 text-gray-800 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
+                        >
+                          View Details
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </CarouselItem>
             ))}
-          </div>
-          
-          {/* Fade edges for smooth visual effect */}
-          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-gray-50 to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-gray-50 to-transparent pointer-events-none z-10" />
-        </div>
+          </CarouselContent>
+          <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
+          <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
+        </Carousel>
 
-        <div className="text-center">
+        <div className="text-center mt-8">
           <Button size="lg" className="bg-primary hover:bg-primary/90 px-12 py-3 text-lg">
             View more
           </Button>

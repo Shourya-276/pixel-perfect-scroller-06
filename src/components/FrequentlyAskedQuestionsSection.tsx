@@ -38,13 +38,13 @@ const FrequentlyAskedQuestionsSection = () => {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+        <div className="text-center mb-8 lg:mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
         </div>
 
         {/* FAQ Accordion */}
         <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible className="space-y-3 lg:space-y-4">
             {faqs.map((faq) => (
               <AccordionItem
                 key={faq.id}
@@ -52,10 +52,10 @@ const FrequentlyAskedQuestionsSection = () => {
                 className="rounded-lg shadow-sm border border-gray-200"
                 style={{ backgroundColor: '#DAEFFF' }}
               >
-                <AccordionTrigger className="px-6 py-4 text-left text-gray-800 hover:no-underline [&[data-state=open]>svg]:rotate-45">
-                  <span className="text-lg font-medium">{faq.question}</span>
+                <AccordionTrigger className="px-4 py-3 text-left text-gray-800 hover:no-underline [&[data-state=open]>svg]:rotate-45 lg:px-6 lg:py-4">
+                  <span className="text-base font-medium lg:text-lg">{faq.question}</span>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-gray-600">
+                <AccordionContent className="px-4 pb-3 text-gray-600 lg:px-6 lg:pb-4 text-sm lg:text-base">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

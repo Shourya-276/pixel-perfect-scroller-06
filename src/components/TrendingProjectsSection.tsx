@@ -103,7 +103,7 @@ const TrendingProjectsSection = () => {
         <Carousel
           plugins={[
             Autoplay({
-              delay: 2500,
+              delay: 0,
               stopOnInteraction: false,
               stopOnMouseEnter: true,
             }),
@@ -113,12 +113,12 @@ const TrendingProjectsSection = () => {
             align: "start",
             loop: true,
             slidesToScroll: 1,
-            duration: 25,
+            duration: 5000,
           }}
         >
           <CarouselContent className="-ml-6">
             {projects.map((project) => (
-              <CarouselItem key={project.id} className="pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+              <CarouselItem key={project.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 hover:scale-105 group">
                   {/* Project image */}
                   <div className="relative h-72 overflow-hidden">
@@ -128,10 +128,7 @@ const TrendingProjectsSection = () => {
                       className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-700 ease-out"
                     />
                     {/* Enhanced gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
-                    
-                    {/* Animated shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300" />
                     
                     {/* Content overlay */}
                     <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
@@ -186,7 +183,7 @@ const TrendingProjectsSection = () => {
         </Carousel>
 
         {/* View more button */}
-        <div className="text-center">
+        <div className="text-center mt-8">
           <Button size="lg" className="bg-primary hover:bg-primary/90 px-12 py-3 text-lg">
             View more
           </Button>
