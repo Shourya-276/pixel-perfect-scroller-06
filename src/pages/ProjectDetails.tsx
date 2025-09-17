@@ -72,6 +72,39 @@ const similarProjects = [
   }
 ];
 
+const virtualTours = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop",
+    alt: "Virtual Tour 1"
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1517840901100-8179e9d84967?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Virtual Tour 2"
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Virtual Tour 3"
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop",
+    alt: "Virtual Tour 4"
+  },
+  {
+    id: 5,
+    image: "https://images.unsplash.com/photo-1517840901100-8179e9d84967?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Virtual Tour 5"
+  },
+  {
+    id: 6,
+    image: "https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Virtual Tour 6"
+  },
+];
+
 const AmenitiesModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
@@ -91,10 +124,10 @@ const AmenitiesModal = ({ isOpen, onClose }) => {
         </div>
         
         <div className="p-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {amenitiesList.map((amenity, index) => (
               <div key={index} className="flex flex-col items-center p-4 border rounded-lg hover:bg-gray-50">
-                <div className="text-2xl mb-2">{amenity.icon}</div>
+                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">{amenity.icon}</div>
                 <span className="text-sm text-center text-blue-600">{amenity.name}</span>
               </div>
             ))}
@@ -120,21 +153,21 @@ const ProjectDetails = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative h-[500px] overflow-hidden">
+      <section className="relative h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden">
         <img
           src={projectHero}
           alt="Codename Chembur Pinnacle"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center md:object-fill"
         />
         
         {/* Enquiry Now Button */}
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-40">
           <Button 
-            className="bg-[#0D6ABC] hover:bg-[#0D6ABC]/90 text-white w-12 h-64 px-0 rounded-l-lg rounded-r-lg shadow-lg flex items-center justify-center enquiry-button-pointer"
+            className="bg-[#0D6ABC] hover:bg-[#0D6ABC]/90 text-white w-10 h-56 px-0 rounded-l-lg rounded-r-lg shadow-lg flex items-center justify-center enquiry-button-pointer sm:w-12 sm:h-64"
             style={{ writingMode: 'vertical-lr' }}
             onClick={() => setShowEnquiryModal(true)}
           >
-            Enquiry Now
+            <span className="text-sm">Enquire Now</span>
           </Button>
         </div>
       </section>
@@ -145,12 +178,12 @@ const ProjectDetails = () => {
         {/* Suji Platinum Section (true edge-to-edge bg-[#EDF4FC], no container constraint) */}
         <div className="mb-8 w-full py-12 bg-[#EDF4FC]">
           <div className="container mx-auto px-6">
-            <div className="grid lg:grid-cols-3 gap-8 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
               {/* Left: Project Details */}
               <div className="lg:col-span-2">
                 <div className="flex items-center justify-between mb-4">
-                  <h1 className="text-3xl font-bold">Suji Platinum</h1>
-                  <div className="flex space-x-2">
+                  <h1 className="text-2xl sm:text-3xl font-bold">Suji Platinum</h1>
+                  <div className="flex flex-wrap gap-2 sm:space-x-2">
                     <Badge className="bg-blue-100 text-blue-600">Under Construction</Badge>
                     <Badge className="bg-green-100 text-green-600">RERA</Badge>
                   </div>
@@ -159,7 +192,7 @@ const ProjectDetails = () => {
                   <img
                     src={projectBuilding}
                     alt="Suji Platinum"
-                    className="w-full h-64 object-cover rounded-lg"
+                    className="w-full h-48 sm:h-64 object-cover rounded-lg"
                   />
                   {/* View all overlay */}
                   <div className="absolute bottom-4 left-4">
@@ -170,10 +203,10 @@ const ProjectDetails = () => {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <div>
-                    <p className="text-2xl font-bold">₹78 L - 1.24 Cr</p>
+                    <p className="text-xl sm:text-2xl font-bold">₹78 L - 1.24 Cr</p>
                     <div className="flex items-center text-gray-600 mt-1">
                       <MapPin className="h-4 w-4 mr-1" />
-                      <span>Vikhroli, Central Mumbai Suburbs, Mumbai</span>
+                      <span className="text-sm sm:text-base">Vikhroli, Central Mumbai Suburbs, Mumbai</span>
                     </div>
                   </div>
                 </div>
@@ -208,7 +241,7 @@ const ProjectDetails = () => {
           {/* About Project Section (no box, just content) */}
           <div className="mb-8">
             <h2 className="text-xl font-bold mb-4">About Project</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <p className="text-gray-700 mb-4">
                   The Suji Platinum Project in Vikhroli, By Suji Builders and Developers. This Project is
@@ -231,7 +264,7 @@ const ProjectDetails = () => {
             {/* Project Overview */}
             <div className="mt-6">
               <h3 className="font-semibold mb-4">Project Overview</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
                   <Building2 className="h-5 w-5 text-gray-600" />
                   <div>
@@ -269,7 +302,7 @@ const ProjectDetails = () => {
       {/* Floor Plans Section */}
       <section className="py-8 bg-[#EDF4FC]">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
               <img
                 src={floorPlan}
@@ -279,19 +312,19 @@ const ProjectDetails = () => {
             </div>
             <div>
               <h2 className="text-2xl font-bold mb-6 text-black">Floor Plans and Configuration</h2>
-              <div className="flex space-x-4 mb-6">
+              <div className="flex flex-wrap gap-2 mb-6">
                 <Button variant="outline" className="bg-blue-600 text-white border-blue-600">1 BHK</Button>
                 <Button variant="outline">2 BHK</Button>
                 <Button variant="outline">3 BHK</Button>
-                <Button variant="outline">Typical Floor Plan</Button>
-                <Button variant="outline">Brochure Floor Plan</Button>
+                <Button variant="outline" className="text-xs">Typical Floor Plan</Button>
+                <Button variant="outline" className="text-xs">Brochure Floor Plan</Button>
               </div>
               <div className="space-y-3 mb-6">
                 {floorPlans.map((plan, index) => (
                   <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg border">
                     <div className="flex items-center space-x-4">
-                      <span className="font-medium">{plan.type}</span>
-                      <span className="text-gray-600">{plan.area}</span>
+                      <span className="font-medium text-sm">{plan.type}</span>
+                      <span className="text-gray-600 text-xs">{plan.area}</span>
                     </div>
                     <Button size="sm" variant="outline">
                       {plan.price}
@@ -310,21 +343,34 @@ const ProjectDetails = () => {
       {/* Virtual Tour Section */}
       <section className="py-8 bg-white">
         <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-6 text-center">Virtual Tour</h2>
-          <div className="relative max-w-full mx-auto">
-            <div className="relative h-96 bg-gray-900 rounded-lg overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop"
-                alt="Virtual Tour"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Button size="lg" className="bg-white/90 hover:bg-white text-black rounded-full p-4">
-                  <Play className="h-8 w-8" />
-                </Button>
-              </div>
-            </div>
-          </div>
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">Virtual Tour</h2>
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-full relative"
+          >
+            <CarouselContent className="flex -ml-4">
+              {virtualTours.map((tour) => (
+                <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <div className="relative h-64 sm:h-80 md:h-96 bg-gray-200 rounded-lg overflow-hidden">
+                    <img
+                      src={tour.image}
+                      alt={tour.alt}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Button size="icon" className="bg-white/90 hover:bg-white text-black rounded-full p-3 h-14 w-14 sm:h-16 sm:w-16">
+                        <Play className="h-8 w-8" />
+                      </Button>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
+          </Carousel>
         </div>
       </section>
 
@@ -332,14 +378,14 @@ const ProjectDetails = () => {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-6">
-            <div className="flex items-center justify-center space-x-8 text-sm text-gray-600">
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-gray-600">
               <span>Location: Vikhroli East</span>
               <span>Zone: Central Mumbai Suburbs</span>
               <span>Pincode: 400083</span>
             </div>
           </div>
           
-          <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden mb-12">
+          <div className="relative h-64 sm:h-80 md:h-96 bg-gray-200 rounded-lg overflow-hidden mb-12">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.8!2d72.9!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1"
               width="100%"
@@ -374,7 +420,7 @@ const ProjectDetails = () => {
             }}
           >
             <CarouselContent className="-ml-6">
-              <CarouselItem className="pl-6 md:basis-1/2 lg:basis-1/3">
+              <CarouselItem className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3">
                 <div className="relative group rounded-lg overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
@@ -475,7 +521,7 @@ const ProjectDetails = () => {
       {/* Similar Recommendations */}
       <section className="py-8 bg-[#EDF4FC]">
         <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-6 text-center">Similar Recommendations</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">Similar Recommendations</h2>
           <Carousel
             plugins={[
               Autoplay({
@@ -484,17 +530,17 @@ const ProjectDetails = () => {
                 stopOnMouseEnter: true,
               }),
             ]}
-            className="w-full"
             opts={{
               align: "start",
               loop: true,
               slidesToScroll: 1,
               duration: 5000,
             }}
+            className="w-full"
           >
-            <CarouselContent className="-ml-6">
+            <CarouselContent className="flex -ml-4">
               {similarProjects.map((project) => (
-                <CarouselItem key={project.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={project.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <div className="bg-white rounded-lg shadow-md overflow-hidden">
                     <img
                       src={project.image}

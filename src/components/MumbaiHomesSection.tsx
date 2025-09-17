@@ -15,10 +15,21 @@ const MumbaiHomesSection = () => {
               <img 
                 src={mumbaiHomesLogo} 
                 alt="Mumbai Homes Logo" 
-                className="h-16 md:h-20 w-auto mb-2 mx-auto md:mx-0"
+                className="h-20 sm:h-24 w-auto mb-4 mx-auto md:mx-0"
               />
             </div>
             
+            {/* Our Company (Moved for mobile layout) */}
+            <div className="mb-6 md:hidden">
+              <h3 className="text-base font-bold mb-2">Our Company</h3>
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs max-w-sm mx-auto">
+                <a href="#" className="hover:underline">Projects</a>
+                <a href="#" className="hover:underline">Contact Us</a>
+                <a href="#" className="hover:underline">Blogs</a>
+                <a href="#" className="hover:underline">Careers</a>
+              </div>
+            </div>
+
             <div>
               <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4">About Mumbai Homes</h3>
               <p className="text-sm leading-relaxed opacity-90">
@@ -30,10 +41,10 @@ const MumbaiHomesSection = () => {
 
           {/* Right Column - Company Info and Disclaimer */}
           <div className="grid grid-cols-1 gap-4 md:gap-8 text-center md:text-left">
-            {/* Our Company */}
-            <div>
+            {/* Our Company (Desktop version, hidden on mobile) */}
+            <div className="hidden md:block">
               <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4">Our Company</h3>
-              <div className="grid grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm max-w-xs mx-auto md:mx-0">
+              <div className="flex space-x-4 text-sm">
                 <a href="#" className="hover:underline">Projects</a>
                 <a href="#" className="hover:underline">Contact Us</a>
                 <a href="#" className="hover:underline">Blogs</a>

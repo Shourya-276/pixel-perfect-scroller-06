@@ -1,5 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const categories = [
   {
@@ -79,8 +86,8 @@ const DiscoverNeighborhoodsSection = () => {
             <ChevronRight className="h-5 w-5" />
           </button>
 
-          {/* Categories grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-8 lg:px-0">
+          {/* Categories Carousel for small screens, Grid for large screens */}
+          <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-8 lg:px-0">
             {categories.map((category) => (
               <div key={category.id} className="space-y-2 lg:space-y-4 text-center sm:text-left">
                 <h3 className="text-base lg:text-xl font-bold text-primary mb-2 lg:mb-4">{category.title}</h3>
@@ -102,6 +109,41 @@ const DiscoverNeighborhoodsSection = () => {
               </div>
             ))}
           </div>
+
+          {/* Carousel for small screens */}
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="lg:hidden"
+          >
+            <CarouselContent className="-ml-4">
+              {categories.map((category) => (
+                <CarouselItem key={category.id} className="pl-4 basis-full sm:basis-1/2">
+                  <div className="space-y-2 text-center sm:text-left">
+                    <h3 className="text-base font-bold text-primary mb-2">{category.title}</h3>
+                    <ul className="space-y-1">
+                      {category.items.map((item, index) => (
+                        <li key={index}>
+                          <button className="text-gray-700 hover:text-primary transition-colors text-sm">
+                            {item}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button 
+                      variant="link" 
+                      className="text-primary p-0 h-auto font-medium hover:underline text-sm"
+                    >
+                      {category.link}
+                    </Button>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
+          </Carousel>
         </div>
       </div>
     </section>

@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 import mumbaiHomesLogo from "@/assets/mumbai-homes-logo.png";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const banks = [
   { name: "HDFC Bank", logo: "https://1000logos.net/wp-content/uploads/2021/06/HDFC-Bank-emblem.png" },
@@ -30,21 +36,35 @@ const BanksSection = () => {
         </div>
 
         {/* Banks grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 lg:gap-4 max-w-3xl mx-auto">
-          {banks.map((bank, index) => (
-            <div
-              key={index}
-              className="bg-white/10 backdrop-blur-sm rounded-xl p-3 flex items-center space-x-2 hover:bg-white/20 transition-colors duration-300 lg:p-4 lg:space-x-3"
-            >
-              <div className="bg-white rounded-lg p-1 flex items-center justify-center w-10 h-10 lg:w-12 lg:h-12">
-                <img src={bank.logo} alt={bank.name} className="h-full w-full object-contain" />
-              </div>
-              <div className="text-white font-semibold text-sm lg:text-base">
-                {bank.name}
-              </div>
-            </div>
-          ))}
-        </div>
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 0,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+            duration: 15000,
+          }}
+          className="w-full max-w-6xl mx-auto"
+        >
+          <CarouselContent className="-ml-4">
+            {/* Duplicate banks for seamless loop */}
+            {[...banks, ...banks].map((bank, index) => (
+              <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6">
+                <div
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-3 flex items-center justify-center h-20 w-full hover:bg-white/20 transition-colors duration-300"
+                >
+                  <img src={bank.logo} alt={bank.name} className="h-full w-auto object-contain" />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
 
         {/* Optional CTA */}
         <div className="text-center mt-6 lg:mt-8">
