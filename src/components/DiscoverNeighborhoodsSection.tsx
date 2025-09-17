@@ -61,11 +61,11 @@ const categories = [
 
 const DiscoverNeighborhoodsSection = () => {
   return (
-    <section className="py-16" style={{ backgroundColor: '#E2EFFC' }}>
-      <div className="container mx-auto px-6">
+    <section className="py-8 lg:py-16" style={{ backgroundColor: '#E2EFFC' }}>
+      <div className="container mx-auto px-4 lg:px-6">
         {/* Section header */}
-        <div className="mb-8 lg:mb-12">
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-4 text-center lg:text-left">Discover the city's prime neighbourhoods.</h2>
+        <div className="mb-6 lg:mb-12">
+          <h2 className="text-xl lg:text-3xl font-bold text-gray-800 mb-2 lg:mb-4 text-center lg:text-left">Discover the city's prime neighbourhoods.</h2>
         </div>
 
         {/* Navigation and Categories */}
@@ -80,11 +80,11 @@ const DiscoverNeighborhoodsSection = () => {
           </button>
 
           {/* Categories grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 lg:px-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-8 lg:px-0">
             {categories.map((category) => (
-              <div key={category.id} className="space-y-3 lg:space-y-4 text-center sm:text-left">
-                <h3 className="text-lg lg:text-xl font-bold text-primary mb-3 lg:mb-4">{category.title}</h3>
-                <ul className="space-y-2 lg:space-y-3">
+              <div key={category.id} className="space-y-2 lg:space-y-4 text-center sm:text-left">
+                <h3 className="text-base lg:text-xl font-bold text-primary mb-2 lg:mb-4">{category.title}</h3>
+                <ul className="space-y-1 lg:space-y-3">
                   {category.items.map((item, index) => (
                     <li key={index}>
                       <button className="text-gray-700 hover:text-primary transition-colors text-sm lg:text-left">
