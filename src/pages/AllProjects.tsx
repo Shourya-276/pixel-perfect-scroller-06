@@ -270,29 +270,30 @@ const AllProjects = () => {
     if (selectedProjects.length > 0) {
       filtered = filtered.filter(project => selectedProjects.includes(project.name));
     }
-    if (selectedPurchaseType.length > 0) {
-      filtered = filtered.filter(project => selectedPurchaseType.includes(project.purchaseType));
-    }
-    if (selectedAmenities.length > 0) {
-      filtered = filtered.filter(project => 
-        selectedAmenities.every(amenity => project.amenities.includes(amenity))
-      );
-    }
-    if (selectedFurnishing.length > 0) {
-      filtered = filtered.filter(project => selectedFurnishing.includes(project.furnishing));
-    }
+    // Commented out filters for properties not in data structure
+    // if (selectedPurchaseType.length > 0) {
+    //   filtered = filtered.filter(project => selectedPurchaseType.includes(project.purchaseType));
+    // }
+    // if (selectedAmenities.length > 0) {
+    //   filtered = filtered.filter(project => 
+    //     selectedAmenities.every(amenity => project.amenities.includes(amenity))
+    //   );
+    // }
+    // if (selectedFurnishing.length > 0) {
+    //   filtered = filtered.filter(project => selectedFurnishing.includes(project.furnishing));
+    // }
     if (selectedRera.length > 0) {
       filtered = filtered.filter(project => selectedRera.includes(project.reraApproved ? "Yes" : "No"));
     }
-    if (selectedPostedBy.length > 0) {
-      filtered = filtered.filter(project => selectedPostedBy.includes(project.postedBy));
-    }
+    // if (selectedPostedBy.length > 0) {
+    //   filtered = filtered.filter(project => selectedPostedBy.includes(project.postedBy));
+    // }
     if (selectedConstruction.length > 0) {
       filtered = filtered.filter(project => selectedConstruction.includes(project.status));
     }
-    if (selectedBedrooms.length > 0) {
-      filtered = filtered.filter(project => selectedBedrooms.some(bed => project.beds.includes(bed)));
-    }
+    // if (selectedBedrooms.length > 0) {
+    //   filtered = filtered.filter(project => selectedBedrooms.some(bed => project.beds.includes(bed)));
+    // }
     if (selectedPropertyType.length > 0) {
       filtered = filtered.filter(project => selectedPropertyType.includes(project.type));
     }
@@ -306,13 +307,13 @@ const AllProjects = () => {
         return price >= minBudget && price <= maxBudget;
       });
     }
-    // Area range filter
-    if (areaRange[0] > 0 || areaRange[1] > 0) {
-      filtered = filtered.filter(project => {
-        const area = parseFloat(project.area.replace(/[^0-9.]/g, ''));
-        return area >= areaRange[0] && area <= areaRange[1];
-      });
-    }
+    // Area range filter - commented out as area property doesn't exist
+    // if (areaRange[0] > 0 || areaRange[1] > 0) {
+    //   filtered = filtered.filter(project => {
+    //     const area = parseFloat(project.area.replace(/[^0-9.]/g, ''));
+    //     return area >= areaRange[0] && area <= areaRange[1];
+    //   });
+    // }
 
     return filtered;
   }, [projectList, searchQuery, hideAlreadySeen, verifiedProperties, selectedLocalities, selectedProjects, selectedPurchaseType, selectedAmenities, selectedFurnishing, selectedRera, selectedPostedBy, selectedConstruction, selectedBedrooms, selectedPropertyType, budgetRange, areaRange]);
