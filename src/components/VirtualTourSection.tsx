@@ -114,8 +114,8 @@ const VirtualTourSection = () => {
         </div>
 
         {/* Video grid */}
-        <div className="relative w-full max-w-4xl mx-auto">
-          <div className="relative bg-gray-300 rounded-lg overflow-hidden h-56 sm:h-72 md:h-[420px] lg:h-[500px] aspect-video">
+        <div className="relative w-full max-w-2xl mx-auto">
+          <div className="relative bg-gray-300 rounded-lg overflow-hidden h-64 sm:h-80 md:h-[480px] lg:h-[520px]">
             <img
               src={currentVideo.image}
               alt={currentVideo.alt}
