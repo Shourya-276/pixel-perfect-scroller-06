@@ -378,7 +378,7 @@ const ProjectDetails = () => {
             <CarouselContent className="flex -ml-4">
               {virtualTours.map((tour) => (
                 <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <div className="relative h-[420px] sm:h-[560px] md:h-[600px] bg-gray-200 rounded-lg overflow-hidden">
+                  <div className="relative h-96 sm:h-[480px] md:h-[600px] bg-gray-200 rounded-lg overflow-hidden">
                     <img
                       src={tour.image}
                       alt={tour.alt}
