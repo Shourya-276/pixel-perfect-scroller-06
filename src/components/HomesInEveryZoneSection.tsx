@@ -1,3 +1,11 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const zones = [
   {
     id: 1,
@@ -47,7 +55,8 @@ const HomesInEveryZoneSection = () => {
         </div>
 
         {/* Zones grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* Existing grid for larger screens */}
           {zones.map((zone) => (
             <div
               key={zone.id}
@@ -58,10 +67,7 @@ const HomesInEveryZoneSection = () => {
                 alt={zone.name}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
-              {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              
-              {/* Content overlay */}
               <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
                 <h3 className="text-2xl sm:text-3xl font-bold mb-2">{zone.name}</h3>
                 <p className="text-base sm:text-lg">{zone.projects}</p>
@@ -69,6 +75,42 @@ const HomesInEveryZoneSection = () => {
             </div>
           ))}
         </div>
+
+        {/* Carousel for small screens */}
+        <div className="lg:hidden relative">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {zones.map((zone, index) => (
+                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2">
+                  <div
+                    className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer h-56"
+                  >
+                    <img
+                      src={zone.image}
+                      alt={zone.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
+                      <h3 className="text-2xl font-bold mb-2">{zone.name}</h3>
+                      <p className="text-base">{zone.projects}</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
+          </Carousel>
+        </div>
+
       </div>
     </section>
   );

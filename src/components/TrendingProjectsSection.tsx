@@ -83,20 +83,22 @@ const TrendingProjectsSection = () => {
         </div>
 
         {/* Location tabs */}
-        <div className="flex flex-wrap justify-center gap-8 mb-12">
-          {locations.map((location) => (
-            <button
-              key={location}
-              onClick={() => setActiveLocation(location)}
-              className={`text-lg font-medium transition-colors pb-2 border-b-2 ${
-                activeLocation === location
-                  ? "text-primary border-primary"
-                  : "text-gray-500 border-transparent hover:text-gray-700"
-              }`}
-            >
-              {location}
-            </button>
-          ))}
+        <div className="flex justify-center mb-12">
+          <div className="flex flex-nowrap overflow-x-auto scrollbar-hide gap-x-6 px-2 -mx-2 lg:flex-wrap lg:justify-center lg:gap-8 lg:px-0 lg:mx-0">
+            {locations.map((location) => (
+              <button
+                key={location}
+                onClick={() => setActiveLocation(location)}
+                className={`text-lg font-medium transition-colors pb-2 border-b-2 whitespace-nowrap ${
+                  activeLocation === location
+                    ? "text-primary border-primary"
+                    : "text-gray-500 border-transparent hover:text-gray-700"
+                }`}
+              >
+                {location}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Projects carousel with enhanced animation */}

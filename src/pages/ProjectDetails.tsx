@@ -124,11 +124,13 @@ const AmenitiesModal = ({ isOpen, onClose }) => {
         </div>
         
         <div className="p-6">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             {amenitiesList.map((amenity, index) => (
-              <div key={index} className="flex flex-col items-center p-4 border rounded-lg hover:bg-gray-50">
-                <div className="text-xl sm:text-2xl mb-1 sm:mb-2">{amenity.icon}</div>
-                <span className="text-sm text-center text-blue-600">{amenity.name}</span>
+              <div key={index} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50">
+                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-blue-600 text-sm">{amenity.icon}</span>
+                </div>
+                <span className="text-blue-600 text-sm">{amenity.name}</span>
               </div>
             ))}
           </div>
@@ -192,7 +194,7 @@ const ProjectDetails = () => {
                   <img
                     src={projectBuilding}
                     alt="Suji Platinum"
-                    className="w-full h-48 sm:h-64 object-cover rounded-lg"
+                    className="w-full h-48 sm:h-64 lg:h-[480px] object-cover rounded-lg"
                   />
                   {/* View all overlay */}
                   <div className="absolute bottom-4 left-4">
@@ -212,16 +214,16 @@ const ProjectDetails = () => {
                 </div>
               </div>
               {/* Right: Amenities */}
-              <div className="lg:col-span-1 mt-8 lg:mt-0">
+              <div className="hidden lg:block lg:col-span-1 mt-8 lg:mt-0">
                 <div>
                   <h3 className="text-xl font-bold mb-4">Amenities</h3>
-                  <div className="space-y-3">
-                    {amenitiesList.slice(0, 6).map((amenity, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="grid grid-cols-2 gap-4">
+                    {amenitiesList.map((amenity, index) => (
+                      <div key={index} className="flex items-center space-x-3 p-2 rounded-lg">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                           <span className="text-blue-600 text-sm">{amenity.icon}</span>
                         </div>
-                        <span className="text-blue-600">{amenity.name}</span>
+                        <span className="text-blue-600 text-sm">{amenity.name}</span>
                       </div>
                     ))}
                   </div>
@@ -242,6 +244,7 @@ const ProjectDetails = () => {
           <div className="mb-8">
             <h2 className="text-xl font-bold mb-4">About Project</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Left Column: About Text + Project Overview */}
               <div>
                 <p className="text-gray-700 mb-4">
                   The Suji Platinum Project in Vikhroli, By Suji Builders and Developers. This Project is
@@ -252,49 +255,71 @@ const ProjectDetails = () => {
                   <Building className="h-5 w-5 text-blue-600" />
                   <span className="font-medium">Suji Builders and Developers</span>
                 </div>
+                {/* Project Overview - now within this column */}
+                <div className="mt-6">
+                  <h3 className="font-semibold mb-4">Project Overview</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                      <Building2 className="h-5 w-5 text-gray-600" />
+                      <div>
+                        <p className="text-xs text-gray-500">Project Type</p>
+                        <p className="font-medium">Residential</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                      <Home className="h-5 w-5 text-gray-600" />
+                      <div>
+                        <p className="text-xs text-gray-500">Project Type</p>
+                        <p className="font-medium">1, 2 BHK Apartments</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                      <Square className="h-5 w-5 text-gray-600" />
+                      <div>
+                        <p className="text-xs text-gray-500">Rera Carpet Area</p>
+                        <p className="font-medium">394.00 sq. ft. to 639.00 sq. ft.</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                      <LinkIcon className="h-5 w-5 text-gray-600" />
+                      <div>
+                        <p className="text-xs text-gray-500">Maharera Registration no.</p>
+                        <p className="font-medium">P51800053230</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+              {/* Right Column: Image */}
               <div>
                 <img
                   src={projectAerial}
                   alt="Project Aerial View"
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-48 sm:h-64 md:h-80 object-cover rounded-lg"
                 />
               </div>
             </div>
-            {/* Project Overview */}
-            <div className="mt-6">
-              <h3 className="font-semibold mb-4">Project Overview</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                  <Building2 className="h-5 w-5 text-gray-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Project Type</p>
-                    <p className="font-medium">Residential</p>
+          </div>
+
+          {/* Mobile Amenities Section */}
+          <div className="lg:hidden mt-8">
+            <h3 className="text-xl font-bold mb-4">Amenities</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {amenitiesList.slice(0, 4).map((amenity, index) => (
+                <div key={index} className="flex items-center space-x-3 p-2 rounded-lg">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 text-sm">{amenity.icon}</span>
                   </div>
+                  <span className="text-blue-600 text-sm">{amenity.name}</span>
                 </div>
-                <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                  <Home className="h-5 w-5 text-gray-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Project Type</p>
-                    <p className="font-medium">1, 2 BHK Apartments</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                  <Square className="h-5 w-5 text-gray-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Rera Carpet Area</p>
-                    <p className="font-medium">394.00 sq. ft. to 639.00 sq. ft.</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                  <LinkIcon className="h-5 w-5 text-gray-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Maharera Registration no.</p>
-                    <p className="font-medium">P51800053230</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
+            <Button
+              onClick={() => setShowAmenitiesModal(true)}
+              className="mt-4 w-full bg-blue-600 hover:bg-blue-700"
+            >
+              View more
+            </Button>
           </div>
         </div>
       </section>
@@ -312,12 +337,12 @@ const ProjectDetails = () => {
             </div>
             <div>
               <h2 className="text-2xl font-bold mb-6 text-black">Floor Plans and Configuration</h2>
-              <div className="flex flex-wrap gap-2 mb-6">
-                <Button variant="outline" className="bg-blue-600 text-white border-blue-600">1 BHK</Button>
-                <Button variant="outline">2 BHK</Button>
-                <Button variant="outline">3 BHK</Button>
-                <Button variant="outline" className="text-xs">Typical Floor Plan</Button>
-                <Button variant="outline" className="text-xs">Brochure Floor Plan</Button>
+              <div className="flex flex-nowrap gap-2 mb-6 overflow-x-auto scrollbar-hide -mx-2 px-2">
+                <Button variant="outline" className="bg-blue-600 text-white border-blue-600 whitespace-nowrap">1 BHK</Button>
+                <Button variant="outline" className="whitespace-nowrap">2 BHK</Button>
+                <Button variant="outline" className="whitespace-nowrap">3 BHK</Button>
+                <Button variant="outline" className="text-xs whitespace-nowrap">Typical Floor Plan</Button>
+                <Button variant="outline" className="text-xs whitespace-nowrap">Brochure Floor Plan</Button>
               </div>
               <div className="space-y-3 mb-6">
                 {floorPlans.map((plan, index) => (
@@ -353,7 +378,7 @@ const ProjectDetails = () => {
             <CarouselContent className="flex -ml-4">
               {virtualTours.map((tour) => (
                 <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <div className="relative h-64 sm:h-80 md:h-96 bg-gray-200 rounded-lg overflow-hidden">
+                  <div className="relative h-[420px] sm:h-[560px] md:h-[600px] bg-gray-200 rounded-lg overflow-hidden">
                     <img
                       src={tour.image}
                       alt={tour.alt}
@@ -378,10 +403,10 @@ const ProjectDetails = () => {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-6">
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-gray-600">
-              <span>Location: Vikhroli East</span>
-              <span>Zone: Central Mumbai Suburbs</span>
-              <span>Pincode: 400083</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-y-2 sm:gap-y-0 gap-x-6 text-sm text-gray-600 flex-nowrap overflow-x-auto scrollbar-hide">
+              <span className="whitespace-nowrap">Location: Vikhroli East</span>
+              <span className="whitespace-nowrap">Zone: Central Mumbai Suburbs</span>
+              <span className="whitespace-nowrap">Pincode: 400083</span>
             </div>
           </div>
           

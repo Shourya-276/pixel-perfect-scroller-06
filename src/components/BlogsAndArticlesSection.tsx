@@ -1,4 +1,11 @@
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const blogs = [
   {
@@ -57,7 +64,7 @@ const BlogsAndArticlesSection = () => {
         </div>
 
         {/* Blogs grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8 lg:mb-12">
+        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8 lg:mb-12">
           {/* First row - 2 small cards + 1 large card */}
           <div className="sm:col-span-1">
             <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
@@ -169,6 +176,43 @@ const BlogsAndArticlesSection = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Carousel for small screens */}
+        <div className="lg:hidden relative mb-8">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {blogs.map((blog, index) => (
+                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2">
+                  <div className="relative bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 h-60">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 text-white">
+                      <div className="text-xs mb-1">{blog.date}</div>
+                      <h3 className="text-base font-bold">{blog.title}</h3>
+                      {blog.subtitle && <p className="text-xs text-gray-200 mb-2">{blog.subtitle}</p>}
+                      <Button variant="link" className="text-white p-0 h-auto mt-1 underline text-xs">
+                        Read more
+                      </Button>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
+          </Carousel>
         </div>
 
         {/* View more button */}

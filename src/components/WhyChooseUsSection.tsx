@@ -11,8 +11,36 @@ const WhyChooseUsSection = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Why Choose Us ?</h2>
         </div>
 
-        {/* Features grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Mobile: Single dark card with all features stacked */}
+        <div className="lg:hidden flex justify-center">
+          <div className="w-full max-w-xl bg-[#1A253A]/90 backdrop-blur rounded-2xl px-4 py-8 text-white text-center shadow-lg">
+            <div className="space-y-6">
+              <div className="flex items-start gap-3">
+                <Zap className="h-6 w-6 mt-1 flex-shrink-0" />
+                <span className="text-base text-left">Smart Tools - Use price comparison, EMI calculators & site visit schedulers to make informed decisions.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Shield className="h-6 w-6 mt-1 flex-shrink-0" />
+                <span className="text-base text-left">Verified Properties – No fakes, no fluff.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="h-6 w-6 mt-1 flex-shrink-0" />
+                <span className="text-base text-left">Location Intelligence - Get deep insights on areas, pricing trends & upcoming growth zones.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Users className="h-6 w-6 mt-1 flex-shrink-0" />
+                <span className="text-base text-left">Personalized Assistance - Talk to experts, not bots.</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <ThumbsUp className="h-6 w-6 mt-1 flex-shrink-0" />
+                <span className="text-base text-left">Hassle-Free Experience – Mumbai Homes has you covered for a smooth, stress-free property journey.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop: Original grid layout */}
+        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Top left card - Smart Tools */}
           <div className="bg-white rounded-3xl p-6 lg:p-8 space-y-3 lg:space-y-4">
             <div className="flex items-start space-x-3 lg:space-x-4">
