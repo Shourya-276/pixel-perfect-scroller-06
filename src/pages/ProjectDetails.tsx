@@ -149,6 +149,7 @@ const AmenitiesModal = ({ isOpen, onClose }) => {
 const ProjectDetails = () => {
   const [showAmenitiesModal, setShowAmenitiesModal] = useState(false);
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+  const [showFloorPlan, setShowFloorPlan] = useState(false);
 
   return (
     <div className="min-h-screen bg-background">
@@ -328,7 +329,7 @@ const ProjectDetails = () => {
       <section className="py-8 bg-[#EDF4FC]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
+            <div className={`${showFloorPlan ? 'block' : 'hidden lg:block'}`}>
               <img
                 src={floorPlan}
                 alt="Floor Plan"
@@ -342,7 +343,13 @@ const ProjectDetails = () => {
                 <Button variant="outline" className="whitespace-nowrap">2 BHK</Button>
                 <Button variant="outline" className="whitespace-nowrap">3 BHK</Button>
                 <Button variant="outline" className="text-xs whitespace-nowrap">Typical Floor Plan</Button>
-                <Button variant="outline" className="text-xs whitespace-nowrap">Brochure Floor Plan</Button>
+                <Button 
+                  variant="outline" 
+                  className="text-xs whitespace-nowrap"
+                  onClick={() => setShowFloorPlan(!showFloorPlan)}
+                >
+                  Brochure Floor Plan
+                </Button>
               </div>
               <div className="space-y-3 mb-6">
                 {floorPlans.map((plan, index) => (
@@ -378,7 +385,7 @@ const ProjectDetails = () => {
             <CarouselContent className="flex -ml-4">
               {virtualTours.map((tour) => (
                 <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <div className="relative h-96 sm:h-[480px] md:h-[600px] bg-gray-200 rounded-lg overflow-hidden">
+                  <div className="relative h-[600px] sm:h-[480px] md:h-[600px] bg-gray-200 rounded-lg overflow-hidden">
                     <img
                       src={tour.image}
                       alt={tour.alt}

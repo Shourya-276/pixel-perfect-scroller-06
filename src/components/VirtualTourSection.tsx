@@ -9,6 +9,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const homepageVirtualTours = [
   {
@@ -89,62 +90,39 @@ const companyLogos = [
 ];
 
 const VirtualTourSection = () => {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
-  const handlePrevVideo = () => {
-    setCurrentVideoIndex((prevIndex) =>
-      prevIndex === 0 ? homepageVirtualTours.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNextVideo = () => {
-    setCurrentVideoIndex((prevIndex) =>
-      prevIndex === homepageVirtualTours.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const currentVideo = homepageVirtualTours[currentVideoIndex];
-
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
-        {/* Section header */}
-        <div className="text-center mb-8 lg:mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Virtual Tour</h2>
-        </div>
-
-        {/* Video grid */}
-        <div className="relative w-full max-w-2xl mx-auto">
-          <div className="relative bg-gray-300 rounded-lg overflow-hidden aspect-[16/9] min-h-[420px] sm:min-h-[480px] md:min-h-[480px] lg:min-h-[720px]">
-            <img
-              src={currentVideo.image}
-              alt={currentVideo.alt}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Button size="icon" className="bg-white/90 hover:bg-white text-black rounded-full p-3 h-14 w-14 sm:h-16 sm:w-16">
-                <Play className="h-8 w-8" />
-              </Button>
-            </div>
-          </div>
-          
-          {/* Navigation arrows */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/70 hover:bg-white rounded-full p-2 h-10 w-10 sm:h-12 sm:w-12"
-            onClick={handlePrevVideo}
+        {/* Virtual Tour Section */}
+        <div className="mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">Virtual Tour</h2>
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="w-full relative"
           >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/70 hover:bg-white rounded-full p-2 h-10 w-10 sm:h-12 sm:w-12"
-            onClick={handleNextVideo}
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
+            <CarouselContent className="flex -ml-4">
+              {homepageVirtualTours.map((tour) => (
+                <CarouselItem key={tour.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <div className="relative h-[600px] sm:h-[480px] md:h-[600px] bg-gray-200 rounded-lg overflow-hidden">
+                    <img
+                      src={tour.image}
+                      alt={tour.alt}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Button size="icon" className="bg-white/90 hover:bg-white text-black rounded-full p-3 h-14 w-14 sm:h-16 sm:w-16">
+                        <Play className="h-8 w-8" />
+                      </Button>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
+          </Carousel>
         </div>
 
         {/* Company logos section */}
@@ -182,8 +160,6 @@ const VirtualTourSection = () => {
             ))}
           </CarouselContent>
         </Carousel>
-
-
       </div>
     </section>
   );

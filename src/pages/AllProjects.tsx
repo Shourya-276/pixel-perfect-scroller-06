@@ -1336,7 +1336,47 @@ const AllProjects = () => {
             {/* Limited Offers Section */}
             <section className="mb-8 sm:mb-12">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Limited Offers in Central Mumbai</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+
+              {/* Mobile: single row horizontal scroll */}
+              <div className="md:hidden -mx-4 px-4">
+                <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+                  {limitedOffers.map((offer) => (
+                    <div key={offer.id} className="min-w-[85%] bg-[#EDF4FC] rounded-lg overflow-hidden shadow-md relative">
+                      {/* Heart button top right */}
+                      <button
+                        className="absolute top-2 right-2 p-1 h-7 w-7 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow"
+                        onClick={() => handleOfferLikeToggle(offer.id)}
+                      >
+                        <Heart className={`h-4 w-4 ${offerLikes[offer.id] ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
+                      </button>
+                      <div className="flex">
+                        <img
+                          src={offer.image}
+                          alt={offer.name}
+                          className="w-32 h-32 object-cover flex-shrink-0"
+                        />
+                        <div className="flex-1 p-3">
+                          <h3 className="font-semibold text-base mb-1">{offer.name}</h3>
+                          <p className="text-xs text-gray-600 mb-2">{offer.type}</p>
+                          <div className="flex items-center text-xs text-gray-600 mb-2">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            {offer.location}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold text-sm">{offer.price}</span>
+                            <Button size="sm" className="bg-primary hover:bg-primary/90 text-xs px-3 py-1 h-auto">
+                              View Details
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop/Tablet: keep grid */}
+              <div className="hidden md:grid grid-cols-2 gap-6">
                 {limitedOffers.map((offer) => (
                   <div key={offer.id} className="bg-[#EDF4FC] rounded-lg overflow-hidden shadow-md relative">
                     {/* Heart button top right */}
@@ -1346,22 +1386,22 @@ const AllProjects = () => {
                     >
                       <Heart className={`h-4 w-4 ${offerLikes[offer.id] ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
                     </button>
-                    <div className="flex flex-col sm:flex-row">
-                      <img 
-                        src={offer.image} 
+                    <div className="flex">
+                      <img
+                        src={offer.image}
                         alt={offer.name}
-                        className="w-full h-32 object-cover sm:w-32 sm:h-auto"
+                        className="w-32 h-full object-cover flex-shrink-0"
                       />
-                      <div className="flex-1 p-3 sm:p-4">
-                        <h3 className="font-semibold text-base sm:text-lg mb-1">{offer.name}</h3>
-                        <p className="text-xs text-gray-600 mb-1 sm:mb-2">{offer.type}</p>
-                        <div className="flex items-center text-xs text-gray-600 mb-1 sm:mb-2">
-                          <MapPin className="h-3 w-3 mr-1" />
+                      <div className="flex-1 p-4">
+                        <h3 className="font-semibold text-lg mb-1">{offer.name}</h3>
+                        <p className="text-sm text-gray-600 mb-2">{offer.type}</p>
+                        <div className="flex items-center text-sm text-gray-600 mb-2">
+                          <MapPin className="h-4 w-4 mr-1" />
                           {offer.location}
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold text-sm">{offer.price}</span>
-                          <Button size="sm" className="bg-primary hover:bg-primary/90 text-xs px-3 py-1 h-auto">
+                          <span className="font-semibold">{offer.price}</span>
+                          <Button size="sm" className="bg-primary hover:bg-primary/90">
                             View Details
                           </Button>
                         </div>

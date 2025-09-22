@@ -8,14 +8,14 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ name, location, image }) => {
   return (
-    <div className="flex flex-col items-center text-center w-[150px] flex-shrink-0">
+    <div className="flex flex-col items-center text-center w-[120px] sm:w-[150px] flex-shrink-0">
       <img
         src={image}
         alt={name}
-        className="w-24 h-24 rounded-full object-cover mb-2 border-2 border-white shadow-md"
+        className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover mb-2 border-2 border-white shadow-md"
       />
-      <h4 className="text-white font-semibold text-sm leading-tight">{name}</h4>
-      <p className="text-gray-200 text-xs mt-1 leading-tight">{location}</p>
+      <h4 className="text-white font-semibold text-xs sm:text-sm leading-tight line-clamp-2 max-w-full">{name}</h4>
+      <p className="text-gray-200 text-[10px] sm:text-xs mt-1 leading-tight">{location}</p>
     </div>
   );
 };
@@ -55,12 +55,12 @@ const ProjectsInKandivaliSection: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#0D6ABC] py-8 pl-6 pr-0 rounded-l-2xl mb-8 ml-auto w-full max-w-4xl shadow-lg">
+    <section className="bg-[#0D6ABC] py-6 sm:py-8 pl-4 sm:pl-6 pr-0 rounded-l-2xl mb-8 ml-auto w-full max-w-4xl shadow-lg">
       <div className="flex flex-col items-start">
-        <h2 className="text-3xl font-bold text-white mb-2">Projects in Kandivali, Mumbai</h2>
-        <p className="text-gray-200 text-sm mb-6">Inspired by your search preferences.</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Projects in Kandivali, Mumbai</h2>
+        <p className="text-gray-200 text-xs sm:text-sm mb-4 sm:mb-6">Inspired by your search preferences.</p>
 
-        <div className="flex space-x-6 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex space-x-4 sm:space-x-6 overflow-x-auto pb-2 scrollbar-hide">
           {projects.map((project) => (
             <ProjectCard key={project.id} {...project} />
           ))}
