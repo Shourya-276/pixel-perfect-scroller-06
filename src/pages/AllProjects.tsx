@@ -337,7 +337,7 @@ const AllProjects = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
               </div>
-              <div className="mt-2 sm:mt-0 flex w-full sm:w-auto justify-center sm:justify-end gap-2">
+              <div className="mt-2 sm:mt-0 hidden sm:flex w-full sm:w-auto justify-center sm:justify-end gap-2">
                 <Button size="sm" className="bg-primary hover:bg-primary/90 text-white rounded-full h-9 w-9 p-0" aria-label="Search">
                 🔍
               </Button>
