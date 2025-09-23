@@ -410,10 +410,10 @@ const ProjectDetails = () => {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-6">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-y-2 sm:gap-y-0 gap-x-6 text-sm text-gray-600 flex-nowrap overflow-x-auto scrollbar-hide">
-              <span className="whitespace-nowrap">Location: Vikhroli East</span>
-              <span className="whitespace-nowrap">Zone: Central Mumbai Suburbs</span>
-              <span className="whitespace-nowrap">Pincode: 400083</span>
+            <div className="grid grid-cols-2 sm:flex sm:flex-row items-center justify-center gap-2 sm:gap-x-6 text-xs sm:text-sm text-gray-600">
+              <span className="whitespace-nowrap text-center">Location: Vikhroli East</span>
+              <span className="whitespace-nowrap text-center">Zone: Central Mumbai</span>
+              <span className="whitespace-nowrap text-center col-span-2 sm:col-span-1">Pincode: 400083</span>
             </div>
           </div>
           
