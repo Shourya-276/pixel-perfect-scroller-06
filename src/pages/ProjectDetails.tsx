@@ -258,34 +258,34 @@ const ProjectDetails = () => {
                 </div>
                 {/* Project Overview - now within this column */}
                 <div className="mt-6">
-                  <h3 className="font-semibold mb-4">Project Overview</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                      <Building2 className="h-5 w-5 text-gray-600" />
+                  <h3 className="font-semibold mb-3">Project Overview</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+                    <div className="flex items-center space-x-1 sm:space-x-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                      <Building2 className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                       <div>
-                        <p className="text-xs text-gray-500">Project Type</p>
-                        <p className="font-medium">Residential</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Project Type</p>
+                        <p className="font-medium text-xs sm:text-sm">Residential</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                      <Home className="h-5 w-5 text-gray-600" />
+                    <div className="flex items-center space-x-1 sm:space-x-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                      <Home className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                       <div>
-                        <p className="text-xs text-gray-500">Project Type</p>
-                        <p className="font-medium">1, 2 BHK Apartments</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Units</p>
+                        <p className="font-medium text-xs sm:text-sm">1, 2 BHK</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                      <Square className="h-5 w-5 text-gray-600" />
+                    <div className="flex items-center space-x-1 sm:space-x-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                      <Square className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                       <div>
-                        <p className="text-xs text-gray-500">Rera Carpet Area</p>
-                        <p className="font-medium">394.00 sq. ft. to 639.00 sq. ft.</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">Area</p>
+                        <p className="font-medium text-xs sm:text-sm">394-639 sq.ft</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
-                      <LinkIcon className="h-5 w-5 text-gray-600" />
+                    <div className="flex items-center space-x-1 sm:space-x-2 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                      <LinkIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
                       <div>
-                        <p className="text-xs text-gray-500">Maharera Registration no.</p>
-                        <p className="font-medium">P51800053230</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">RERA No.</p>
+                        <p className="font-medium text-xs sm:text-sm">P51800053230</p>
                       </div>
                     </div>
                   </div>
