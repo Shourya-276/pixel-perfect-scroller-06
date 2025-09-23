@@ -178,8 +178,8 @@ const BlogsAndArticlesSection = () => {
           </div>
         </div>
 
-        {/* Carousel for small screens */}
-        <div className="lg:hidden relative mb-8">
+        {/* Compact carousel for small mobile screens */}
+        <div className="lg:hidden relative mb-6">
           <Carousel
             opts={{
               align: "start",
@@ -188,30 +188,30 @@ const BlogsAndArticlesSection = () => {
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-2">
               {blogs.map((blog, index) => (
-                <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2">
-                  <div className="relative bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-300 h-60">
+                <CarouselItem key={index} className="pl-2 basis-4/5 sm:basis-1/2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div className="relative bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-44 sm:h-52 group">
                     <img
                       src={blog.image}
                       alt={blog.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <div className="text-xs mb-1">{blog.date}</div>
-                      <h3 className="text-base font-bold">{blog.title}</h3>
-                      {blog.subtitle && <p className="text-xs text-gray-200 mb-2">{blog.subtitle}</p>}
-                      <Button variant="link" className="text-white p-0 h-auto mt-1 underline text-xs">
-                        Read more
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                    <div className="absolute bottom-2 left-2 right-2 text-white">
+                      <div className="text-[10px] mb-1 opacity-80">{blog.date}</div>
+                      <h3 className="text-xs sm:text-sm font-bold leading-tight line-clamp-2 mb-1">{blog.title}</h3>
+                      {blog.subtitle && <p className="text-[10px] text-gray-200 mb-1 line-clamp-1">{blog.subtitle}</p>}
+                      <Button variant="link" className="text-white p-0 h-auto underline text-[10px] hover:text-primary transition-colors duration-200">
+                        Read more →
                       </Button>
                     </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-2" />
-            <CarouselNext className="right-2" />
+            <CarouselPrevious className="left-1 h-8 w-8 bg-white/90 hover:bg-white" />
+            <CarouselNext className="right-1 h-8 w-8 bg-white/90 hover:bg-white" />
           </Carousel>
         </div>
 
