@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import mumbaiHomesLogo from "@/assets/mumbai-homes-logo.png";
 
 const MumbaiHomesSection = () => {
@@ -75,19 +76,19 @@ const MumbaiHomesSection = () => {
             <div className="flex space-x-2 ml-2 md:space-x-3 md:ml-4">
               <Button variant="ghost" size="sm" className="p-1 text-white hover:bg-white/10">
                 <span className="sr-only">Instagram</span>
-                📷
+                <Instagram className="h-4 w-4" />
               </Button>
               <Button variant="ghost" size="sm" className="p-1 text-white hover:bg-white/10">
                 <span className="sr-only">Facebook</span>
-                📘
+                <Facebook className="h-4 w-4" />
               </Button>
               <Button variant="ghost" size="sm" className="p-1 text-white hover:bg-white/10">
                 <span className="sr-only">LinkedIn</span>
-                💼
+                <Linkedin className="h-4 w-4" />
               </Button>
               <Button variant="ghost" size="sm" className="p-1 text-white hover:bg-white/10">
                 <span className="sr-only">YouTube</span>
-                📺
+                <Youtube className="h-4 w-4" />
               </Button>
             </div>
           </div>
