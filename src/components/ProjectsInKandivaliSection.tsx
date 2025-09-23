@@ -1,4 +1,5 @@
 import React from "react";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface ProjectCardProps {
   name: string;
@@ -60,11 +61,14 @@ const ProjectsInKandivaliSection: React.FC = () => {
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-1 sm:mb-2">Projects in Kandivali, Mumbai</h2>
         <p className="text-gray-200 text-xs sm:text-sm mb-4 sm:mb-6">Inspired by your search preferences.</p>
 
-        <div className="flex space-x-4 sm:space-x-6 overflow-x-auto pb-2 scrollbar-hide">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} {...project} />
-          ))}
-        </div>
+        <ScrollArea className="w-full">
+          <div className="flex space-x-4 sm:space-x-6 pb-2 min-w-max">
+            {projects.map((project) => (
+              <ProjectCard key={project.id} {...project} />
+            ))}
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
     </section>
   );
