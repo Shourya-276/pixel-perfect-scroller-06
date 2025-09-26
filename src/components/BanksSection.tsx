@@ -40,12 +40,12 @@ const BanksSection = () => {
           {banks.map((bank, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-6 flex items-center gap-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex items-center gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.3)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1"
             >
               <div className="w-12 h-12 flex-shrink-0">
                 <img src={bank.logo} alt={bank.name} className="w-full h-full object-contain" />
               </div>
-              <h3 className="text-gray-800 font-semibold text-lg">{bank.name}</h3>
+              <h3 className="text-white font-semibold text-lg">{bank.name}</h3>
             </div>
           ))}
         </div>
