@@ -146,7 +146,7 @@ const VirtualTourSection = () => {
             {/* Duplicate companyLogos for seamless loop */}
             {[...companyLogos, ...companyLogos].map((logo, index) => (
               <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5">
-                <div className="flex flex-col items-center space-y-2 p-2">
+                <div className="flex flex-col items-center space-y-1 p-2">
                   <div className={`${logo.color} p-3 rounded-lg w-16 h-16 flex items-center justify-center text-xl font-bold`}>
                     {logo.initials}
                   </div>
