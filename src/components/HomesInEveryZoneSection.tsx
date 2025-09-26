@@ -55,12 +55,12 @@ const HomesInEveryZoneSection = () => {
         </div>
 
         {/* Zones grid */}
-        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
           {/* Existing grid for larger screens */}
           {zones.map((zone) => (
             <div
               key={zone.id}
-              className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group cursor-pointer h-56 sm:h-64"
+              className="relative bg-white overflow-hidden group cursor-pointer h-56 sm:h-64"
             >
               <img
                 src={zone.image}
