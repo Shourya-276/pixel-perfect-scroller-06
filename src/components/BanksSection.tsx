@@ -35,36 +35,53 @@ const BanksSection = () => {
           </p>
         </div>
 
-        {/* Banks grid */}
-        <Carousel
-          plugins={[
-            Autoplay({
-              delay: 0,
-              stopOnInteraction: false,
-              stopOnMouseEnter: true,
-            }),
-          ]}
-          opts={{
-            align: "start",
-            loop: true,
-            slidesToScroll: 1,
-            duration: 15000,
-          }}
-          className="w-full max-w-6xl mx-auto"
-        >
-          <CarouselContent className="-ml-4">
-            {/* Duplicate banks for seamless loop */}
-            {[...banks, ...banks].map((bank, index) => (
-              <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6">
-                <div
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-3 flex items-center justify-center h-20 w-full hover:bg-white/20 transition-colors duration-300"
-                >
-                  <img src={bank.logo} alt={bank.name} className="h-full w-auto object-contain" />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        {/* Static grid for large screens */}
+        <div className="hidden lg:grid grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {banks.map((bank, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl p-6 flex items-center gap-4 shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="w-12 h-12 flex-shrink-0">
+                <img src={bank.logo} alt={bank.name} className="w-full h-full object-contain" />
+              </div>
+              <h3 className="text-gray-800 font-semibold text-lg">{bank.name}</h3>
+            </div>
+          ))}
+        </div>
+
+        {/* Carousel for small screens */}
+        <div className="lg:hidden">
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 0,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+              duration: 15000,
+            }}
+            className="w-full max-w-6xl mx-auto"
+          >
+            <CarouselContent className="-ml-4">
+              {/* Duplicate banks for seamless loop */}
+              {[...banks, ...banks].map((bank, index) => (
+                <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4">
+                  <div
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-3 flex items-center justify-center h-20 w-full hover:bg-white/20 transition-colors duration-300"
+                  >
+                    <img src={bank.logo} alt={bank.name} className="h-full w-auto object-contain" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
 
         {/* Optional CTA */}
         <div className="text-center mt-6 lg:mt-8">
