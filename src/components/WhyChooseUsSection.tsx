@@ -39,57 +39,47 @@ const WhyChooseUsSection = () => {
           </div>
         </div>
 
-        {/* Desktop: New curved card layout matching the reference */}
-        <div className="hidden lg:grid grid-cols-2 gap-6 max-w-6xl mx-auto">
-          {/* Top left card - Smart Tools & Personalized Assistance with curved bottom-right */}
-          <div className="relative bg-white p-8 h-80" style={{
-            clipPath: 'polygon(0 0, 100% 0, 80% 100%, 0 100%)'
-          }}>
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="bg-gray-100 p-3 rounded-xl">
-                  <Zap className="h-8 w-8 text-gray-800" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">
-                    Smart Tools - Use price comparison, EMI calculators & site visit schedulers to make informed decisions.
-                  </h3>
-                </div>
+        {/* Desktop: Original grid layout */}
+        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Top left card - Smart Tools */}
+          <div className="bg-white rounded-3xl p-6 lg:p-8 space-y-3 lg:space-y-4">
+            <div className="flex items-start space-x-3 lg:space-x-4">
+              <div className="bg-gray-100 p-2 rounded-xl lg:p-3">
+                <Zap className="h-6 w-6 text-gray-800 lg:h-8 lg:w-8" />
               </div>
-              
-              <div className="flex items-start space-x-4">
-                <div className="bg-gray-100 p-3 rounded-xl">
-                  <Users className="h-8 w-8 text-gray-800" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800">
-                    Personalized Assistance - Talk to experts, not bots.
-                  </h3>
-                </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2 lg:text-xl lg:mb-3">
+                  Smart Tools - Use price comparison, EMI calculators & site visit schedulers to make informed decisions.
+                </h3>
               </div>
             </div>
           </div>
 
-          {/* Top right card - Location Intelligence with curved bottom-left */}
-          <div className="relative bg-white p-8 h-80" style={{
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 20% 100%)'
-          }}>
-            <div className="flex items-start space-x-4 h-full">
-              <div className="bg-gray-100 p-3 rounded-xl">
-                <MapPin className="h-8 w-8 text-gray-800" />
+          {/* Top middle card - Building image */}
+          <div className="bg-white rounded-3xl overflow-hidden h-64 md:h-auto">
+            <img
+              src={modernBuilding}
+              alt="Modern building"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Top right card - Location Intelligence */}
+          <div className="bg-white rounded-3xl p-6 lg:p-8 space-y-3 lg:space-y-4">
+            <div className="flex items-start space-x-3 lg:space-x-4">
+              <div className="bg-gray-100 p-2 rounded-xl lg:p-3">
+                <MapPin className="h-6 w-6 text-gray-800 lg:h-8 lg:w-8" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">
+                <h3 className="text-lg font-bold text-gray-800 mb-2 lg:text-xl lg:mb-3">
                   Location Intelligence - Get deep insights on areas, pricing trends & upcoming growth zones.
                 </h3>
               </div>
             </div>
           </div>
 
-          {/* Bottom left card - Handshake image with curved top-right */}
-          <div className="relative overflow-hidden h-80" style={{
-            clipPath: 'polygon(0 0, 80% 0, 100% 100%, 0 100%)'
-          }}>
+          {/* Bottom left card - Handshake image */}
+          <div className="bg-white rounded-3xl overflow-hidden h-64 md:h-auto">
             <img
               src={handshakeImage}
               alt="Handshake deal"
@@ -97,24 +87,37 @@ const WhyChooseUsSection = () => {
             />
           </div>
 
-          {/* Bottom right card - Verified Properties & Hassle-Free Experience */}
-          <div className="bg-white p-8 h-80 rounded-3xl">
-            <div className="space-y-8 h-full flex flex-col justify-center">
-              <div className="flex items-start space-x-4">
-                <div className="bg-gray-100 p-3 rounded-xl">
-                  <Shield className="h-8 w-8 text-gray-800" />
+          {/* Bottom right card - Features */}
+          <div className="md:col-span-2 lg:col-span-2 bg-white rounded-3xl p-6 lg:p-8 space-y-4 lg:space-y-6">
+            <div className="flex items-start space-x-3 lg:space-x-4">
+              <div className="bg-gray-100 p-2 rounded-xl lg:p-3">
+                <Users className="h-6 w-6 text-gray-800 lg:h-8 lg:w-8" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2 lg:text-xl lg:mb-3">
+                  Personalized Assistance - Talk to experts, not bots.
+                </h3>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 lg:gap-6">
+              <div className="flex items-start space-x-3 lg:space-x-4">
+                <div className="bg-gray-100 p-2 rounded-xl">
+                  <Shield className="h-6 w-6 text-gray-800" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Verified Properties - No fakes, no fluff.</h3>
+                  <h4 className="font-bold text-gray-800 mb-1 lg:mb-2 text-base lg:text-lg">Verified Properties</h4>
+                  <p className="text-gray-600 text-sm lg:text-base">No fakes, no fluff.</p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4">
-                <div className="bg-gray-100 p-3 rounded-xl">
-                  <ThumbsUp className="h-8 w-8 text-gray-800" />
+              <div className="flex items-start space-x-3 lg:space-x-4">
+                <div className="bg-gray-100 p-2 rounded-xl">
+                  <ThumbsUp className="h-6 w-6 text-gray-800" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">Hassle-Free Experience - From virtual tours to legal help, we've got you covered. Choose Mumbai Homes for a smoother, smarter, and stress-free property journey.</h3>
+                  <h4 className="font-bold text-gray-800 mb-1 lg:mb-2 text-base lg:text-lg">Hassle-Free Experience</h4>
+                  <p className="text-gray-600 text-sm lg:text-base">From virtual tours to legal help, we've got you covered. Choose Mumbai Homes for a smoother, smarter, and stress-free property journey.</p>
                 </div>
               </div>
             </div>
