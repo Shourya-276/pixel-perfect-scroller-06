@@ -110,35 +110,38 @@ const AmenitiesModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-2xl font-bold">Amenities</h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="p-2"
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-        
+      <div className="bg-white rounded-xl max-w-md w-full max-h-[80vh] overflow-y-auto shadow-lg">
         <div className="p-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Amenities</h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+          
+          <div className="space-y-4">
             {amenitiesList.map((amenity, index) => (
-              <div key={index} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50">
-                <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-600 text-sm">{amenity.icon}</span>
+              <div key={index} className="flex items-center space-x-4 py-2">
+                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span className="text-blue-600 text-lg">{amenity.icon}</span>
                 </div>
-                <span className="text-blue-600 text-sm">{amenity.name}</span>
+                <span className="text-blue-600 font-medium">{amenity.name}</span>
               </div>
             ))}
           </div>
           
-          <div className="flex justify-center mt-6">
-            <Button onClick={onClose} className="bg-blue-600 hover:bg-blue-700">
-              View Less
-            </Button>
+          <div className="flex justify-center mt-8">
+            <button 
+              onClick={onClose}
+              className="text-blue-600 font-medium hover:text-blue-700 transition-colors"
+            >
+              View more
+            </button>
           </div>
         </div>
       </div>
