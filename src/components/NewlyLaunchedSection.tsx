@@ -102,7 +102,10 @@ const NewlyLaunchedSection = () => {
             {allProperties.map((property, idx) => (
               <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <div
-                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:scale-105 group h-80 w-full flex-shrink-0"
+                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group h-80 w-full flex-shrink-0 hover:z-10 transform-gpu perspective-1000"
+                  style={{
+                    filter: 'hover:drop-shadow(0 25px 35px rgba(0, 0, 0, 0.25))'
+                  }}
                 >
                   {/* Background image */}
                   <img
