@@ -48,7 +48,7 @@ const Blogs = () => {
           {/* Featured blogs grid - matching exact layout from image */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
             {/* Left side - Large featured card */}
-            <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64 lg:h-80">
+            <div className="relative bg-white rounded-tl-[40px] rounded-br-[40px] rounded overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-64 lg:h-80">
               <img
                 src={blogHero1}
                 alt="Common Mistakes in Real Estate Investing"
@@ -70,7 +70,7 @@ const Blogs = () => {
             {/* Right side - Top medium card + bottom 3 small cards */}
             <div className="space-y-4 lg:space-y-6">
               {/* Top medium card */}
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-32 lg:h-36">
+              <div className="relative bg-white rounded-tl-[40px] rounded-br-[40px] rounded overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-32 lg:h-36">
                 <img
                   src={blogHero2}
                   alt="Emerging Real Estate Markets to Watch"
@@ -90,7 +90,7 @@ const Blogs = () => {
 
               {/* Bottom row of 3 small cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
+              <div className="relative bg-white rounded-tl-[40px] rounded-br-[40px] rounded overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
                   <img
                     src={blogCard1}
                     alt="What's happening Know more"
@@ -109,7 +109,7 @@ const Blogs = () => {
                   </div>
                 </div>
 
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
+                <div className="relative bg-white rounded-tl-[40px] rounded-br-[40px] rounded overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
                   <img
                     src={blogCard2}
                     alt="What's happening Know more"
@@ -128,7 +128,7 @@ const Blogs = () => {
                   </div>
                 </div>
 
-                <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
+                <div className="relative bg-white rounded-tl-[40px] rounded-br-[40px] rounded overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-28 sm:h-32">
                   <img
                     src={blogCard3}
                     alt="What's happening Know more"

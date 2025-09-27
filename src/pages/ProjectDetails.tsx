@@ -216,7 +216,7 @@ const ProjectDetails = () => {
               </div>
               {/* Right: Amenities */}
               <div className="hidden lg:block lg:col-span-1 mt-8 lg:mt-0">
-                <div>
+                <div className="bg-white rounded-lg p-6 shadow-sm border">
                   <h3 className="text-xl font-bold mb-4">Amenities</h3>
                   <div className="grid grid-cols-2 gap-4">
                     {amenitiesList.map((amenity, index) => (
@@ -353,15 +353,16 @@ const ProjectDetails = () => {
               </div>
               <div className="space-y-3 mb-6">
                 {floorPlans.map((plan, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg border">
-                    <div className="flex items-center space-x-4">
-                      <span className="font-medium text-sm">{plan.type}</span>
-                      <span className="text-gray-600 text-xs">{plan.area}</span>
-                    </div>
-                    <Button size="sm" variant="outline">
-                      {plan.price}
-                    </Button>
-                  </div>
+                  <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg border text-center">
+  <div className="flex items-center space-x-4 flex-1"> {/* Remove 'justify-center' */}
+    <span className="font-medium text-sm">{plan.type}</span>
+    <span className="text-gray-600 text-xs">{plan.area}</span>
+  </div>
+  <Button size="sm" variant="outline">
+    {plan.price}
+  </Button>
+</div>
+
                 ))}
               </div>
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
@@ -448,7 +449,7 @@ const ProjectDetails = () => {
               align: "start",
               loop: true,
               slidesToScroll: 1,
-              duration: 7000,
+              duration: 10000,
             }}
           >
             <CarouselContent className="-ml-6">
