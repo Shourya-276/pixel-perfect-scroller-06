@@ -102,28 +102,31 @@ const TrendingProjectsSection = () => {
         </div>
 
         {/* Projects carousel with enhanced animation */}
-        <Carousel
-          plugins={[
-            Autoplay({
-              delay: 0,
-              stopOnInteraction: false,
-              stopOnMouseEnter: true,
-            }),
-          ]}
-          className="w-full"
-          opts={{
-            align: "start",
-            loop: true,
-            slidesToScroll: 1,
-            duration: 5000,
-          }}
-        >
-          <CarouselContent className="-ml-6">
+        <div className="relative overflow-visible py-8 -my-8">
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 0,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+                stopOnFocusIn: true,
+              }),
+            ]}
+            className="w-full overflow-visible"
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+              duration: 5000,
+            }}
+          >
+            <CarouselContent className="-ml-6 overflow-visible">
             {projects.map((project) => (
               <CarouselItem key={project.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <div 
-                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group hover:z-10 transform-gpu perspective-1000"
+                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group hover:z-30 transform-gpu"
                   style={{
+                    transformStyle: 'preserve-3d',
                     filter: 'hover:drop-shadow(0 25px 35px rgba(0, 0, 0, 0.25))'
                   }}
                 >
@@ -184,10 +187,11 @@ const TrendingProjectsSection = () => {
                 </div>
               </CarouselItem>
             ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
-          <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
-        </Carousel>
+            </CarouselContent>
+            <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200 z-20" />
+            <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200 z-20" />
+          </Carousel>
+        </div>
 
         {/* View more button */}
         <div className="text-center mt-8">
