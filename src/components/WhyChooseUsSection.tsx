@@ -39,85 +39,94 @@ const WhyChooseUsSection = () => {
           </div>
         </div>
 
-        {/* Desktop: Original grid layout */}
-        <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Top left card - Smart Tools */}
-          <div className="bg-white rounded-3xl p-6 lg:p-8 space-y-3 lg:space-y-4">
-            <div className="flex items-start space-x-3 lg:space-x-4">
-              <div className="bg-gray-100 p-2 rounded-xl lg:p-3">
-                <Zap className="h-6 w-6 text-gray-800 lg:h-8 lg:w-8" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2 lg:text-xl lg:mb-3">
-                  Smart Tools - Use price comparison, EMI calculators & site visit schedulers to make informed decisions.
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Top middle card - Building image */}
-          <div className="bg-white rounded-3xl overflow-hidden h-64 md:h-auto">
-            <img
-              src={modernBuilding}
-              alt="Modern building"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Top right card - Location Intelligence */}
-          <div className="bg-white rounded-3xl p-6 lg:p-8 space-y-3 lg:space-y-4">
-            <div className="flex items-start space-x-3 lg:space-x-4">
-              <div className="bg-gray-100 p-2 rounded-xl lg:p-3">
-                <MapPin className="h-6 w-6 text-gray-800 lg:h-8 lg:w-8" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2 lg:text-xl lg:mb-3">
-                  Location Intelligence - Get deep insights on areas, pricing trends & upcoming growth zones.
-                </h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom left card - Handshake image */}
-          <div className="bg-white rounded-3xl overflow-hidden h-64 md:h-auto">
-            <img
-              src={handshakeImage}
-              alt="Handshake deal"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Bottom right card - Features */}
-          <div className="md:col-span-2 lg:col-span-2 bg-white rounded-3xl p-6 lg:p-8 space-y-4 lg:space-y-6">
-            <div className="flex items-start space-x-3 lg:space-x-4">
-              <div className="bg-gray-100 p-2 rounded-xl lg:p-3">
-                <Users className="h-6 w-6 text-gray-800 lg:h-8 lg:w-8" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2 lg:text-xl lg:mb-3">
-                  Personalized Assistance - Talk to experts, not bots.
-                </h3>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 lg:gap-6">
-              <div className="flex items-start space-x-3 lg:space-x-4">
-                <div className="bg-gray-100 p-2 rounded-xl">
-                  <Shield className="h-6 w-6 text-gray-800" />
+        {/* Desktop: Grid layout matching reference image */}
+        <div className="hidden lg:block">
+          {/* Top row - 3 cards */}
+          <div className="grid grid-cols-3 gap-6 mb-6">
+            {/* Top left card - Smart Tools */}
+            <div className="bg-white rounded-2xl p-8">
+              <div className="flex items-start space-x-4">
+                <div className="bg-gray-100 p-3 rounded-xl">
+                  <Zap className="h-8 w-8 text-gray-800" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800 mb-1 lg:mb-2 text-base lg:text-lg">Verified Properties</h4>
-                  <p className="text-gray-600 text-sm lg:text-base">No fakes, no fluff.</p>
+                  <h3 className="text-lg font-bold text-gray-800 leading-tight">
+                    Smart Tools - Use price comparison, EMI calculators & site visit schedulers to make informed decisions.
+                  </h3>
                 </div>
               </div>
+              <div className="mt-8">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gray-100 p-3 rounded-xl">
+                    <Users className="h-8 w-8 text-gray-800" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 leading-tight">
+                      Personalized Assistance - Talk to experts, not bots.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-              <div className="flex items-start space-x-3 lg:space-x-4">
-                <div className="bg-gray-100 p-2 rounded-xl">
-                  <ThumbsUp className="h-6 w-6 text-gray-800" />
+            {/* Top middle card - Building image */}
+            <div className="bg-white rounded-2xl overflow-hidden">
+              <img
+                src={modernBuilding}
+                alt="Modern building complex"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Top right card - Location Intelligence */}
+            <div className="bg-white rounded-2xl p-8">
+              <div className="flex items-start space-x-4">
+                <div className="bg-gray-100 p-3 rounded-xl">
+                  <MapPin className="h-8 w-8 text-gray-800" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-800 mb-1 lg:mb-2 text-base lg:text-lg">Hassle-Free Experience</h4>
-                  <p className="text-gray-600 text-sm lg:text-base">From virtual tours to legal help, we've got you covered. Choose Mumbai Homes for a smoother, smarter, and stress-free property journey.</p>
+                  <h3 className="text-lg font-bold text-gray-800 leading-tight">
+                    Location Intelligence - Get deep insights on areas, pricing trends & upcoming growth zones.
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom row - 2 cards */}
+          <div className="grid grid-cols-2 gap-6">
+            {/* Bottom left card - Handshake image */}
+            <div className="bg-white rounded-2xl overflow-hidden">
+              <img
+                src={handshakeImage}
+                alt="Professional handshake deal"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Bottom right card - Features */}
+            <div className="bg-white rounded-2xl p-8">
+              <div className="space-y-8">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gray-100 p-3 rounded-xl">
+                    <Shield className="h-8 w-8 text-gray-800" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 leading-tight">
+                      Verified Properties – No fakes, no fluff.
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="bg-gray-100 p-3 rounded-xl">
+                    <ThumbsUp className="h-8 w-8 text-gray-800" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 leading-tight">
+                      Hassle-Free Experience – From virtual tours to legal help, we've got you covered. Choose Mumbai Homes for a smoother, smarter, and stress-free property journey.
+                    </h3>
+                  </div>
                 </div>
               </div>
             </div>
