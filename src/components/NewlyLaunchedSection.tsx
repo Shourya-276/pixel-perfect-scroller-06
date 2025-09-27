@@ -82,31 +82,28 @@ const NewlyLaunchedSection = () => {
         </div>
 
         {/* Animated horizontal scroll */}
-        <div className="relative overflow-visible py-8 -my-8">
-          <Carousel
-            plugins={[
-              Autoplay({
-                delay: 0,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-                stopOnFocusIn: true,
-              }),
-            ]}
-            className="w-full overflow-visible"
-            opts={{
-              align: "start",
-              loop: true,
-              slidesToScroll: 1,
-              duration: 5000,
-            }}
-          >
-            <CarouselContent className="-ml-6 overflow-visible">
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 0,
+              stopOnInteraction: false,
+              stopOnMouseEnter: true,
+            }),
+          ]}
+          className="w-full"
+          opts={{
+            align: "start",
+            loop: true,
+            slidesToScroll: 1,
+            duration: 5000,
+          }}
+        >
+          <CarouselContent className="-ml-6">
             {allProperties.map((property, idx) => (
               <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <div
-                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group h-80 w-full flex-shrink-0 hover:z-30 transform-gpu"
+                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group h-80 w-full flex-shrink-0 hover:z-10 transform-gpu perspective-1000"
                   style={{
-                    transformStyle: 'preserve-3d',
                     filter: 'hover:drop-shadow(0 25px 35px rgba(0, 0, 0, 0.25))'
                   }}
                 >
@@ -162,11 +159,10 @@ const NewlyLaunchedSection = () => {
                 </div>
               </CarouselItem>
             ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200 z-20" />
-            <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200 z-20" />
-          </Carousel>
-        </div>
+          </CarouselContent>
+          <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
+          <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
+        </Carousel>
 
         <div className="text-center mt-8">
           <Button size="lg" className="bg-primary hover:bg-primary/90 px-12 py-3 text-lg">
