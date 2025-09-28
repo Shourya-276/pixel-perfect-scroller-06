@@ -4,7 +4,7 @@ import mumbaiHomesLogo from "@/assets/mumbai-homes-logo.png";
 
 const MumbaiHomesSection = () => {
   return (
-    <section 
+    <section
       className="py-6 md:py-12 text-white"
       style={{ backgroundColor: '#0D6ABC' }}
     >
@@ -13,13 +13,13 @@ const MumbaiHomesSection = () => {
           {/* Left Column - Logo and About */}
           <div className="text-center md:text-left">
             <div className="mb-4 md:mb-8">
-              <img 
-                src={mumbaiHomesLogo} 
-                alt="Mumbai Homes Logo" 
+              <img
+                src={mumbaiHomesLogo}
+                alt="Mumbai Homes Logo"
                 className="h-20 sm:h-24 w-auto mb-4 mx-auto md:mx-0"
               />
             </div>
-            
+
             {/* Our Company (Moved for mobile layout) */}
             <div className="mb-6 md:hidden">
               <h3 className="text-base font-bold mb-2">Our Company</h3>
@@ -32,10 +32,15 @@ const MumbaiHomesSection = () => {
             </div>
 
             <div>
-              <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4">About Mumbai Homes</h3>
-              <p className="text-sm leading-relaxed opacity-90">
-                Welcome to <strong>Mumbai Homes by The Avenew</strong> – your gateway to luxury living. We 
-                specialise in premium properties across the city, offering a curated selection of high-end residences that blend elegance, comfort, and exclusivity.
+              <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4">
+                About Mumbai Homes
+              </h3>
+              <p
+                className="text-sm opacity-90 text-left md:text-justify mx-auto"
+                style={{ maxWidth: "500px" }}
+              >
+                Welcome to <strong>Mumbai Homes by The Avenew</strong> – your gateway to luxury living.
+                We specialise in premium properties across the city, offering a curated selection of high-end residences that blend elegance, comfort, and exclusivity.
               </p>
             </div>
           </div>
@@ -70,7 +75,7 @@ const MumbaiHomesSection = () => {
           <div className="mb-3 md:mb-0 text-center">
             <p>Copyright 2025 | All Rights Reserved By Swastik Group | Developed by <a href="#" className="underline">Signature Advertising</a></p>
           </div>
-          
+
           <div className="flex items-center space-x-2 md:space-x-4">
             <a href="#" className="underline">Privacy Policy</a>
             <div className="flex space-x-2 ml-2 md:space-x-3 md:ml-4">
