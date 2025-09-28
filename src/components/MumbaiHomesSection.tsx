@@ -31,14 +31,11 @@ const MumbaiHomesSection = () => {
               </div>
             </div>
 
-            <div>
+            <div className="max-w-full">
               <h3 className="text-base md:text-xl font-bold mb-2 md:mb-4">
                 About Mumbai Homes
               </h3>
-              <p
-                className="text-sm opacity-90 text-left md:text-justify mx-auto"
-                style={{ maxWidth: "500px" }}
-              >
+              <p className="text-sm opacity-90 text-left md:text-left leading-relaxed max-w-lg md:max-w-none md:mx-0 mx-auto">
                 Welcome to <strong>Mumbai Homes by The Avenew</strong> – your gateway to luxury living.
                 We specialise in premium properties across the city, offering a curated selection of high-end residences that blend elegance, comfort, and exclusivity.
               </p>
