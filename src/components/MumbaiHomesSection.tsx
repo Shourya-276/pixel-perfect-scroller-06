@@ -12,11 +12,11 @@ const MumbaiHomesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           {/* Left Column - Logo and About */}
           <div className="text-center md:text-left">
-            <div className="mb-4 md:mb-8">
+            <div className="mb-6 md:mb-8 flex justify-center md:justify-start">
               <img
                 src={mumbaiHomesLogo}
                 alt="Mumbai Homes Logo"
-                className="h-20 sm:h-24 w-auto mb-4 mx-auto md:mx-0"
+                className="h-32 sm:h-36 md:h-40 w-auto"
               />
             </div>
 
