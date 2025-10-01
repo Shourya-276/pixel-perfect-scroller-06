@@ -91,7 +91,7 @@ const companyLogos = [
 
 const VirtualTourSection = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-10 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Virtual Tour Section */}
         <div className="mb-12">

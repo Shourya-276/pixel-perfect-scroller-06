@@ -83,7 +83,7 @@ const TrendingProjectsSection = () => {
   );
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-8 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12">

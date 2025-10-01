@@ -77,7 +77,7 @@ const buildFilterUrl = (locality?: string, bedrooms?: string) => {
 
 const DiscoverNeighborhoodsSection = () => {
   return (
-    <section className="py-8 lg:py-16" style={{ backgroundColor: '#E2EFFC' }}>
+    <section className="py-8" style={{ backgroundColor: '#E2EFFC' }}>
       <div className="container mx-auto px-4 lg:px-6">
         {/* Section header */}
         <div className="mb-6 lg:mb-12">

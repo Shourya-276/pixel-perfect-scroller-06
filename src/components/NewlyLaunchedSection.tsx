@@ -71,7 +71,7 @@ const NewlyLaunchedSection = () => {
   const allProperties = [...properties];
 
   return (
-    <section className="py-12 bg-gray-50 overflow-visible">
+    <section className="py-8 bg-gray-50 overflow-visible">
       <div className="container mx-auto px-6 overflow-visible">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Newly Launched</h2>
