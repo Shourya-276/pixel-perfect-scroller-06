@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
@@ -200,6 +201,7 @@ const FilterSection = ({ title, children, isExpandable = false }) => {
 };
 
 const AllProjects = () => {
+  const [searchParams] = useSearchParams();
   const [projectList, setProjectList] = useState(projects);
   const [hideAlreadySeen, setHideAlreadySeen] = useState(false);
   const [verifiedProperties, setVerifiedProperties] = useState(false);
@@ -219,6 +221,21 @@ const AllProjects = () => {
   const [selectedPropertyType, setSelectedPropertyType] = useState([]);
   const [budgetRange, setBudgetRange] = useState([0]);
   const [areaRange, setAreaRange] = useState([0]);
+
+  // Apply filters from URL parameters on mount
+  useEffect(() => {
+    const locality = searchParams.get('locality');
+    const bedrooms = searchParams.get('bedrooms');
+    
+    if (locality) {
+      setSelectedLocalities([locality]);
+    }
+    
+    if (bedrooms) {
+      const bedroomArray = bedrooms.split(',');
+      setSelectedBedrooms(bedroomArray);
+    }
+  }, [searchParams]);
 
   const handleLikeToggle = (projectId) => {
     setProjectList(prev => 

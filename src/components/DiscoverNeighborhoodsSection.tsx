@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -13,10 +14,10 @@ const categories = [
     id: 1,
     title: "New Projects",
     items: [
-      "New Projects in Chembur",
-      "New Projects in Vikhroli", 
-      "New Projects in Bhandup",
-      "New Projects in Ghatkopar"
+      { text: "New Projects in Chembur", locality: "Chembur" },
+      { text: "New Projects in Vikhroli", locality: "Vikhroli" }, 
+      { text: "New Projects in Bhandup", locality: "Bhandup" },
+      { text: "New Projects in Ghatkopar", locality: "Ghatkopar" }
     ],
     link: "View All"
   },
@@ -24,10 +25,10 @@ const categories = [
     id: 2,
     title: "Trending Projects", 
     items: [
-      "Trending Projects in Chembur",
-      "Trending Projects in Vikhroli",
-      "Trending Projects in Bhandup", 
-      "Trending Projects in Ghatkopar"
+      { text: "Trending Projects in Chembur", locality: "Chembur" },
+      { text: "Trending Projects in Vikhroli", locality: "Vikhroli" },
+      { text: "Trending Projects in Bhandup", locality: "Bhandup" }, 
+      { text: "Trending Projects in Ghatkopar", locality: "Ghatkopar" }
     ],
     link: "View All"
   },
@@ -35,10 +36,10 @@ const categories = [
     id: 3,
     title: "1&2 BHK Flats",
     items: [
-      "1&2 BHK Flats in Chembur",
-      "1 BHK Flats in Vikhroli",
-      "1 BHK Flats in Bhandup",
-      "1 BHK Flats in Ghatkopar"
+      { text: "1&2 BHK Flats in Chembur", locality: "Chembur", bedrooms: "1 BHK,2 BHK" },
+      { text: "1 BHK Flats in Vikhroli", locality: "Vikhroli", bedrooms: "1 BHK" },
+      { text: "1 BHK Flats in Bhandup", locality: "Bhandup", bedrooms: "1 BHK" },
+      { text: "1 BHK Flats in Ghatkopar", locality: "Ghatkopar", bedrooms: "1 BHK" }
     ],
     link: "View All"
   },
@@ -46,10 +47,10 @@ const categories = [
     id: 4,
     title: "3&4 BHK Flats",
     items: [
-      "3&4 BHK Flats in Chembur",
-      "3&4 BHK Flats in Vikhroli", 
-      "3&4 BHK Flats in Bhandup",
-      "3&4 BHK Flats in Ghatkopar"
+      { text: "3&4 BHK Flats in Chembur", locality: "Chembur", bedrooms: "3 BHK,4 BHK" },
+      { text: "3&4 BHK Flats in Vikhroli", locality: "Vikhroli", bedrooms: "3 BHK,4 BHK" }, 
+      { text: "3&4 BHK Flats in Bhandup", locality: "Bhandup", bedrooms: "3 BHK,4 BHK" },
+      { text: "3&4 BHK Flats in Ghatkopar", locality: "Ghatkopar", bedrooms: "3 BHK,4 BHK" }
     ],
     link: "View All"
   },
@@ -57,14 +58,22 @@ const categories = [
     id: 5,
     title: "Complex Projects",
     items: [
-      "Complex Projects",
-      "Complex Projects",
-      "Complex Projects",
-      "Complex Projects"
+      { text: "Complex Projects" },
+      { text: "Complex Projects" },
+      { text: "Complex Projects" },
+      { text: "Complex Projects" }
     ],
     link: "View All"
   }
 ];
+
+// Helper function to build filter URL
+const buildFilterUrl = (locality?: string, bedrooms?: string) => {
+  const params = new URLSearchParams();
+  if (locality) params.append('locality', locality);
+  if (bedrooms) params.append('bedrooms', bedrooms);
+  return `/all-projects${params.toString() ? '?' + params.toString() : ''}`;
+};
 
 const DiscoverNeighborhoodsSection = () => {
   return (
@@ -94,18 +103,23 @@ const DiscoverNeighborhoodsSection = () => {
                 <ul className="space-y-1 lg:space-y-3">
                   {category.items.map((item, index) => (
                     <li key={index}>
-                      <button className="text-gray-700 hover:text-primary transition-colors text-sm lg:text-left">
-                        {item}
-                      </button>
+                      <Link 
+                        to={buildFilterUrl(item.locality, item.bedrooms)}
+                        className="text-gray-700 hover:text-primary transition-colors text-sm lg:text-left block"
+                      >
+                        {item.text}
+                      </Link>
                     </li>
                   ))}
                 </ul>
-                <Button 
-                  variant="link" 
-                  className="text-primary p-0 h-auto font-medium hover:underline text-sm lg:text-base"
-                >
-                  {category.link}
-                </Button>
+                <Link to="/all-projects">
+                  <Button 
+                    variant="link" 
+                    className="text-primary p-0 h-auto font-medium hover:underline text-sm lg:text-base"
+                  >
+                    {category.link}
+                  </Button>
+                </Link>
               </div>
             ))}
           </div>
@@ -125,18 +139,23 @@ const DiscoverNeighborhoodsSection = () => {
                     <ul className="space-y-1">
                       {category.items.map((item, index) => (
                         <li key={index}>
-                          <button className="text-gray-700 hover:text-primary transition-colors text-sm">
-                            {item}
-                          </button>
+                          <Link 
+                            to={buildFilterUrl(item.locality, item.bedrooms)}
+                            className="text-gray-700 hover:text-primary transition-colors text-sm block"
+                          >
+                            {item.text}
+                          </Link>
                         </li>
                       ))}
                     </ul>
-                    <Button 
-                      variant="link" 
-                      className="text-primary p-0 h-auto font-medium hover:underline text-sm"
-                    >
-                      {category.link}
-                    </Button>
+                    <Link to="/all-projects">
+                      <Button 
+                        variant="link" 
+                        className="text-primary p-0 h-auto font-medium hover:underline text-sm"
+                      >
+                        {category.link}
+                      </Button>
+                    </Link>
                   </div>
                 </CarouselItem>
               ))}
