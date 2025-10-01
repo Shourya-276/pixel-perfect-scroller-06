@@ -71,8 +71,8 @@ const NewlyLaunchedSection = () => {
   const allProperties = [...properties];
 
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="container mx-auto px-6">
+    <section className="py-12 bg-gray-50 overflow-visible">
+      <div className="container mx-auto px-6 overflow-visible">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Newly Launched</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -90,7 +90,7 @@ const NewlyLaunchedSection = () => {
               stopOnMouseEnter: true,
             }),
           ]}
-          className="w-full"
+          className="w-full overflow-visible"
           opts={{
             align: "start",
             loop: true,
@@ -98,9 +98,9 @@ const NewlyLaunchedSection = () => {
             duration: 5000,
           }}
         >
-          <CarouselContent className="-ml-6">
+          <CarouselContent className="-ml-6 overflow-visible">
             {allProperties.map((property, idx) => (
-              <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+              <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 overflow-visible">
                 <div
                   className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group h-80 w-full flex-shrink-0 hover:z-10 transform-gpu perspective-1000"
                   style={{
