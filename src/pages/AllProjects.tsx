@@ -544,7 +544,7 @@ const AllProjects = () => {
                           />
                         </div>
                         <div className="grid grid-cols-1 gap-2">
-                          {['Andheri', 'Kandivali', 'Malad', 'Kandivali East', 'Andheri West'].map((locality) => (
+                          {['Andheri', 'Kandivali', 'Malad', 'Kandivali East', 'Andheri West', 'Chembur', 'Vikhroli', 'Bhandup', 'Ghatkopar'].map((locality) => (
                             <div key={locality} className="flex items-center space-x-2">
                               <Checkbox
                                 id={locality}
@@ -1020,7 +1020,7 @@ const AllProjects = () => {
                       className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                   </div>
-                  {['Andheri', 'Kandivali', 'Malad', 'Kandivali East', 'Andheri West'].map((locality) => (
+                  {['Andheri', 'Kandivali', 'Malad', 'Kandivali East', 'Andheri West', 'Chembur', 'Vikhroli', 'Bhandup', 'Ghatkopar'].map((locality) => (
                     <div key={locality} className="flex items-center space-x-2">
                       <Checkbox
                         id={locality}
