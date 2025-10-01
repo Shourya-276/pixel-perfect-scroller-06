@@ -222,6 +222,11 @@ const AllProjects = () => {
   const [budgetRange, setBudgetRange] = useState([0]);
   const [areaRange, setAreaRange] = useState([0]);
 
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Apply filters from URL parameters on mount
   useEffect(() => {
     const locality = searchParams.get('locality');
