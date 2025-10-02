@@ -101,13 +101,13 @@ const NewlyLaunchedSection = () => {
           >
             <CarouselContent className="-ml-6">
               {allProperties.map((property, idx) => (
-                <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                  <div
-                    className="relative bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-500 group h-80 w-full hover:shadow-2xl hover:-translate-y-8 hover:scale-[1.08] hover:z-50"
-                    style={{
-                      willChange: 'transform'
-                    }}
-                  >
+              <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <div
+                  className="relative rounded-xl overflow-hidden shadow-lg transition-all duration-500 group h-80 w-full hover:shadow-2xl hover:-translate-y-8 hover:scale-[1.08] hover:z-50"
+                  style={{
+                    willChange: 'transform'
+                  }}
+                >
                   {/* Background image */}
                   <img
                     src={property.image}
