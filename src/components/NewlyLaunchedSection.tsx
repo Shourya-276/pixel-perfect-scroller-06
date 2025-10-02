@@ -71,8 +71,8 @@ const NewlyLaunchedSection = () => {
   const allProperties = [...properties];
 
   return (
-    <section className="py-8 bg-gray-50 overflow-visible">
-      <div className="container mx-auto px-6 overflow-visible">
+    <section className="py-8 bg-gray-50">
+      <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Newly Launched</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -81,53 +81,54 @@ const NewlyLaunchedSection = () => {
           </p>
         </div>
 
-        {/* Animated horizontal scroll */}
-        <Carousel
-          plugins={[
-            Autoplay({
-              delay: 0,
-              stopOnInteraction: false,
-              stopOnMouseEnter: true,
-            }),
-          ]}
-          className="w-full overflow-visible"
-          opts={{
-            align: "start",
-            loop: true,
-            slidesToScroll: 1,
-            duration: 5000,
-          }}
-        >
-          <CarouselContent className="-ml-6 overflow-visible">
-            {allProperties.map((property, idx) => (
-              <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 overflow-visible">
-                <div
-                  className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-6 hover:scale-110 hover:rotate-1 group h-80 w-full flex-shrink-0 hover:z-10 transform-gpu perspective-1000"
-                  style={{
-                    filter: 'hover:drop-shadow(0 25px 35px rgba(0, 0, 0, 0.25))'
-                  }}
-                >
+        {/* Add padding to prevent clipping */}
+        <div className="py-12 -my-12">
+          <Carousel
+            plugins={[
+              Autoplay({
+                delay: 0,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+              duration: 5000,
+            }}
+          >
+            <CarouselContent className="-ml-6">
+              {allProperties.map((property, idx) => (
+                <CarouselItem key={property.id + "-" + idx} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                  <div
+                    className="relative bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-500 group h-80 w-full hover:shadow-2xl hover:-translate-y-8 hover:scale-[1.08] hover:z-50"
+                    style={{
+                      willChange: 'transform'
+                    }}
+                  >
                   {/* Background image */}
                   <img
                     src={property.image}
                     alt={property.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-700 ease-out"
                   />
                   {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
                   
                   {/* Content overlay */}
                   <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
-                    {/* Top badge with glow effect */}
-                    <div className="flex justify-start">
-                      <div className="bg-primary/90 backdrop-blur-sm text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-lg border border-white/20">
+                    {/* Top badge */}
+                    <div className="flex justify-start opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold shadow-xl">
                         {property.type}
                       </div>
                     </div>
                     
                     {/* Bottom content */}
-                    <div className="space-y-3 transform transition-transform duration-300 group-hover:translate-y-0">
-                      <h3 className="text-xl font-bold tracking-wide">{property.name}</h3>
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold tracking-wide drop-shadow-lg">{property.name}</h3>
                       <div className="flex items-center text-white/90">
                         <MapPin className="h-4 w-4 mr-2" />
                         <span className="text-sm">{property.location}</span>
@@ -149,7 +150,7 @@ const NewlyLaunchedSection = () => {
                         <Button 
                           variant="secondary" 
                           size="sm"
-                          className="bg-white/95 text-gray-800 hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg"
+                          className="bg-white text-gray-900 hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl font-semibold"
                         >
                           View Details
                         </Button>
@@ -158,11 +159,12 @@ const NewlyLaunchedSection = () => {
                   </div>
                 </div>
               </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
-          <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
-        </Carousel>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4 hover:scale-110 transition-transform duration-200" />
+            <CarouselNext className="right-4 hover:scale-110 transition-transform duration-200" />
+          </Carousel>
+        </div>
 
         <div className="text-center mt-8">
           <Button size="lg" className="bg-primary hover:bg-primary/90 px-12 py-3 text-lg">
