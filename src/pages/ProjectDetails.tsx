@@ -352,19 +352,16 @@ const ProjectDetails = () => {
                 </Button>
               </div>
               <div className="space-y-3 mb-6">
-                {floorPlans.map((plan, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg border text-center">
-  <div className="flex items-center space-x-4 flex-1"> {/* Remove 'justify-center' */}
-    <span className="font-medium text-sm">{plan.type}</span>
-    <span className="text-gray-600 text-xs">{plan.area}</span>
-  </div>
+  {floorPlans.map((plan, index) => (
+    <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg border relative">
+  <span className="font-medium text-base">{plan.type}</span>
+  <span className="text-gray-600 text-base absolute left-1/2 transform -translate-x-1/2">{plan.area}</span>
   <Button size="sm" variant="outline">
     {plan.price}
   </Button>
 </div>
-
-                ))}
-              </div>
+  ))}
+</div>
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
                 Download Brochure
               </Button>

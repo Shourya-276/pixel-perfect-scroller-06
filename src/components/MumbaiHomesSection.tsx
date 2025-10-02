@@ -12,11 +12,11 @@ const MumbaiHomesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           {/* Left Column - Logo and About */}
           <div className="text-center md:text-left">
-            <div className="mb-4 md:mb-8">
+            <div style={{ marginBottom: '-7px', marginTop: '-40px' }}>
               <img
                 src={mumbaiHomesLogo}
                 alt="Mumbai Homes Logo"
-                className="h-20 sm:h-24 w-auto mb-4 mx-auto md:mx-0"
+                className="h-[120px] sm:h-[150px] w-auto ml-[10px] md:ml-[50px]"
               />
             </div>
 
