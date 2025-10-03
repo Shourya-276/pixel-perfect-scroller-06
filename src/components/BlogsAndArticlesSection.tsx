@@ -12,46 +12,52 @@ const blogs = [
     id: 1,
     title: "Current Real Estate Market Trends",
     date: "November 17, 2024",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
-    size: "small"
+    image:
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+    size: "small",
   },
   {
     id: 2,
     title: "Green Real Estate: Sustainable Practices and Benefits",
-    date: "November 17, 2024", 
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
-    size: "small"
+    date: "November 17, 2024",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+    size: "small",
   },
   {
     id: 3,
     title: "Common Mistakes in Real Estate Investing",
     subtitle: "Real estate investing is one of the most popular ways to...",
     date: "November 17, 2024",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
-    size: "large"
+    image:
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
+    size: "large",
   },
   {
     id: 4,
-    title: "Emerging Real Estate Markets to Watch", 
+    title: "Emerging Real Estate Markets to Watch",
     subtitle: "Real estate investing is one of the most popular ways to...",
     date: "November 17, 2024",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=300&fit=crop",
-    size: "wide"
+    image:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=300&fit=crop",
+    size: "wide",
   },
   {
     id: 5,
     title: "How Interest Rates Affect Real Estate Prices",
     date: "November 17, 2024",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
-    size: "small"
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    size: "small",
   },
   {
     id: 6,
     title: "How to Assess Real Estate Market Conditions",
     date: "November 17, 2024",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
-    size: "small"
-  }
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+    size: "small",
+  },
 ];
 
 const BlogsAndArticlesSection = () => {
@@ -60,7 +66,9 @@ const BlogsAndArticlesSection = () => {
       <div className="container mx-auto px-6">
         {/* Section header */}
         <div className="text-center mb-8 lg:mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">Blogs and Articles</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
+            Blogs and Articles
+          </h2>
         </div>
 
         {/* Blogs grid */}
@@ -75,9 +83,16 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[0].date}</div>
-                <h3 className="text-base sm:text-lg font-bold">{blogs[0].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+                  {blogs[0].date}
+                </div>
+                <h3 className="text-base sm:text-lg font-bold">
+                  {blogs[0].title}
+                </h3>
+                <Button
+                  variant="link"
+                  className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm"
+                >
                   Read more
                 </Button>
               </div>
@@ -93,9 +108,16 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[1].date}</div>
-                <h3 className="text-base sm:text-lg font-bold">{blogs[1].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+                  {blogs[1].date}
+                </div>
+                <h3 className="text-base sm:text-lg font-bold">
+                  {blogs[1].title}
+                </h3>
+                <Button
+                  variant="link"
+                  className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm"
+                >
                   Read more
                 </Button>
               </div>
@@ -111,9 +133,15 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[2].date}</div>
-                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{blogs[2].title}</h3>
-                <p className="text-xs sm:text-sm text-gray-200 mb-2 sm:mb-3">{blogs[2].subtitle}</p>
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+                  {blogs[2].date}
+                </div>
+                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">
+                  {blogs[2].title}
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-200 mb-2 sm:mb-3">
+                  {blogs[2].subtitle}
+                </p>
                 <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
                   Read more
                 </Button>
@@ -121,9 +149,10 @@ const BlogsAndArticlesSection = () => {
             </div>
           </div>
 
-          {/* Second row - 1 wide card + 2 small cards */}
+          {/* Second row - 1 wide (taller) card + 2 small cards */}
           <div className="sm:col-span-2 lg:col-span-2">
-            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-60 sm:h-64">
+            {/* ✅ Increased by 20px here */}
+            <div className="relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-[340px] sm:h-[404px]">
               <img
                 src={blogs[3].image}
                 alt={blogs[3].title}
@@ -131,9 +160,15 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[3].date}</div>
-                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{blogs[3].title}</h3>
-                <p className="text-xs sm:text-sm text-gray-200 mb-2 sm:mb-3">{blogs[3].subtitle}</p>
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+                  {blogs[3].date}
+                </div>
+                <h3 className="text-lg sm:text-2xl font-bold mb-1 sm:mb-2">
+                  {blogs[3].title}
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-200 mb-2 sm:mb-3">
+                  {blogs[3].subtitle}
+                </p>
                 <Button className="bg-primary hover:bg-primary/90 text-xs sm:text-sm px-3 py-1 sm:px-4 sm:py-2">
                   Read More
                 </Button>
@@ -150,9 +185,16 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[4].date}</div>
-                <h3 className="text-base sm:text-lg font-bold">{blogs[4].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+                  {blogs[4].date}
+                </div>
+                <h3 className="text-base sm:text-lg font-bold">
+                  {blogs[4].title}
+                </h3>
+                <Button
+                  variant="link"
+                  className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm"
+                >
                   Read more
                 </Button>
               </div>
@@ -168,9 +210,16 @@ const BlogsAndArticlesSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <div className="text-xs sm:text-sm mb-1 sm:mb-2">{blogs[5].date}</div>
-                <h3 className="text-base sm:text-lg font-bold">{blogs[5].title}</h3>
-                <Button variant="link" className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm">
+                <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+                  {blogs[5].date}
+                </div>
+                <h3 className="text-base sm:text-lg font-bold">
+                  {blogs[5].title}
+                </h3>
+                <Button
+                  variant="link"
+                  className="text-white p-0 h-auto mt-1 sm:mt-2 underline text-xs sm:text-sm"
+                >
                   Read more
                 </Button>
               </div>
@@ -190,7 +239,11 @@ const BlogsAndArticlesSection = () => {
           >
             <CarouselContent className="-ml-2">
               {blogs.map((blog, index) => (
-                <CarouselItem key={index} className="pl-2 basis-4/5 sm:basis-1/2 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <CarouselItem
+                  key={index}
+                  className="pl-2 basis-4/5 sm:basis-1/2 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                   <div className="relative bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-44 sm:h-52 group">
                     <img
                       src={blog.image}
@@ -199,10 +252,21 @@ const BlogsAndArticlesSection = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                     <div className="absolute bottom-2 left-2 right-2 text-white">
-                      <div className="text-[10px] mb-1 opacity-80">{blog.date}</div>
-                      <h3 className="text-xs sm:text-sm font-bold leading-tight line-clamp-2 mb-1">{blog.title}</h3>
-                      {blog.subtitle && <p className="text-[10px] text-gray-200 mb-1 line-clamp-1">{blog.subtitle}</p>}
-                      <Button variant="link" className="text-white p-0 h-auto underline text-[10px] hover:text-primary transition-colors duration-200">
+                      <div className="text-[10px] mb-1 opacity-80">
+                        {blog.date}
+                      </div>
+                      <h3 className="text-xs sm:text-sm font-bold leading-tight line-clamp-2 mb-1">
+                        {blog.title}
+                      </h3>
+                      {blog.subtitle && (
+                        <p className="text-[10px] text-gray-200 mb-1 line-clamp-1">
+                          {blog.subtitle}
+                        </p>
+                      )}
+                      <Button
+                        variant="link"
+                        className="text-white p-0 h-auto underline text-[10px] hover:text-primary transition-colors duration-200"
+                      >
                         Read more →
                       </Button>
                     </div>
@@ -217,7 +281,10 @@ const BlogsAndArticlesSection = () => {
 
         {/* View more button */}
         <div className="text-center mt-8 lg:mt-12">
-          <Button size="lg" className="bg-primary hover:bg-primary/90 px-8 py-3 text-base lg:px-12 lg:py-3 lg:text-lg">
+          <Button
+            size="lg"
+            className="bg-primary hover:bg-primary/90 px-8 py-3 text-base lg:px-12 lg:py-3 lg:text-lg"
+          >
             View more
           </Button>
         </div>
