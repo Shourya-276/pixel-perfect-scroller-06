@@ -56,12 +56,13 @@ const BanksSection = () => {
           {banks.map((bank, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg p-3 flex items-center gap-3 shadow-md"
+              className="rounded-lg p-3 flex items-center gap-3 shadow-lg"
+              style={{ backgroundColor: '#0D6ABC' }}
             >
               <div className="w-10 h-10 flex-shrink-0 bg-white rounded flex items-center justify-center">
                 <img src={bank.logo} alt={bank.name} className="w-8 h-8 object-contain" />
               </div>
-              <h3 className="text-primary font-semibold text-sm leading-tight">{bank.name}</h3>
+              <h3 className="text-white font-semibold text-sm leading-tight">{bank.name}</h3>
             </div>
           ))}
         </div>
