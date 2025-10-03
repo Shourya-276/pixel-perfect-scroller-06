@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Heart, MapPin, Search, X, ChevronDown, Plus } from "lucide-react";
-import reraVerifiedBadge from "@/assets/rera-verified-badge.png";
 import Header from "@/components/Header";
 import MumbaiHomesSection from "@/components/MumbaiHomesSection";
 import ProjectsInKandivaliSection from "@/components/ProjectsInKandivaliSection";
@@ -123,11 +122,9 @@ const ProjectCard = ({ project, onLikeToggle }) => {
           className="w-full h-48 object-cover"
         />
         {project.reraApproved && (
-          <img 
-            src={reraVerifiedBadge} 
-            alt="RERA Verified" 
-            className="absolute top-3 left-3 h-6 w-auto"
-          />
+          <Badge className="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1">
+            RERA
+          </Badge>
         )}
         {project.isViewed && (
           <Badge className="absolute top-3 right-12 bg-purple-500 text-white text-xs px-2 py-1">
