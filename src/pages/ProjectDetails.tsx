@@ -353,13 +353,15 @@ const ProjectDetails = () => {
               </div>
               <div className="space-y-3 mb-6">
   {floorPlans.map((plan, index) => (
-    <div key={index} className="flex items-center justify-between p-4 bg-white rounded-lg border relative">
-  <span className="font-medium text-base">{plan.type}</span>
-  <span className="text-gray-600 text-base absolute left-1/2 transform -translate-x-1/2">{plan.area}</span>
-  <Button size="sm" variant="outline">
-    {plan.price}
-  </Button>
-</div>
+    <div key={index} className="p-4 bg-white rounded-lg border">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <span className="font-medium text-base">{plan.type}</span>
+        <span className="text-gray-600 text-sm sm:text-base">{plan.area}</span>
+        <Button size="sm" variant="outline" className="w-full sm:w-auto">
+          {plan.price}
+        </Button>
+      </div>
+    </div>
   ))}
 </div>
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
