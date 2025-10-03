@@ -74,11 +74,9 @@ const properties = [
 ];
 
 const NewlyLaunchedSection = () => {
-  const viewportRef = useRef(null);
   const containerRef = useRef(null);
 
   useEffect(() => {
-    if (viewportRef.current) viewportRef.current.style.overflow = "visible";
     if (containerRef.current) containerRef.current.style.overflow = "visible";
   }, []);
 
@@ -107,7 +105,6 @@ const NewlyLaunchedSection = () => {
               }),
             ]}
             className="w-full overflow-visible relative z-0"
-            viewportRef={viewportRef}
             opts={{
               align: "start",
               loop: true,

@@ -12,22 +12,22 @@ const MumbaiHomesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           {/* Left Column - Logo and About */}
           <div className="text-center md:text-left">
-            <div style={{ marginBottom: '-7px', marginTop: '-40px' }}>
+            <div className="mb-6 md:mb-0 md:-mt-10 md:-mb-2">
               <img
                 src={mumbaiHomesLogo}
                 alt="Mumbai Homes Logo"
-                className="h-[120px] sm:h-[150px] w-auto ml-[10px] md:ml-[50px]"
+                className="h-[120px] sm:h-[150px] w-auto mx-auto md:mx-0 md:ml-[50px]"
               />
             </div>
 
             {/* Our Company (Moved for mobile layout) */}
             <div className="mb-6 md:hidden">
-              <h3 className="text-base font-bold mb-2">Our Company</h3>
-              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs max-w-sm mx-auto">
+              <h3 className="text-base font-bold mb-3">Our Company</h3>
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm max-w-sm mx-auto">
                 <a href="#" className="hover:underline">Projects</a>
                 <a href="#" className="hover:underline">Contact Us</a>
                 <a href="#" className="hover:underline">Blogs</a>
-                <a href="#" className="hover:underline">Careers</a>
+                <a href="#" className="hover:underline">Career</a>
               </div>
             </div>
 
