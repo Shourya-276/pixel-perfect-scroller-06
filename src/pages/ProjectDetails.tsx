@@ -353,20 +353,25 @@ const ProjectDetails = () => {
               </div>
               <div className="space-y-3 mb-6">
   {floorPlans.map((plan, index) => (
-    <div key={index} className="p-4 bg-white rounded-lg border">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <span className="font-medium text-base">{plan.type}</span>
-        <span className="text-gray-600 text-sm sm:text-base">{plan.area}</span>
-        <Button size="sm" variant="outline" className="w-full sm:w-auto">
+    <div key={index} className="p-3 sm:p-4 bg-white rounded-lg border-2 border-blue-600">
+      <div className="flex items-center justify-between gap-2">
+        <span className="font-semibold text-sm sm:text-base flex-shrink-0">{plan.type}</span>
+        <span className="text-gray-900 text-xs sm:text-base font-medium text-center flex-1">{plan.area}</span>
+        <Button size="sm" variant="outline" className="text-xs sm:text-sm whitespace-nowrap border-black">
           {plan.price}
         </Button>
       </div>
     </div>
   ))}
 </div>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Download Brochure
-              </Button>
+              <div className="grid grid-cols-2 gap-3">
+                <Button variant="outline" className="w-full border-blue-600 text-blue-600 hover:bg-blue-50">
+                  View Floorplan
+                </Button>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                  Download Brochure
+                </Button>
+              </div>
             </div>
           </div>
         </div>
