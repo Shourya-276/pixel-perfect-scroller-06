@@ -21,12 +21,12 @@ const banks = [
 
 const BanksSection = () => {
   return (
-    <section className="py-10 bg-primary">
+    <section className="py-6 lg:py-10 bg-primary">
       <div className="container mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-6 lg:mb-8">
-          <h2 className="text-xl lg:text-2xl font-bold text-white mb-3 lg:mb-4">Banks we work with</h2>
-          <p className="text-xs lg:text-sm text-white/90 max-w-2xl mx-auto mb-2 lg:mb-3">
+        <div className="text-center mb-4 lg:mb-8">
+          <h2 className="text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-4">Banks we work with</h2>
+          <p className="text-xs lg:text-sm text-white/90 max-w-2xl mx-auto mb-1 lg:mb-3">
             From virtual tours to legal aid, Mumbai Homes delivers end-to-end
             support for a smoother, smarter, stress-free property journey.
           </p>
@@ -51,41 +51,23 @@ const BanksSection = () => {
           ))}
         </div>
 
-        {/* Carousel for small screens */}
-        <div className="lg:hidden">
-          <Carousel
-            plugins={[
-              Autoplay({
-                delay: 0,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true,
-              }),
-            ]}
-            opts={{
-              align: "start",
-              loop: true,
-              slidesToScroll: 1,
-              duration: 15000,
-            }}
-            className="w-full max-w-6xl mx-auto"
-          >
-            <CarouselContent className="-ml-4">
-              {/* Duplicate banks for seamless loop */}
-              {[...banks, ...banks].map((bank, index) => (
-                <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4">
-                  <div
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-3 flex items-center justify-center h-20 w-full hover:bg-white/20 transition-colors duration-300"
-                  >
-                    <img src={bank.logo} alt={bank.name} className="h-full w-auto object-contain" />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
+        {/* Static grid for small screens (mobile) */}
+        <div className="lg:hidden grid grid-cols-2 gap-3 max-w-md mx-auto">
+          {banks.map((bank, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg p-3 flex items-center gap-3 shadow-md"
+            >
+              <div className="w-10 h-10 flex-shrink-0 bg-white rounded flex items-center justify-center">
+                <img src={bank.logo} alt={bank.name} className="w-8 h-8 object-contain" />
+              </div>
+              <h3 className="text-primary font-semibold text-sm leading-tight">{bank.name}</h3>
+            </div>
+          ))}
         </div>
 
         {/* Optional CTA */}
-        <div className="text-center mt-6 lg:mt-8">
+        <div className="text-center mt-4 lg:mt-8">
           <Button 
             variant="secondary" 
             size="default"
