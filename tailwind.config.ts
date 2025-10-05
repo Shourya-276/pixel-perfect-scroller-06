@@ -95,16 +95,12 @@ export default {
         },
         "float-up": {
           "0%": {
-            transform: "translateY(0px)",
-            opacity: "0.8"
-          },
-          "50%": {
-            transform: "translateY(-10px)",
-            opacity: "1"
+            transform: "translateY(0px) scale(1)",
+            zIndex: "10"
           },
           "100%": {
-            transform: "translateY(0px)",
-            opacity: "0.8"
+            transform: "translateY(-20px) scale(1.05)",
+            zIndex: "20"
           }
         },
         "train-move": {
@@ -120,10 +116,9 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "slide-left": "slide-left 20s linear infinite",
-        "float-up": "float-up 3s ease-in-out infinite",
+        "float-up": "float-up 0.3s ease-out forwards",
         "spin-slow": "spin 8s linear infinite",
-        "train-move": "train-move 15s linear infinite",
-        "pulse": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "train-move": "train-move 8s linear infinite",
       },
     },
   },
