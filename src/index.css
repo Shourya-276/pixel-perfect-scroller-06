@@ -112,4 +112,18 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Enhanced shadow utilities */
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Animation delay utilities */
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-1000 {
+    animation-delay: 1000ms;
+  }
 }
