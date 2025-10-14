@@ -66,11 +66,11 @@ const HeroSection = () => {
           </div>
 
           {/* Right content - Building image */}
-          <div className="relative mt-8 lg:mt-0">
+          <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 lg:h-full">
             <img
               src={buildingComplex}
               alt="Mumbai residential buildings"
-              className="w-full h-auto rounded-lg max-w-lg mx-auto"
+              className="w-full h-full object-cover lg:rounded-l-lg"
             />
             
             {/* Circular badge with rotating animation */}
