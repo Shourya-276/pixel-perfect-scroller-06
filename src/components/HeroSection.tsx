@@ -66,59 +66,15 @@ const HeroSection = () => {
           </div>
 
           {/* Right content - Building image */}
-          <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 lg:h-full overflow-hidden">
+          <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 lg:h-full">
             <img
               src={buildingComplex}
               alt="Mumbai residential buildings"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover lg:rounded-l-lg"
             />
             
-            {/* Wavy border overlay */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M 0,0 
-                   L 0,5 
-                   Q 2,8 0,12 
-                   Q -2,16 0,20
-                   Q 2,24 0,28
-                   Q -2,32 0,36
-                   Q 2,40 0,44
-                   Q -2,48 0,52
-                   Q 2,56 0,60
-                   Q -2,64 0,68
-                   Q 2,72 0,76
-                   Q -2,80 0,84
-                   Q 2,88 0,92
-                   Q -1,94 0,96
-                   Q 1,98 3,100
-                   L 12,100
-                   Q 16,98 20,100
-                   Q 24,102 28,100
-                   Q 32,98 36,100
-                   Q 40,102 44,100
-                   Q 48,98 52,100
-                   Q 56,102 60,100
-                   Q 64,98 68,100
-                   Q 72,102 76,100
-                   Q 80,98 84,100
-                   Q 88,102 92,100
-                   Q 96,98 100,100
-                   L 100,96
-                   Q 98,94 100,92
-                   Q 102,90 100,88
-                   L 100,0
-                   Z"
-                fill="#1A88DD"
-                fillOpacity="0.95"
-              />
-            </svg>
-            
             {/* Circular badge with rotating animation */}
-            <div className="absolute bottom-8 left-8 w-24 h-24 animate-spin-slow md:w-28 md:h-28 lg:w-32 lg:h-32 z-10">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-24 animate-spin-slow md:w-32 md:h-32">
               <img
                 src={exploreNowBadge}
                 alt="Explore Now"
