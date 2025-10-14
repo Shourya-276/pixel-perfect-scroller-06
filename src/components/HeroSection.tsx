@@ -70,26 +70,11 @@ const HeroSection = () => {
             <img
               src={buildingComplex}
               alt="Mumbai residential buildings"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover lg:rounded-l-lg"
             />
             
-            {/* Wavy diagonal border */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M 0,0 Q 15,20 20,30 Q 25,40 30,45 Q 40,55 45,60 Q 55,70 60,75 Q 70,85 80,90 Q 90,95 100,100"
-                fill="none"
-                stroke="#1A88DD"
-                strokeWidth="0.8"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-            
-            {/* Circular badge with rotating animation - positioned at left-bottom */}
-            <div className="absolute bottom-8 left-8 w-24 h-24 animate-spin-slow md:w-32 md:h-32 z-10">
+            {/* Circular badge with rotating animation */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-24 animate-spin-slow md:w-32 md:h-32">
               <img
                 src={exploreNowBadge}
                 alt="Explore Now"
