@@ -26,7 +26,11 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+          <Button 
+            variant="outline" 
+            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            onClick={() => navigate("/admin")}
+          >
             Post Project
           </Button>
           <Button variant="default" className="bg-primary hover:bg-primary/90">
@@ -87,13 +91,13 @@ const Header = () => {
                   <Briefcase className="h-5 w-5" />
                   <span>Careers</span>
                 </a>
-                <a 
-                  href="#" 
-                  className="flex items-center space-x-3 text-white/90 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10"
+                <button 
+                  onClick={() => navigate("/admin")}
+                  className="flex items-center space-x-3 text-white/90 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 w-full text-left"
                 >
                   <PlusCircle className="h-5 w-5" />
                   <span>Post Project</span>
-                </a>
+                </button>
               </nav>
               <div className="mt-auto p-4">
                 <Button className="w-full bg-white text-[#0D6ABC] hover:bg-gray-100 flex items-center space-x-2 py-3">
