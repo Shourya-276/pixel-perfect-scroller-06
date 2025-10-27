@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,36 +36,65 @@ interface MumbaiHomesData {
 const MumbaiHomesAdmin = () => {
   const { toast } = useToast();
   const { websiteData, updateMumbaiHomes } = useWebsiteData();
-  
-  const [mumbaiHomesData, setMumbaiHomesData] = useState<MumbaiHomesData>(websiteData.mumbaiHomes);
+
+  // CHANGE: Safely initialize state with default values and id assignment
+  const [mumbaiHomesData, setMumbaiHomesData] = useState<MumbaiHomesData>({
+    logo: websiteData.mumbaiHomes.logo || "",
+    title: websiteData.mumbaiHomes.title || "About Mumbai Homes",
+    description: websiteData.mumbaiHomes.description || "",
+    companyLinks: Array.isArray(websiteData.mumbaiHomes.companyLinks)
+      ? websiteData.mumbaiHomes.companyLinks.map((link, index) => ({
+          id: (link as any).id || Date.now() + index,
+          text: link.text || "",
+          url: link.url || "",
+        }))
+      : [],
+    disclaimer: websiteData.mumbaiHomes.disclaimer || "",
+    copyright: websiteData.mumbaiHomes.copyright || "",
+    socialLinks: Array.isArray(websiteData.mumbaiHomes.socialLinks)
+      ? websiteData.mumbaiHomes.socialLinks.map((link, index) => ({
+          id: (link as any).id || Date.now() + index + 1000,
+          platform: link.platform || "",
+          url: link.url || "",
+          icon: link.icon || "",
+        }))
+      : [],
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [editingCompanyLink, setEditingCompanyLink] = useState<CompanyLink | null>(null);
   const [editingSocialLink, setEditingSocialLink] = useState<SocialLink | null>(null);
   const [isAddingCompanyLink, setIsAddingCompanyLink] = useState(false);
   const [isAddingSocialLink, setIsAddingSocialLink] = useState(false);
   const logoRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    setMumbaiHomesData(websiteData.mumbaiHomes);
-  }, [websiteData.mumbaiHomes]);
-
-  const handleInputChange = (field: keyof Omit<MumbaiHomesData, 'companyLinks' | 'socialLinks' | 'logo'>, value: string) => {
+  const handleInputChange = (
+    field: keyof Omit<MumbaiHomesData, "companyLinks" | "socialLinks" | "logo">,
+    value: string
+  ) => {
     setMumbaiHomesData(prev => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      // CHANGE: Validate image file type
+      if (!file.type.startsWith("image/")) {
+        toast({
+          title: "Error",
+          description: "Please upload an image file",
+          variant: "destructive",
+        });
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageDataUrl = e.target?.result as string;
         setMumbaiHomesData(prev => ({
           ...prev,
-          logo: imageDataUrl
+          logo: imageDataUrl,
         }));
       };
       reader.readAsDataURL(file);
@@ -75,15 +104,16 @@ const MumbaiHomesAdmin = () => {
   const handleRemoveLogo = () => {
     setMumbaiHomesData(prev => ({
       ...prev,
-      logo: ""
+      logo: "",
     }));
+    if (logoRef.current) logoRef.current.value = "";
   };
 
   const handleAddCompanyLink = () => {
     const newLink: CompanyLink = {
       id: Date.now(),
       text: "",
-      url: ""
+      url: "",
     };
     setEditingCompanyLink(newLink);
     setIsAddingCompanyLink(true);
@@ -96,31 +126,50 @@ const MumbaiHomesAdmin = () => {
     setIsModalOpen(true);
   };
 
+  // CHANGE: Add validation for company links
   const handleSaveCompanyLink = () => {
     if (!editingCompanyLink) return;
 
-    if (isAddingCompanyLink) {
-      setMumbaiHomesData(prev => ({
-        ...prev,
-        companyLinks: [...prev.companyLinks, editingCompanyLink]
-      }));
-    } else {
-      setMumbaiHomesData(prev => ({
-        ...prev,
-        companyLinks: prev.companyLinks.map(l => l.id === editingCompanyLink.id ? editingCompanyLink : l)
-      }));
+    if (!editingCompanyLink.text || !editingCompanyLink.url) {
+      toast({
+        title: "Error",
+        description: "Company link requires both text and URL",
+        variant: "destructive",
+      });
+      return;
     }
 
+    if (
+      mumbaiHomesData.companyLinks.some(
+        link => link.text === editingCompanyLink.text && link.id !== editingCompanyLink.id
+      )
+    ) {
+      toast({
+        title: "Error",
+        description: `A company link with the text "${editingCompanyLink.text}" already exists`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setMumbaiHomesData(prev => ({
+      ...prev,
+      companyLinks: isAddingCompanyLink
+        ? [...prev.companyLinks, editingCompanyLink]
+        : prev.companyLinks.map(l => (l.id === editingCompanyLink.id ? editingCompanyLink : l)),
+    }));
     setEditingCompanyLink(null);
     setIsAddingCompanyLink(false);
     setIsModalOpen(false);
+    toast({ title: "Success", description: "Company link saved successfully" });
   };
 
   const handleDeleteCompanyLink = (linkId: number) => {
     setMumbaiHomesData(prev => ({
       ...prev,
-      companyLinks: prev.companyLinks.filter(l => l.id !== linkId)
+      companyLinks: prev.companyLinks.filter(l => l.id !== linkId),
     }));
+    toast({ title: "Success", description: "Company link deleted successfully" });
   };
 
   const handleAddSocialLink = () => {
@@ -128,7 +177,7 @@ const MumbaiHomesAdmin = () => {
       id: Date.now(),
       platform: "",
       url: "",
-      icon: ""
+      icon: "",
     };
     setEditingSocialLink(newLink);
     setIsAddingSocialLink(true);
@@ -141,62 +190,104 @@ const MumbaiHomesAdmin = () => {
     setIsModalOpen(true);
   };
 
+  // CHANGE: Add validation for social links
   const handleSaveSocialLink = () => {
     if (!editingSocialLink) return;
 
-    if (isAddingSocialLink) {
-      setMumbaiHomesData(prev => ({
-        ...prev,
-        socialLinks: [...prev.socialLinks, editingSocialLink]
-      }));
-    } else {
-      setMumbaiHomesData(prev => ({
-        ...prev,
-        socialLinks: prev.socialLinks.map(l => l.id === editingSocialLink.id ? editingSocialLink : l)
-      }));
+    if (!editingSocialLink.platform || !editingSocialLink.url) {
+      toast({
+        title: "Error",
+        description: "Social link requires both platform and URL",
+        variant: "destructive",
+      });
+      return;
     }
 
+    if (
+      mumbaiHomesData.socialLinks.some(
+        link => link.platform === editingSocialLink.platform && link.id !== editingSocialLink.id
+      )
+    ) {
+      toast({
+        title: "Error",
+        description: `A social link for "${editingSocialLink.platform}" already exists`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setMumbaiHomesData(prev => ({
+      ...prev,
+      socialLinks: isAddingSocialLink
+        ? [...prev.socialLinks, editingSocialLink]
+        : prev.socialLinks.map(l => (l.id === editingSocialLink.id ? editingSocialLink : l)),
+    }));
     setEditingSocialLink(null);
     setIsAddingSocialLink(false);
     setIsModalOpen(false);
+    toast({ title: "Success", description: "Social link saved successfully" });
   };
 
   const handleDeleteSocialLink = (linkId: number) => {
     setMumbaiHomesData(prev => ({
       ...prev,
-      socialLinks: prev.socialLinks.filter(l => l.id !== linkId)
+      socialLinks: prev.socialLinks.filter(l => l.id !== linkId),
     }));
+    toast({ title: "Success", description: "Social link deleted successfully" });
   };
 
-  const handleEdit = () => {
-    setIsEditing(true);
-    setIsModalOpen(true);
-  };
-
+  // CHANGE: Remove isEditing state and simplify handleEdit
   const handleSave = () => {
+    // CHANGE: Add validation for required fields
+    if (!mumbaiHomesData.title || !mumbaiHomesData.description) {
+      toast({
+        title: "Error",
+        description: "Section title and description are required",
+        variant: "destructive",
+      });
+      return;
+    }
+
     updateMumbaiHomes(mumbaiHomesData);
     toast({
       title: "Success",
       description: "Mumbai Homes section data saved successfully!",
+      duration: 2000,
     });
-    setIsEditing(false);
     setIsModalOpen(false);
-    if (logoRef.current) logoRef.current.value = '';
+    if (logoRef.current) logoRef.current.value = "";
   };
 
+  // CHANGE: Safe reset with id assignment
   const handleCancel = () => {
-    setMumbaiHomesData(websiteData.mumbaiHomes);
-    setIsEditing(false);
-    setIsModalOpen(false);
+    setMumbaiHomesData({
+      logo: websiteData.mumbaiHomes.logo || "",
+      title: websiteData.mumbaiHomes.title || "About Mumbai Homes",
+      description: websiteData.mumbaiHomes.description || "",
+      companyLinks: Array.isArray(websiteData.mumbaiHomes.companyLinks)
+        ? websiteData.mumbaiHomes.companyLinks.map((link, index) => ({
+            id: (link as any).id || Date.now() + index,
+            text: link.text || "",
+            url: link.url || "",
+          }))
+        : [],
+      disclaimer: websiteData.mumbaiHomes.disclaimer || "",
+      copyright: websiteData.mumbaiHomes.copyright || "",
+      socialLinks: Array.isArray(websiteData.mumbaiHomes.socialLinks)
+        ? websiteData.mumbaiHomes.socialLinks.map((link, index) => ({
+            id: (link as any).id || Date.now() + index + 1000,
+            platform: link.platform || "",
+            url: link.url || "",
+            icon: link.icon || "",
+          }))
+        : [],
+    });
     setEditingCompanyLink(null);
     setEditingSocialLink(null);
     setIsAddingCompanyLink(false);
     setIsAddingSocialLink(false);
-    if (logoRef.current) logoRef.current.value = '';
-  };
-
-  const handlePreview = () => {
-    window.open('/', '_blank');
+    setIsModalOpen(false);
+    if (logoRef.current) logoRef.current.value = "";
   };
 
   const socialPlatforms = [
@@ -204,18 +295,15 @@ const MumbaiHomesAdmin = () => {
     { value: "Facebook", icon: "Facebook", label: "Facebook" },
     { value: "LinkedIn", icon: "Linkedin", label: "LinkedIn" },
     { value: "YouTube", icon: "Youtube", label: "YouTube" },
-    { value: "Twitter", icon: "Twitter", label: "Twitter" }
+    { value: "Twitter", icon: "Twitter", label: "Twitter" },
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Mumbai Homes Configuration</h3>
         <div className="space-x-2">
-          <Button variant="outline" onClick={handlePreview}>
-            Preview
-          </Button>
-          <Button onClick={handleEdit} className="flex items-center space-x-2">
+          <Button onClick={() => setIsModalOpen(true)} className="flex items-center space-x-2">
             <Edit className="h-4 w-4" />
             <span>Edit Mumbai Homes Section</span>
           </Button>
@@ -251,7 +339,7 @@ const MumbaiHomesAdmin = () => {
               <div className="flex space-x-2">
                 {mumbaiHomesData.socialLinks.map((link) => (
                   <a key={link.id} href={link.url} className="text-white hover:text-white/80">
-                    <span className="text-sm">{link.icon}</span>
+                    <span className="text-sm">{link.platform}</span> {/* CHANGE: Show platform for preview */}
                   </a>
                 ))}
               </div>
@@ -269,7 +357,7 @@ const MumbaiHomesAdmin = () => {
               <span>Edit Mumbai Homes Section</span>
             </DialogTitle>
           </DialogHeader>
-          
+
           <div className="space-y-6">
             {/* Logo Upload */}
             <div className="space-y-4">
@@ -297,7 +385,6 @@ const MumbaiHomesAdmin = () => {
                     <p className="text-gray-500 text-sm">No logo</p>
                   </div>
                 )}
-                
                 <div className="flex flex-col items-center space-y-2">
                   <input
                     ref={logoRef}
@@ -314,7 +401,7 @@ const MumbaiHomesAdmin = () => {
                     className="flex items-center space-x-2"
                   >
                     <Upload className="h-4 w-4" />
-                    <span>{mumbaiHomesData.logo ? 'Change Logo' : 'Upload Logo'}</span>
+                    <span>{mumbaiHomesData.logo ? "Change Logo" : "Upload Logo"}</span>
                   </Button>
                 </div>
               </div>
@@ -327,7 +414,7 @@ const MumbaiHomesAdmin = () => {
                 <Input
                   id="sectionTitle"
                   value={mumbaiHomesData.title}
-                  onChange={(e) => handleInputChange('title', e.target.value)}
+                  onChange={(e) => handleInputChange("title", e.target.value)}
                   placeholder="Enter section title"
                 />
               </div>
@@ -336,7 +423,7 @@ const MumbaiHomesAdmin = () => {
                 <Textarea
                   id="sectionDescription"
                   value={mumbaiHomesData.description}
-                  onChange={(e) => handleInputChange('description', e.target.value)}
+                  onChange={(e) => handleInputChange("description", e.target.value)}
                   placeholder="Enter description"
                   rows={3}
                 />
@@ -346,7 +433,7 @@ const MumbaiHomesAdmin = () => {
                 <Textarea
                   id="disclaimer"
                   value={mumbaiHomesData.disclaimer}
-                  onChange={(e) => handleInputChange('disclaimer', e.target.value)}
+                  onChange={(e) => handleInputChange("disclaimer", e.target.value)}
                   placeholder="Enter disclaimer text"
                   rows={3}
                 />
@@ -356,7 +443,7 @@ const MumbaiHomesAdmin = () => {
                 <Input
                   id="copyright"
                   value={mumbaiHomesData.copyright}
-                  onChange={(e) => handleInputChange('copyright', e.target.value)}
+                  onChange={(e) => handleInputChange("copyright", e.target.value)}
                   placeholder="Enter copyright text"
                 />
               </div>
@@ -371,7 +458,6 @@ const MumbaiHomesAdmin = () => {
                   <span>Add Link</span>
                 </Button>
               </div>
-              
               <div className="space-y-2">
                 {mumbaiHomesData.companyLinks.map((link) => (
                   <div key={link.id} className="flex justify-between items-center bg-gray-50 p-2 rounded">
@@ -407,7 +493,6 @@ const MumbaiHomesAdmin = () => {
                   <span>Add Social Link</span>
                 </Button>
               </div>
-              
               <div className="space-y-2">
                 {mumbaiHomesData.socialLinks.map((link) => (
                   <div key={link.id} className="flex justify-between items-center bg-gray-50 p-2 rounded">
@@ -438,7 +523,7 @@ const MumbaiHomesAdmin = () => {
             {editingCompanyLink && (
               <div className="border rounded-lg p-4 bg-gray-50">
                 <h4 className="font-semibold mb-4">
-                  {isAddingCompanyLink ? 'Add New Company Link' : 'Edit Company Link'}
+                  {isAddingCompanyLink ? "Add New Company Link" : "Edit Company Link"}
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -446,7 +531,9 @@ const MumbaiHomesAdmin = () => {
                     <Input
                       id="linkText"
                       value={editingCompanyLink.text}
-                      onChange={(e) => setEditingCompanyLink(prev => prev ? {...prev, text: e.target.value} : null)}
+                      onChange={(e) =>
+                        setEditingCompanyLink(prev => (prev ? { ...prev, text: e.target.value } : null))
+                      }
                       placeholder="Enter link text"
                     />
                   </div>
@@ -455,7 +542,9 @@ const MumbaiHomesAdmin = () => {
                     <Input
                       id="linkUrl"
                       value={editingCompanyLink.url}
-                      onChange={(e) => setEditingCompanyLink(prev => prev ? {...prev, url: e.target.value} : null)}
+                      onChange={(e) =>
+                        setEditingCompanyLink(prev => (prev ? { ...prev, url: e.target.value } : null))
+                      }
                       placeholder="Enter link URL"
                     />
                   </div>
@@ -465,7 +554,7 @@ const MumbaiHomesAdmin = () => {
                     Cancel
                   </Button>
                   <Button onClick={handleSaveCompanyLink}>
-                    {isAddingCompanyLink ? 'Add Link' : 'Save Changes'}
+                    {isAddingCompanyLink ? "Add Link" : "Save Changes"}
                   </Button>
                 </div>
               </div>
@@ -475,7 +564,7 @@ const MumbaiHomesAdmin = () => {
             {editingSocialLink && (
               <div className="border rounded-lg p-4 bg-gray-50">
                 <h4 className="font-semibold mb-4">
-                  {isAddingSocialLink ? 'Add New Social Link' : 'Edit Social Link'}
+                  {isAddingSocialLink ? "Add New Social Link" : "Edit Social Link"}
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -485,16 +574,23 @@ const MumbaiHomesAdmin = () => {
                       value={editingSocialLink.platform}
                       onChange={(e) => {
                         const selectedPlatform = socialPlatforms.find(p => p.value === e.target.value);
-                        setEditingSocialLink(prev => prev ? {
-                          ...prev, 
-                          platform: e.target.value,
-                          icon: selectedPlatform?.icon || e.target.value
-                        } : null);
+                        setEditingSocialLink(prev =>
+                          prev
+                            ? {
+                                ...prev,
+                                platform: e.target.value,
+                                icon: selectedPlatform?.icon || e.target.value,
+                              }
+                            : null
+                        );
                       }}
                       className="w-full p-2 border rounded-md"
                     >
+                      <option value="">Select a platform</option>
                       {socialPlatforms.map(platform => (
-                        <option key={platform.value} value={platform.value}>{platform.label}</option>
+                        <option key={platform.value} value={platform.value}>
+                          {platform.label}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -503,7 +599,9 @@ const MumbaiHomesAdmin = () => {
                     <Input
                       id="socialUrl"
                       value={editingSocialLink.url}
-                      onChange={(e) => setEditingSocialLink(prev => prev ? {...prev, url: e.target.value} : null)}
+                      onChange={(e) =>
+                        setEditingSocialLink(prev => (prev ? { ...prev, url: e.target.value } : null))
+                      }
                       placeholder="Enter social media URL"
                     />
                   </div>
@@ -513,7 +611,7 @@ const MumbaiHomesAdmin = () => {
                     Cancel
                   </Button>
                   <Button onClick={handleSaveSocialLink}>
-                    {isAddingSocialLink ? 'Add Social Link' : 'Save Changes'}
+                    {isAddingSocialLink ? "Add Social Link" : "Save Changes"}
                   </Button>
                 </div>
               </div>

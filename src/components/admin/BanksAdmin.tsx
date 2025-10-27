@@ -23,11 +23,32 @@ interface BanksData {
   banks: Bank[];
 }
 
+// Predefined list of major Indian banks with their logo URLs
+const majorBanks: Omit<Bank, 'id'>[] = [
+  { name: "HDFC Bank", logo: "https://1000logos.net/wp-content/uploads/2021/06/HDFC-Bank-emblem.png" },
+  { name: "SBI Bank", logo: "https://static.vecteezy.com/system/resources/previews/020/975/552/non_2x/sbi-logo-sbi-icon-transparent-free-png.png" },
+  { name: "Bank Of Baroda", logo: "https://1000logos.net/wp-content/uploads/2021/06/Bank-of-Baroda-icon.png" },
+  { name: "ICICI Bank", logo: "https://i.pinimg.com/736x/ff/d5/31/ffd531a6a78464512a97848e14506738.jpg" },
+  { name: "IOB Bank", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUB77Zf9NSBi6pyR-mx-YIgI_CZZjTQQFM7w&s" },
+  { name: "Kotak Mahindra Bank", logo: "https://e7.pngegg.com/pngimages/333/464/png-clipart-kotak-mahindra-bank-logo-horizontal-bank-logos-thumbnail.png" },
+  { name: "Axis Bank", logo: "https://icon2.cleanpng.com/20180531/jlo/kisspng-axis-bank-loan-bank-account-payment-5b0f85cf2b43f6.6580657115277439511772.jpg" },
+  { name: "Union Bank", logo: "https://smest.in/_next/image?url=https%3A%2F%2Fissuer-master-article-logos.s3.ap-south-1.amazonaws.com%2FUNIONBANK.png&w=3840&q=75" },
+  { name: "Bank Of Maharashtra", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGcoOoZH9lJlcXLgHi9xYJ46UsLM-huNMXkA&s" },
+];
+
+// Utility to check if a string is a base64 image
+const isBase64Image = (str: string) => str && typeof str === 'string' && str.startsWith('data:image/');
+
 const BanksAdmin = () => {
   const { toast } = useToast();
   const { websiteData, updateBanks } = useWebsiteData();
-  
-  const [banksData, setBanksData] = useState<BanksData>(websiteData.banks);
+
+  const [banksData, setBanksData] = useState<BanksData>({
+    ...websiteData.banks,
+    banks: Array.isArray(websiteData.banks.banks)
+      ? [...new Set(websiteData.banks.banks.map(bank => JSON.stringify(bank)))].map(str => JSON.parse(str))
+      : [],
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editingBank, setEditingBank] = useState<Bank | null>(null);
@@ -35,13 +56,19 @@ const BanksAdmin = () => {
   const bankLogoRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setBanksData(websiteData.banks);
-  }, [websiteData.banks]);
+    console.log('Saving banksData:', banksData);
+    updateBanks(banksData);
+    toast({
+      title: "Success",
+      description: "Banks section data saved automatically!",
+      duration: 2000,
+    });
+  }, [banksData, updateBanks, toast]);
 
   const handleInputChange = (field: keyof Omit<BanksData, 'banks'>, value: string) => {
     setBanksData(prev => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -51,8 +78,15 @@ const BanksAdmin = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageDataUrl = e.target?.result as string;
-        if (editingBank) {
-          setEditingBank(prev => prev ? {...prev, logo: imageDataUrl} : null);
+        if (editingBank && isBase64Image(imageDataUrl)) {
+          setEditingBank(prev => prev ? { ...prev, logo: imageDataUrl } : null);
+          console.log('Uploaded bank logo for ID:', editingBank.id, 'Image:', imageDataUrl.substring(0, 50) + '...');
+        } else {
+          toast({
+            title: "Error",
+            description: "Invalid image file",
+            variant: "destructive",
+          });
         }
       };
       reader.readAsDataURL(file);
@@ -63,11 +97,35 @@ const BanksAdmin = () => {
     const newBank: Bank = {
       id: Date.now(),
       name: "",
-      logo: ""
+      logo: "",
     };
     setEditingBank(newBank);
     setIsAddingBank(true);
     setIsModalOpen(true);
+  };
+
+  const handleSelectBank = (bank: Omit<Bank, 'id'>) => {
+    const newBank: Bank = {
+      id: Date.now(),
+      name: bank.name,
+      logo: bank.logo,
+    };
+    setBanksData(prev => {
+      if (prev.banks.some(b => b.name === newBank.name)) {
+        toast({
+          title: "Error",
+          description: `${newBank.name} is already added`,
+          variant: "destructive",
+        });
+        return prev;
+      }
+      const newBanks = [...prev.banks, newBank];
+      console.log('Added bank:', newBank, 'New banks:', newBanks);
+      return {
+        ...prev,
+        banks: newBanks,
+      };
+    });
   };
 
   const handleEditBank = (bank: Bank) => {
@@ -77,18 +135,41 @@ const BanksAdmin = () => {
   };
 
   const handleSaveBank = () => {
-    if (!editingBank) return;
+    if (!editingBank || !editingBank.name || !editingBank.logo) {
+      toast({
+        title: "Error",
+        description: "Bank requires a name and logo",
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (isAddingBank) {
-      setBanksData(prev => ({
-        ...prev,
-        banks: [...prev.banks, editingBank]
-      }));
+      setBanksData(prev => {
+        if (prev.banks.some(b => b.name === editingBank.name && b.id !== editingBank.id)) {
+          toast({
+            title: "Error",
+            description: `${editingBank.name} is already added`,
+            variant: "destructive",
+          });
+          return prev;
+        }
+        const newBanks = [...prev.banks, editingBank];
+        console.log('Saving new bank:', editingBank, 'New banks:', newBanks);
+        return {
+          ...prev,
+          banks: newBanks,
+        };
+      });
     } else {
-      setBanksData(prev => ({
-        ...prev,
-        banks: prev.banks.map(b => b.id === editingBank.id ? editingBank : b)
-      }));
+      setBanksData(prev => {
+        const newBanks = prev.banks.map(b => b.id === editingBank.id ? editingBank : b);
+        console.log('Updating bank:', editingBank, 'New banks:', newBanks);
+        return {
+          ...prev,
+          banks: newBanks,
+        };
+      });
     }
 
     setEditingBank(null);
@@ -98,25 +179,19 @@ const BanksAdmin = () => {
   };
 
   const handleDeleteBank = (bankId: number) => {
-    setBanksData(prev => ({
-      ...prev,
-      banks: prev.banks.filter(b => b.id !== bankId)
-    }));
+    setBanksData(prev => {
+      const newBanks = prev.banks.filter(b => b.id !== bankId);
+      console.log('Deleting bank ID:', bankId, 'New banks:', newBanks);
+      return {
+        ...prev,
+        banks: newBanks,
+      };
+    });
   };
 
   const handleEdit = () => {
     setIsEditing(true);
     setIsModalOpen(true);
-  };
-
-  const handleSave = () => {
-    updateBanks(banksData);
-    toast({
-      title: "Success",
-      description: "Banks section data saved successfully!",
-    });
-    setIsEditing(false);
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -128,18 +203,11 @@ const BanksAdmin = () => {
     if (bankLogoRef.current) bankLogoRef.current.value = '';
   };
 
-  const handlePreview = () => {
-    window.open('/', '_blank');
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Banks Section Configuration</h3>
         <div className="space-x-2">
-          <Button variant="outline" onClick={handlePreview}>
-            Preview
-          </Button>
           <Button onClick={handleEdit} className="flex items-center space-x-2">
             <Edit className="h-4 w-4" />
             <span>Edit Banks Section</span>
@@ -187,7 +255,7 @@ const BanksAdmin = () => {
               <span>Edit Banks Section</span>
             </DialogTitle>
           </DialogHeader>
-          
+
           <div className="space-y-6">
             {/* Section Content */}
             <div className="space-y-4">
@@ -229,16 +297,42 @@ const BanksAdmin = () => {
               </div>
             </div>
 
+            {/* Major Banks Selection */}
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <Label>Select Major Banks</Label>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {majorBanks.map((bank) => (
+                  <div key={bank.name} className="border rounded-lg p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-white rounded flex items-center justify-center">
+                        <img src={bank.logo} alt={bank.name} className="w-8 h-8 object-contain" />
+                      </div>
+                      <h4 className="font-semibold">{bank.name}</h4>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleSelectBank(bank)}
+                      className="mt-2 w-full"
+                    >
+                      Select
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Banks Management */}
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <Label>Banks</Label>
+                <Label>Current Banks</Label>
                 <Button onClick={handleAddBank} className="flex items-center space-x-2">
                   <Plus className="h-4 w-4" />
-                  <span>Add Bank</span>
+                  <span>Add Custom Bank</span>
                 </Button>
               </div>
-              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {banksData.banks.map((bank) => (
                   <div key={bank.id} className="border rounded-lg p-4">
@@ -284,11 +378,10 @@ const BanksAdmin = () => {
                     <Input
                       id="bankName"
                       value={editingBank.name}
-                      onChange={(e) => setEditingBank(prev => prev ? {...prev, name: e.target.value} : null)}
+                      onChange={(e) => setEditingBank(prev => prev ? { ...prev, name: e.target.value } : null)}
                       placeholder="Enter bank name"
                     />
                   </div>
-                  
                   <div className="space-y-2">
                     <Label>Bank Logo</Label>
                     <div className="flex flex-col items-center space-y-4">
@@ -304,7 +397,7 @@ const BanksAdmin = () => {
                             variant="destructive"
                             size="sm"
                             className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0"
-                            onClick={() => setEditingBank(prev => prev ? {...prev, logo: ""} : null)}
+                            onClick={() => setEditingBank(prev => prev ? { ...prev, logo: "" } : null)}
                           >
                             <X className="h-3 w-3" />
                           </Button>
@@ -314,7 +407,6 @@ const BanksAdmin = () => {
                           <p className="text-gray-500 text-xs">No logo</p>
                         </div>
                       )}
-                      
                       <div className="flex flex-col items-center space-y-2">
                         <input
                           ref={bankLogoRef}
@@ -353,9 +445,9 @@ const BanksAdmin = () => {
               <Button variant="outline" onClick={handleCancel}>
                 Cancel
               </Button>
-              <Button onClick={handleSave} className="flex items-center space-x-2">
+              <Button onClick={handleCancel} className="flex items-center space-x-2">
                 <Save className="h-4 w-4" />
-                <span>Save Changes</span>
+                <span>Close</span>
               </Button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,7 +9,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Edit, Save, Plus, Trash2 } from "lucide-react";
 import { useWebsiteData } from "@/contexts/WebsiteDataContext";
 
+// Define interfaces within the file
 interface NeighborhoodItem {
+  id: number; // Added id for unique identification
   text: string;
   locality?: string;
   bedrooms?: string;
@@ -30,35 +32,45 @@ interface DiscoverNeighborhoodsData {
 const DiscoverNeighborhoodsAdmin = () => {
   const { toast } = useToast();
   const { websiteData, updateDiscoverNeighborhoods } = useWebsiteData();
-  
-  const [discoverData, setDiscoverData] = useState<DiscoverNeighborhoodsData>(websiteData.discoverNeighborhoods);
+  const [discoverData, setDiscoverData] = useState<DiscoverNeighborhoodsData>({
+    title: websiteData.discoverNeighborhoods.title || "Discover the city's prime neighbourhoods.",
+    categories: Array.isArray(websiteData.discoverNeighborhoods.categories)
+      ? websiteData.discoverNeighborhoods.categories.map(category => ({
+          ...category,
+          title: category.title || '',
+          items: Array.isArray(category.items)
+            ? category.items.map((item, index) => ({
+                id: (item as any).id || Date.now() + index, // Ensure items have IDs
+                text: item.text || '',
+                locality: item.locality || '',
+                bedrooms: item.bedrooms || '',
+              }))
+            : [],
+          link: category.link || 'View All',
+        }))
+      : [],
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [editingItem, setEditingItem] = useState<NeighborhoodItem | null>(null);
   const [isAddingCategory, setIsAddingCategory] = useState(false);
   const [isAddingItem, setIsAddingItem] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
 
-  useEffect(() => {
-    setDiscoverData(websiteData.discoverNeighborhoods);
-  }, [websiteData.discoverNeighborhoods]);
-
   const handleInputChange = (field: keyof Omit<DiscoverNeighborhoodsData, 'categories'>, value: string) => {
     setDiscoverData(prev => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   const handleAddCategory = () => {
-    const newCategory: Category = {
+    setEditingCategory({
       id: Date.now(),
       title: "",
       items: [],
-      link: "View All"
-    };
-    setEditingCategory(newCategory);
+      link: "View All",
+    });
     setIsAddingCategory(true);
     setIsModalOpen(true);
   };
@@ -70,39 +82,51 @@ const DiscoverNeighborhoodsAdmin = () => {
   };
 
   const handleSaveCategory = () => {
-    if (!editingCategory) return;
-
-    if (isAddingCategory) {
-      setDiscoverData(prev => ({
-        ...prev,
-        categories: [...prev.categories, editingCategory]
-      }));
-    } else {
-      setDiscoverData(prev => ({
-        ...prev,
-        categories: prev.categories.map(c => c.id === editingCategory.id ? editingCategory : c)
-      }));
+    if (!editingCategory || !editingCategory.title || !editingCategory.link) {
+      toast({
+        title: "Error",
+        description: "Category requires a title and link text",
+        variant: "destructive",
+      });
+      return;
     }
 
+    if (discoverData.categories.some(c => c.title === editingCategory.title && c.id !== editingCategory.id)) {
+      toast({
+        title: "Error",
+        description: `A category with the title "${editingCategory.title}" already exists`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setDiscoverData(prev => ({
+      ...prev,
+      categories: isAddingCategory
+        ? [...prev.categories, editingCategory]
+        : prev.categories.map(c => (c.id === editingCategory.id ? editingCategory : c)),
+    }));
     setEditingCategory(null);
     setIsAddingCategory(false);
     setIsModalOpen(false);
+    toast({ title: "Success", description: "Category saved successfully" });
   };
 
   const handleDeleteCategory = (categoryId: number) => {
     setDiscoverData(prev => ({
       ...prev,
-      categories: prev.categories.filter(c => c.id !== categoryId)
+      categories: prev.categories.filter(c => c.id !== categoryId),
     }));
+    toast({ title: "Success", description: "Category deleted successfully" });
   };
 
   const handleAddItem = (categoryId: number) => {
-    const newItem: NeighborhoodItem = {
+    setEditingItem({
+      id: Date.now(),
       text: "",
       locality: "",
-      bedrooms: ""
-    };
-    setEditingItem(newItem);
+      bedrooms: "",
+    });
     setSelectedCategoryId(categoryId);
     setIsAddingItem(true);
   };
@@ -114,89 +138,113 @@ const DiscoverNeighborhoodsAdmin = () => {
   };
 
   const handleSaveItem = () => {
-    if (!editingItem || !selectedCategoryId) return;
+    if (!editingItem || !selectedCategoryId || !editingItem.text) {
+      toast({
+        title: "Error",
+        description: "Item requires text",
+        variant: "destructive",
+      });
+      return;
+    }
 
     const category = discoverData.categories.find(c => c.id === selectedCategoryId);
     if (!category) return;
 
-    if (isAddingItem) {
-      category.items.push(editingItem);
-    } else {
-      const itemIndex = category.items.findIndex(item => item.text === editingItem.text);
-      if (itemIndex !== -1) {
-        category.items[itemIndex] = editingItem;
-      }
+    if (category.items.some(item => item.text === editingItem.text && item.id !== editingItem.id)) {
+      toast({
+        title: "Error",
+        description: `An item with the text "${editingItem.text}" already exists in this category`,
+        variant: "destructive",
+      });
+      return;
     }
+
+    const updatedItems = isAddingItem
+      ? [...category.items, editingItem]
+      : category.items.map(item => (item.id === editingItem.id ? editingItem : item));
 
     setDiscoverData(prev => ({
       ...prev,
-      categories: prev.categories.map(c => c.id === selectedCategoryId ? category : c)
+      categories: prev.categories.map(c =>
+        c.id === selectedCategoryId ? { ...c, items: updatedItems } : c
+      ),
     }));
 
     setEditingItem(null);
     setSelectedCategoryId(null);
     setIsAddingItem(false);
+    toast({ title: "Success", description: "Item saved successfully" });
   };
 
-  const handleDeleteItem = (categoryId: number, itemText: string) => {
+  const handleDeleteItem = (categoryId: number, itemId: number) => {
     setDiscoverData(prev => ({
       ...prev,
-      categories: prev.categories.map(c => 
-        c.id === categoryId 
-          ? { ...c, items: c.items.filter(item => item.text !== itemText) }
-          : c
-      )
+      categories: prev.categories.map(c =>
+        c.id === categoryId ? { ...c, items: c.items.filter(item => item.id !== itemId) } : c
+      ),
     }));
+    toast({ title: "Success", description: "Item deleted successfully" });
   };
 
-  const handleEdit = () => {
-    setIsEditing(true);
-    setIsModalOpen(true);
-  };
-
-  const handleSave = () => {
+  const handleSaveAll = () => {
+    if (!discoverData.title) {
+      toast({
+        title: "Error",
+        description: "Section title is required",
+        variant: "destructive",
+      });
+      return;
+    }
+    console.log('Saving discoverData:', discoverData);
     updateDiscoverNeighborhoods(discoverData);
+    setIsModalOpen(false);
     toast({
       title: "Success",
-      description: "Discover Neighborhoods section data saved successfully!",
+      description: "Discover Neighborhoods section saved successfully!",
+      duration: 2000,
     });
-    setIsEditing(false);
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
-    setDiscoverData(websiteData.discoverNeighborhoods);
-    setIsEditing(false);
-    setIsModalOpen(false);
+    setDiscoverData({
+      title: websiteData.discoverNeighborhoods.title || "Discover the city's prime neighbourhoods.",
+      categories: Array.isArray(websiteData.discoverNeighborhoods.categories)
+        ? websiteData.discoverNeighborhoods.categories.map(category => ({
+            ...category,
+            title: category.title || '',
+            items: Array.isArray(category.items)
+              ? category.items.map((item, index) => ({
+                  id: (item as any).id || Date.now() + index,
+                  text: item.text || '',
+                  locality: item.locality || '',
+                  bedrooms: item.bedrooms || '',
+                }))
+              : [],
+            link: category.link || 'View All',
+          }))
+        : [],
+    });
     setEditingCategory(null);
     setEditingItem(null);
     setIsAddingCategory(false);
     setIsAddingItem(false);
     setSelectedCategoryId(null);
-  };
-
-  const handlePreview = () => {
-    window.open('/', '_blank');
+    setIsModalOpen(false);
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Discover Neighborhoods Configuration</h3>
-        <div className="space-x-2">
-          <Button variant="outline" onClick={handlePreview}>
-            Preview
-          </Button>
-          <Button onClick={handleEdit} className="flex items-center space-x-2">
-            <Edit className="h-4 w-4" />
-            <span>Edit Discover Neighborhoods</span>
-          </Button>
-        </div>
+        <Button onClick={() => setIsModalOpen(true)} className="flex items-center space-x-2">
+          <Edit className="h-4 w-4" />
+          <span>Edit Section</span>
+        </Button>
       </div>
 
       <Separator />
 
-      {/* Current Categories Display */}
+      {/* Preview */}
       <Card>
         <CardHeader>
           <CardTitle className="text-base">Current Discover Neighborhoods Section</CardTitle>
@@ -204,26 +252,33 @@ const DiscoverNeighborhoodsAdmin = () => {
         <CardContent>
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-center">{discoverData.title}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {discoverData.categories.map((category) => (
-                <div key={category.id} className="border rounded-lg p-4">
-                  <h4 className="font-semibold text-primary mb-3">{category.title}</h4>
-                  <ul className="space-y-2">
-                    {category.items.slice(0, 3).map((item, index) => (
-                      <li key={index} className="text-sm text-gray-700">{item.text}</li>
-                    ))}
-                  </ul>
-                  <Button variant="link" className="text-primary p-0 h-auto text-sm mt-2">
-                    {category.link}
-                  </Button>
-                </div>
-              ))}
-            </div>
+            {discoverData.categories.length === 0 ? (
+              <p className="text-center text-gray-500">No categories available.</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {discoverData.categories.map((category) => (
+                  <div key={category.id} className="border rounded-lg p-4">
+                    <h4 className="font-semibold text-primary mb-3">{category.title}</h4>
+                    <ul className="space-y-2">
+                      {category.items.slice(0, 3).map((item) => (
+                        <li key={item.id} className="text-sm text-gray-700">{item.text}</li>
+                      ))}
+                      {category.items.length > 3 && (
+                        <li className="text-sm text-gray-500">... and {category.items.length - 3} more</li>
+                      )}
+                    </ul>
+                    <Button variant="link" className="text-primary p-0 h-auto text-sm mt-2">
+                      {category.link}
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
 
-      {/* Categories Edit Modal */}
+      {/* Edit Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -232,7 +287,6 @@ const DiscoverNeighborhoodsAdmin = () => {
               <span>Edit Discover Neighborhoods Section</span>
             </DialogTitle>
           </DialogHeader>
-          
           <div className="space-y-6">
             {/* Section Title */}
             <div className="space-y-2">
@@ -254,7 +308,6 @@ const DiscoverNeighborhoodsAdmin = () => {
                   <span>Add Category</span>
                 </Button>
               </div>
-              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {discoverData.categories.map((category) => (
                   <div key={category.id} className="border rounded-lg p-4">
@@ -262,8 +315,8 @@ const DiscoverNeighborhoodsAdmin = () => {
                       <div className="flex-1">
                         <h4 className="font-semibold text-primary mb-2">{category.title}</h4>
                         <ul className="space-y-1 mb-3">
-                          {category.items.slice(0, 3).map((item, index) => (
-                            <li key={index} className="text-sm text-gray-700">{item.text}</li>
+                          {category.items.slice(0, 3).map((item) => (
+                            <li key={item.id} className="text-sm text-gray-700">{item.text}</li>
                           ))}
                           {category.items.length > 3 && (
                             <li className="text-sm text-gray-500">... and {category.items.length - 3} more</li>
@@ -291,13 +344,12 @@ const DiscoverNeighborhoodsAdmin = () => {
                         </Button>
                       </div>
                     </div>
-                    
                     {/* Items Management for this Category */}
                     <div className="space-y-2">
                       <div className="flex justify-between items-center">
                         <Label className="text-sm">Items</Label>
-                        <Button 
-                          onClick={() => handleAddItem(category.id)} 
+                        <Button
+                          onClick={() => handleAddItem(category.id)}
                           size="sm"
                           className="flex items-center space-x-1"
                         >
@@ -305,10 +357,9 @@ const DiscoverNeighborhoodsAdmin = () => {
                           <span>Add Item</span>
                         </Button>
                       </div>
-                      
                       <div className="space-y-2">
-                        {category.items.map((item, index) => (
-                          <div key={index} className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                        {category.items.map((item) => (
+                          <div key={item.id} className="flex justify-between items-center bg-gray-50 p-2 rounded">
                             <span className="text-sm">{item.text}</span>
                             <div className="flex space-x-1">
                               <Button
@@ -321,7 +372,7 @@ const DiscoverNeighborhoodsAdmin = () => {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleDeleteItem(category.id, item.text)}
+                                onClick={() => handleDeleteItem(category.id, item.id)}
                                 className="text-red-600 hover:text-red-700"
                               >
                                 <Trash2 className="h-3 w-3" />
@@ -348,7 +399,7 @@ const DiscoverNeighborhoodsAdmin = () => {
                     <Input
                       id="categoryTitle"
                       value={editingCategory.title}
-                      onChange={(e) => setEditingCategory(prev => prev ? {...prev, title: e.target.value} : null)}
+                      onChange={(e) => setEditingCategory(prev => prev ? { ...prev, title: e.target.value } : null)}
                       placeholder="Enter category title"
                     />
                   </div>
@@ -357,7 +408,7 @@ const DiscoverNeighborhoodsAdmin = () => {
                     <Input
                       id="categoryLink"
                       value={editingCategory.link}
-                      onChange={(e) => setEditingCategory(prev => prev ? {...prev, link: e.target.value} : null)}
+                      onChange={(e) => setEditingCategory(prev => prev ? { ...prev, link: e.target.value } : null)}
                       placeholder="Enter link text"
                     />
                   </div>
@@ -367,7 +418,7 @@ const DiscoverNeighborhoodsAdmin = () => {
                     Cancel
                   </Button>
                   <Button onClick={handleSaveCategory}>
-                    {isAddingCategory ? 'Add Category' : 'Save Changes'}
+                    {isAddingCategory ? 'Add Category' : 'Save Category'}
                   </Button>
                 </div>
               </div>
@@ -385,7 +436,7 @@ const DiscoverNeighborhoodsAdmin = () => {
                     <Input
                       id="itemText"
                       value={editingItem.text}
-                      onChange={(e) => setEditingItem(prev => prev ? {...prev, text: e.target.value} : null)}
+                      onChange={(e) => setEditingItem(prev => prev ? { ...prev, text: e.target.value } : null)}
                       placeholder="Enter item text"
                     />
                   </div>
@@ -394,7 +445,7 @@ const DiscoverNeighborhoodsAdmin = () => {
                     <Input
                       id="itemLocality"
                       value={editingItem.locality || ""}
-                      onChange={(e) => setEditingItem(prev => prev ? {...prev, locality: e.target.value} : null)}
+                      onChange={(e) => setEditingItem(prev => prev ? { ...prev, locality: e.target.value } : null)}
                       placeholder="Enter locality"
                     />
                   </div>
@@ -403,20 +454,23 @@ const DiscoverNeighborhoodsAdmin = () => {
                     <Input
                       id="itemBedrooms"
                       value={editingItem.bedrooms || ""}
-                      onChange={(e) => setEditingItem(prev => prev ? {...prev, bedrooms: e.target.value} : null)}
+                      onChange={(e) => setEditingItem(prev => prev ? { ...prev, bedrooms: e.target.value } : null)}
                       placeholder="e.g., 1 BHK, 2 BHK"
                     />
                   </div>
                 </div>
                 <div className="flex justify-end space-x-2 mt-4">
-                  <Button variant="outline" onClick={() => {
-                    setEditingItem(null);
-                    setSelectedCategoryId(null);
-                  }}>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setEditingItem(null);
+                      setSelectedCategoryId(null);
+                    }}
+                  >
                     Cancel
                   </Button>
                   <Button onClick={handleSaveItem}>
-                    {isAddingItem ? 'Add Item' : 'Save Changes'}
+                    {isAddingItem ? 'Add Item' : 'Save Item'}
                   </Button>
                 </div>
               </div>
@@ -427,9 +481,9 @@ const DiscoverNeighborhoodsAdmin = () => {
               <Button variant="outline" onClick={handleCancel}>
                 Cancel
               </Button>
-              <Button onClick={handleSave} className="flex items-center space-x-2">
+              <Button onClick={handleSaveAll} className="flex items-center space-x-2">
                 <Save className="h-4 w-4" />
-                <span>Save Changes</span>
+                <span>Save All</span>
               </Button>
             </div>
           </div>

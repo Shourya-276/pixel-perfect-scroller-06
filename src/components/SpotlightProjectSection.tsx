@@ -5,6 +5,7 @@ import { useWebsiteData } from "@/contexts/WebsiteDataContext";
 
 const SpotlightProjectSection = () => {
   const { websiteData } = useWebsiteData();
+
   return (
     <section className="bg-white w-full">
       <div className="relative w-full">

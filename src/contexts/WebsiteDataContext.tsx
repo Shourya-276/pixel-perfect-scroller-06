@@ -103,6 +103,7 @@ interface Blog {
   subtitle?: string;
   date: string;
   image: string;
+  content: string; // Added content field
   size: "small" | "large" | "wide";
 }
 
@@ -223,7 +224,7 @@ const defaultNewlyLaunchedData: NewlyLaunchedData = {
       type: "Residential",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop",
     },
-  ]
+  ],
 };
 
 const defaultTrendingProjectsData: TrendingProjectsData = {
@@ -235,7 +236,7 @@ const defaultTrendingProjectsData: TrendingProjectsData = {
     "Central Mumbai",
     "Mumbai Metropolitan",
     "Thane-Kalyan",
-    "Navi Mumbai"
+    "Navi Mumbai",
   ],
   projects: [
     {
@@ -256,14 +257,15 @@ const defaultTrendingProjectsData: TrendingProjectsData = {
       type: "Residential",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=500&fit=crop",
     },
-  ]
+  ],
 };
 
 const defaultSpotlightProjectData: SpotlightProjectData = {
   badge: "Spotlight Project",
   title: "Ajmera 78 Lakes Town",
   location: "Kanjurmarg",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis",
   projectType: "Residential",
   apartmentTypes: "1,2 BHK Apartments",
   reraArea: "379.00sq.ft - 758.00 sq.ft",
@@ -280,35 +282,37 @@ const defaultWhyChooseUsData: WhyChooseUsData = {
       id: 1,
       icon: "Zap",
       title: "Smart Tools",
-      description: "Use price comparison, EMI calculators & site visit schedulers to make informed decisions."
+      description:
+        "Use price comparison, EMI calculators & site visit schedulers to make informed decisions.",
     },
     {
       id: 2,
       icon: "Users",
       title: "Personalized Assistance",
-      description: "Talk to experts, not bots."
+      description: "Talk to experts, not bots.",
     },
     {
       id: 3,
       icon: "MapPin",
       title: "Location Intelligence",
-      description: "Get deep insights on areas, pricing trends & upcoming growth zones."
+      description: "Get deep insights on areas, pricing trends & upcoming growth zones.",
     },
     {
       id: 4,
       icon: "Shield",
       title: "Verified Properties",
-      description: "No fakes, no fluff."
+      description: "No fakes, no fluff.",
     },
     {
       id: 5,
       icon: "ThumbsUp",
       title: "Hassle-Free Experience",
-      description: "From virtual tours to legal help, we've got you covered. Choose Mumbai Homes for a smoother, smarter, and stress-free property journey."
-    }
+      description:
+        "From virtual tours to legal help, we've got you covered. Choose Mumbai Homes for a smoother, smarter, and stress-free property journey.",
+    },
   ],
   buildingImage: "",
-  handshakeImage: ""
+  handshakeImage: "",
 };
 
 const defaultVirtualTourData: VirtualTourData = {
@@ -317,18 +321,20 @@ const defaultVirtualTourData: VirtualTourData = {
     {
       id: 1,
       image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop",
-      alt: "Virtual Tour 1"
+      alt: "Virtual Tour 1",
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1517840901100-8179e9d84967?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      alt: "Virtual Tour 2"
+      image:
+        "https://images.unsplash.com/photo-1517840901100-8179e9d84967?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Virtual Tour 2",
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      alt: "Virtual Tour 3"
-    }
+      image:
+        "https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Virtual Tour 3",
+    },
   ],
   companyLogos: [
     {
@@ -354,21 +360,38 @@ const defaultVirtualTourData: VirtualTourData = {
       color: "bg-red-600 text-white",
       textColor: "text-red-600",
       description: "A VISION FOR YOUR LIFE",
-    }
-  ]
+    },
+  ],
 };
 
 const defaultBanksData: BanksData = {
   title: "Banks we work with",
-  description: "From virtual tours to legal aid, Mumbai Homes delivers end-to-end support for a smoother, smarter, stress-free property journey.",
+  description:
+    "From virtual tours to legal aid, Mumbai Homes delivers end-to-end support for a smoother, smarter, stress-free property journey.",
   contactText: "Contact Us for more details",
   ctaText: "Get Loan Assistance",
   banks: [
-    { id: 1, name: "HDFC Bank", logo: "https://1000logos.net/wp-content/uploads/2021/06/HDFC-Bank-emblem.png" },
-    { id: 2, name: "SBI Bank", logo: "https://static.vecteezy.com/system/resources/previews/020/975/552/non_2x/sbi-logo-sbi-icon-transparent-free-png.png" },
-    { id: 3, name: "ICICI Bank", logo: "https://i.pinimg.com/736x/ff/d5/31/ffd531a6a78464512a97848e14506738.jpg" },
-    { id: 4, name: "Kotak Mahindra Bank", logo: "https://e7.pngegg.com/pngimages/333/464/png-clipart-kotak-mahindra-bank-logo-horizontal-bank-logos-thumbnail.png" }
-  ]
+    {
+      id: 1,
+      name: "HDFC Bank",
+      logo: "https://1000logos.net/wp-content/uploads/2021/06/HDFC-Bank-emblem.png",
+    },
+    {
+      id: 2,
+      name: "SBI Bank",
+      logo: "https://static.vecteezy.com/system/resources/previews/020/975/552/non_2x/sbi-logo-sbi-icon-transparent-free-png.png",
+    },
+    {
+      id: 3,
+      name: "ICICI Bank",
+      logo: "https://i.pinimg.com/736x/ff/d5/31/ffd531a6a78464512a97848e14506738.jpg",
+    },
+    {
+      id: 4,
+      name: "Kotak Mahindra Bank",
+      logo: "https://e7.pngegg.com/pngimages/333/464/png-clipart-kotak-mahindra-bank-logo-horizontal-bank-logos-thumbnail.png",
+    },
+  ],
 };
 
 const defaultBlogsData: BlogsData = {
@@ -380,6 +403,7 @@ const defaultBlogsData: BlogsData = {
       title: "Current Real Estate Market Trends",
       date: "November 17, 2024",
       image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop",
+      content: "Explore the latest trends shaping the real estate market in Mumbai, including pricing, demand, and investment opportunities.", // Added content
       size: "small",
     },
     {
@@ -387,6 +411,7 @@ const defaultBlogsData: BlogsData = {
       title: "Green Real Estate: Sustainable Practices and Benefits",
       date: "November 17, 2024",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+      content: "Learn about sustainable practices in real estate and their benefits for homeowners and the environment.", // Added content
       size: "small",
     },
     {
@@ -395,9 +420,10 @@ const defaultBlogsData: BlogsData = {
       subtitle: "Real estate investing is one of the most popular ways to...",
       date: "November 17, 2024",
       image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop",
+      content: "Real estate investing is one of the most popular ways to build wealth, but it comes with pitfalls. This article discusses common mistakes and how to avoid them.", // Added content
       size: "large",
-    }
-  ]
+    },
+  ],
 };
 
 const defaultHomesInEveryZoneData: HomesInEveryZoneData = {
@@ -407,21 +433,21 @@ const defaultHomesInEveryZoneData: HomesInEveryZoneData = {
       id: 1,
       name: "Western",
       projects: "700 Projects",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop"
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop",
     },
     {
       id: 2,
-      name: "Eastern", 
+      name: "Eastern",
       projects: "500 Projects",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop"
+      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&h=400&fit=crop",
     },
     {
       id: 3,
       name: "Central",
-      projects: "1000 Projects", 
-      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&h=400&fit=crop"
-    }
-  ]
+      projects: "1000 Projects",
+      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&h=400&fit=crop",
+    },
+  ],
 };
 
 const defaultFrequentlyAskedQuestionsData: FrequentlyAskedQuestionsData = {
@@ -430,14 +456,16 @@ const defaultFrequentlyAskedQuestionsData: FrequentlyAskedQuestionsData = {
     {
       id: 1,
       question: "What makes Swastik Group a trusted name in real estate in Vikhroli?",
-      answer: "Swastik Group has been a trusted name in real estate for over 2 decades, delivering quality projects with timely completion and excellent customer service. We focus on creating sustainable communities with modern amenities and infrastructure."
+      answer:
+        "Swastik Group has been a trusted name in real estate for over 2 decades, delivering quality projects with timely completion and excellent customer service. We focus on creating sustainable communities with modern amenities and infrastructure.",
     },
     {
       id: 2,
       question: "What types of residential projects does Swastik Group offer in Vikhroli?",
-      answer: "We offer a wide range of residential projects including affordable housing, premium apartments, luxury penthouses, and integrated townships with all modern amenities and facilities."
-    }
-  ]
+      answer:
+        "We offer a wide range of residential projects including affordable housing, premium apartments, luxury penthouses, and integrated townships with all modern amenities and facilities.",
+    },
+  ],
 };
 
 const defaultDiscoverNeighborhoodsData: DiscoverNeighborhoodsData = {
@@ -448,44 +476,47 @@ const defaultDiscoverNeighborhoodsData: DiscoverNeighborhoodsData = {
       title: "New Projects",
       items: [
         { text: "New Projects in Chembur", locality: "Chembur" },
-        { text: "New Projects in Vikhroli", locality: "Vikhroli" }, 
+        { text: "New Projects in Vikhroli", locality: "Vikhroli" },
         { text: "New Projects in Bhandup", locality: "Bhandup" },
-        { text: "New Projects in Ghatkopar", locality: "Ghatkopar" }
+        { text: "New Projects in Ghatkopar", locality: "Ghatkopar" },
       ],
-      link: "View All"
+      link: "View All",
     },
     {
       id: 2,
-      title: "Trending Projects", 
+      title: "Trending Projects",
       items: [
         { text: "Trending Projects in Chembur", locality: "Chembur" },
         { text: "Trending Projects in Vikhroli", locality: "Vikhroli" },
-        { text: "Trending Projects in Bhandup", locality: "Bhandup" }, 
-        { text: "Trending Projects in Ghatkopar", locality: "Ghatkopar" }
+        { text: "Trending Projects in Bhandup", locality: "Bhandup" },
+        { text: "Trending Projects in Ghatkopar", locality: "Ghatkopar" },
       ],
-      link: "View All"
-    }
-  ]
+      link: "View All",
+    },
+  ],
 };
 
 const defaultMumbaiHomesData: MumbaiHomesData = {
   logo: "",
   title: "About Mumbai Homes",
-  description: "Welcome to Mumbai Homes by The Avenew – your gateway to luxury living. We specialise in premium properties across the city, offering a curated selection of high-end residences that blend elegance, comfort, and exclusivity.",
+  description:
+    "Welcome to Mumbai Homes by The Avenew – your gateway to luxury living. We specialise in premium properties across the city, offering a curated selection of high-end residences that blend elegance, comfort, and exclusivity.",
   companyLinks: [
     { id: 1, text: "Projects", url: "#" },
     { id: 2, text: "Contact Us", url: "#" },
     { id: 3, text: "Blogs", url: "#" },
-    { id: 4, text: "Careers", url: "#" }
+    { id: 4, text: "Careers", url: "#" },
   ],
-  disclaimer: "Mumbai Homes Services Limited acts solely as an intermediary, providing a platform for sellers to showcase properties to buyers. We are not involved in or responsible for any transactions between the two parties.",
-  copyright: "Copyright 2025 | All Rights Reserved By Swastik Group | Developed by Signature Advertising",
+  disclaimer:
+    "Mumbai Homes Services Limited acts solely as an intermediary, providing a platform for sellers to showcase properties to buyers. We are not involved in or responsible for any transactions between the two parties.",
+  copyright:
+    "Copyright 2025 | All Rights Reserved By Swastik Group | Developed by Signature Advertising",
   socialLinks: [
     { id: 1, platform: "Instagram", url: "#", icon: "Instagram" },
     { id: 2, platform: "Facebook", url: "#", icon: "Facebook" },
     { id: 3, platform: "LinkedIn", url: "#", icon: "Linkedin" },
-    { id: 4, platform: "YouTube", url: "#", icon: "Youtube" }
-  ]
+    { id: 4, platform: "YouTube", url: "#", icon: "Youtube" },
+  ],
 };
 
 const defaultWebsiteData: WebsiteData = {
@@ -556,10 +587,18 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
           whyChooseUs: whyChooseUsData ? JSON.parse(whyChooseUsData) : defaultWhyChooseUsData,
           virtualTour: virtualTourData ? JSON.parse(virtualTourData) : defaultVirtualTourData,
           banks: banksData ? JSON.parse(banksData) : defaultBanksData,
-          blogsAndArticles: blogsAndArticlesData ? JSON.parse(blogsAndArticlesData) : defaultBlogsData,
-          homesInEveryZone: homesInEveryZoneData ? JSON.parse(homesInEveryZoneData) : defaultHomesInEveryZoneData,
-          frequentlyAskedQuestions: frequentlyAskedQuestionsData ? JSON.parse(frequentlyAskedQuestionsData) : defaultFrequentlyAskedQuestionsData,
-          discoverNeighborhoods: discoverNeighborhoodsData ? JSON.parse(discoverNeighborhoodsData) : defaultDiscoverNeighborhoodsData,
+          blogsAndArticles: blogsAndArticlesData
+            ? JSON.parse(blogsAndArticlesData)
+            : defaultBlogsData,
+          homesInEveryZone: homesInEveryZoneData
+            ? JSON.parse(homesInEveryZoneData)
+            : defaultHomesInEveryZoneData,
+          frequentlyAskedQuestions: frequentlyAskedQuestionsData
+            ? JSON.parse(frequentlyAskedQuestionsData)
+            : defaultFrequentlyAskedQuestionsData,
+          discoverNeighborhoods: discoverNeighborhoodsData
+            ? JSON.parse(discoverNeighborhoodsData)
+            : defaultDiscoverNeighborhoodsData,
           mumbaiHomes: mumbaiHomesData ? JSON.parse(mumbaiHomesData) : defaultMumbaiHomesData,
         });
       } catch (error) {
@@ -576,7 +615,7 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
     };
 
     window.addEventListener('storage', handleStorageChange);
-    
+
     // Also listen for custom events for same-tab updates
     window.addEventListener('websiteDataUpdated', handleStorageChange);
 
@@ -682,8 +721,12 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
       banks: banksData ? JSON.parse(banksData) : defaultBanksData,
       blogsAndArticles: blogsAndArticlesData ? JSON.parse(blogsAndArticlesData) : defaultBlogsData,
       homesInEveryZone: homesInEveryZoneData ? JSON.parse(homesInEveryZoneData) : defaultHomesInEveryZoneData,
-      frequentlyAskedQuestions: frequentlyAskedQuestionsData ? JSON.parse(frequentlyAskedQuestionsData) : defaultFrequentlyAskedQuestionsData,
-      discoverNeighborhoods: discoverNeighborhoodsData ? JSON.parse(discoverNeighborhoodsData) : defaultDiscoverNeighborhoodsData,
+      frequentlyAskedQuestions: frequentlyAskedQuestionsData
+        ? JSON.parse(frequentlyAskedQuestionsData)
+        : defaultFrequentlyAskedQuestionsData,
+      discoverNeighborhoods: discoverNeighborhoodsData
+        ? JSON.parse(discoverNeighborhoodsData)
+        : defaultDiscoverNeighborhoodsData,
       mumbaiHomes: mumbaiHomesData ? JSON.parse(mumbaiHomesData) : defaultMumbaiHomesData,
     });
   };

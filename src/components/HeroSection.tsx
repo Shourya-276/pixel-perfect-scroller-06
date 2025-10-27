@@ -9,9 +9,7 @@ import { useWebsiteData } from "@/contexts/WebsiteDataContext";
 const HeroSection = () => {
   const { websiteData } = useWebsiteData();
   return (
-    <section 
-      className="relative bg-gradient-hero min-h-[600px] overflow-hidden"
-    >
+    <section className="relative bg-gradient-hero min-h-[600px] overflow-hidden">
       {/* Background wave shape */}
       <div className="absolute inset-0">
         <svg
@@ -40,7 +38,6 @@ const HeroSection = () => {
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
               {websiteData.heroSection.title}
             </h1>
-            
             {/* Search bar */}
             <div className="bg-white rounded-lg p-2 mb-6 flex flex-col sm:flex-row items-center shadow-lg">
               <Search className="text-gray-400 ml-3 h-5 w-5 mb-2 sm:mb-0" />
@@ -53,30 +50,40 @@ const HeroSection = () => {
                 Search
               </Button>
             </div>
-            
             <p className="text-base lg:text-lg mb-4 opacity-90 whitespace-pre-line">
               {websiteData.heroSection.description}
             </p>
-            
             <p className="text-lg lg:text-xl font-semibold mb-8">
               {websiteData.heroSection.subtitle}
             </p>
-            
             <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100 px-8 py-3 text-base lg:text-lg font-semibold">
               {websiteData.heroSection.ctaText}
             </Button>
           </div>
 
-          {/* Right content - Uploaded image */}
-          <div className="relative mt-8 lg:mt-0">
+          {/* Right content - Uploaded image with wavy border */}
+          <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 lg:h-full">
             <img
               src={websiteData.heroSection.backgroundImage || buildingComplex}
               alt="Hero image"
-              className="w-full h-auto rounded-lg max-w-lg mx-auto max-h-[500px] object-cover"
+              className="w-full h-full object-cover"
             />
-            
+            {/* Wavy border overlay */}
+            <svg
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              preserveAspectRatio="none"
+              viewBox="0 0 100 100"
+            >
+              <path
+                d="M 0,0 L 0,100 Q 15,95 30,100 L 100,100"
+                fill="none"
+                stroke="#1A88DD"
+                strokeWidth="1.2"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
             {/* Circular badge with rotating animation */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-24 animate-spin-slow md:w-32 md:h-32">
+            <div className="absolute bottom-8 left-8 w-24 h-24 animate-spin-slow md:w-28 md:h-28 z-10">
               <img
                 src={exploreNowBadge}
                 alt="Explore Now"
@@ -93,7 +100,7 @@ const HeroSection = () => {
           src={trainImage}
           alt="Mumbai Local Train"
           className="absolute bottom-0 h-12 w-auto animate-train-move"
-          style={{ minWidth: '200px' }}
+          style={{ minWidth: "200px" }}
         />
       </div>
     </section>
