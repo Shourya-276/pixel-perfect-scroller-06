@@ -91,18 +91,11 @@ const HeroSectionAdmin = () => {
     }
   };
 
-  const handlePreview = () => {
-    window.open('/', '_blank');
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-semibold">Hero Section Configuration</h3>
         <div className="space-x-2">
-          <Button variant="outline" onClick={handlePreview}>
-            Preview
-          </Button>
           <Button onClick={handleEdit} className="flex items-center space-x-2">
             <Edit className="h-4 w-4" />
             <span>Edit Hero Section</span>

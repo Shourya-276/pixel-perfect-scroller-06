@@ -23,6 +23,7 @@ import DiscoverNeighborhoodsAdmin from "@/components/admin/DiscoverNeighborhoods
 import MumbaiHomesAdmin from "@/components/admin/MumbaiHomesAdmin";
 import NewlyLaunchedAdmin from "@/components/admin/NewlyLaunchedAdmin";
 import TrendingProjectsAdmin from "@/components/admin/TrendingProjectsAdmin";
+import ProjectDetailsAdmin from "@/components/admin/ProjectDetailsAdmin";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Admin = () => {
     { id: "newly-launched", label: "Newly Launched", icon: Building },
     { id: "spotlight", label: "Spotlight Project", icon: TrendingUp },
     { id: "trending", label: "Trending Projects", icon: TrendingUp },
+    { id: "project-details", label: "Project Details", icon: Building },
     { id: "why-choose-us", label: "Why Choose Us", icon: Building },
     { id: "virtual-tour", label: "Virtual Tour", icon: Building },
     { id: "banks", label: "Banks", icon: Building },
@@ -260,6 +262,20 @@ const Admin = () => {
                   </CardHeader>
                   <CardContent>
                     <TrendingProjectsAdmin />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="project-details" className="mt-0">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <Building className="h-5 w-5" />
+                      <span>Project Details</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ProjectDetailsAdmin />
                   </CardContent>
                 </Card>
               </TabsContent>
