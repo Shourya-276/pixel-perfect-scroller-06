@@ -9,10 +9,11 @@ import { Heart, MapPin, Search, X, ChevronDown, Plus } from "lucide-react";
 import Header from "@/components/Header";
 import MumbaiHomesSection from "@/components/MumbaiHomesSection";
 import ProjectsInKandivaliSection from "@/components/ProjectsInKandivaliSection";
+import { useWebsiteData } from "@/contexts/WebsiteDataContext";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 
-// Mock project data
-const projects = [
+// Mock project data (fallback)
+const projectsFallback = [
   {
     id: 1,
     name: "Suji Platinum - Residential",
@@ -201,8 +202,31 @@ const FilterSection = ({ title, children, isExpandable = false }) => {
 };
 
 const AllProjects = () => {
+  const { websiteData } = useWebsiteData();
   const [searchParams] = useSearchParams();
-  const [projectList, setProjectList] = useState(projects);
+  const mapFromContext = () => (
+    (websiteData.projects && websiteData.projects.length > 0)
+      ? websiteData.projects.map(p => ({
+          id: p.id,
+          name: `${p.projectName} - Residential`,
+          image: p.mainImage || p.heroImage || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop",
+          type: p.cardType || p.overview?.projectType || "1BHK, 2 BHK Apartments available",
+          location: p.locationInfo?.location || p.locationText || "Mumbai",
+          price: p.priceRange || "₹1.00 Cr",
+          builder: p.builder || p.developerName || "Builder Name",
+          status: p.status || (p.statusBadges?.[0] || "Under Construction"),
+          isLiked: false,
+          isViewed: false,
+          reraApproved: !!p.reraApproved,
+        }))
+      : projectsFallback
+  );
+  const [projectList, setProjectList] = useState(mapFromContext());
+
+  useEffect(() => {
+    setProjectList(mapFromContext());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [websiteData.projects]);
   const [hideAlreadySeen, setHideAlreadySeen] = useState(false);
   const [verifiedProperties, setVerifiedProperties] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

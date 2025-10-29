@@ -177,6 +177,81 @@ interface MumbaiHomesData {
   socialLinks: SocialLink[];
 }
 
+// Project Details Types
+interface ProjectAmenity {
+  icon: string;
+  name: string;
+}
+
+interface FloorPlanItem {
+  type: string;
+  area: string;
+  price: string;
+  categoryKey?: '1BHK' | '2BHK' | '3BHK' | 'TYPICAL' | 'BROCHURE';
+}
+
+interface VirtualTourItem {
+  id: number;
+  image: string;
+  alt: string;
+}
+
+interface SimilarProjectItem {
+  id: number;
+  name: string;
+  type: string;
+  location: string;
+  price: string;
+  image: string;
+}
+
+interface ProjectOverview {
+  projectType: string;
+  units: string;
+  area: string;
+  reraNumber: string;
+}
+
+interface ProjectLocationInfo {
+  location: string;
+  zone: string;
+  pincode: string;
+  mapEmbedUrl: string;
+  mapsCtaText: string;
+}
+
+export interface ProjectDetailsData {
+  id: number;
+  projectName: string;
+  statusBadges: string[];
+  priceRange: string;
+  heroImage: string;
+  mainImage: string;
+  aerialImage: string;
+  brochurePdf?: string;
+  locationText: string;
+  aboutText: string;
+  developerName: string;
+  builder?: string;
+  status?: string;
+  reraApproved?: boolean;
+  cardType?: string;
+  amenities: ProjectAmenity[];
+  overview: ProjectOverview;
+  floorPlans: FloorPlanItem[];
+  floorPlanCategoryImages: {
+    oneBhk?: string;
+    twoBhk?: string;
+    threeBhk?: string;
+    typical?: string;
+    brochure?: string;
+  };
+  viewFloorplanImages: string[];
+  virtualTours: VirtualTourItem[];
+  locationInfo: ProjectLocationInfo;
+  similarProjects: SimilarProjectItem[];
+}
+
 interface WebsiteData {
   heroSection: HeroSectionData;
   newlyLaunched: NewlyLaunchedData;
@@ -190,6 +265,8 @@ interface WebsiteData {
   frequentlyAskedQuestions: FrequentlyAskedQuestionsData;
   discoverNeighborhoods: DiscoverNeighborhoodsData;
   mumbaiHomes: MumbaiHomesData;
+  projectDetails: ProjectDetailsData;
+  projects: ProjectDetailsData[];
 }
 
 // Default data
@@ -519,6 +596,107 @@ const defaultMumbaiHomesData: MumbaiHomesData = {
   ],
 };
 
+const defaultProjectDetailsData: ProjectDetailsData = {
+  id: 1,
+  projectName: "Suji Platinum",
+  statusBadges: ["Under Construction", "RERA"],
+  priceRange: "₹78 L - 1.24 Cr",
+  heroImage: "",
+  mainImage: "",
+  aerialImage: "",
+  brochurePdf: "",
+  locationText: "Vikhroli, Central Mumbai Suburbs, Mumbai",
+  aboutText:
+    "The Suji Platinum Project in Vikhroli, By Suji Builders and Developers. This Project is Priced at ₹78 L - 1.24 Cr and offers 1 and 2 BHK apartments, & Project Size 394.00 sq. ft. to 639.00 sq. ft. Embrace luxury living in a vibrant community.",
+  developerName: "Suji Builders and Developers",
+  builder: "Builder Name",
+  status: "Under Construction - Completion by July 2027",
+  reraApproved: true,
+  cardType: "1BHK, 2 BHK Apartments available",
+  amenities: [
+    { icon: "🏊", name: "Swimming pool" },
+    { icon: "🎮", name: "Playground" },
+    { icon: "🐕", name: "Pet Friendly" },
+    { icon: "🌿", name: "Garden" },
+    { icon: "💪", name: "Fitness center" },
+    { icon: "🚗", name: "Parking" },
+    { icon: "🔒", name: "Security" },
+    { icon: "⚡", name: "Power Backup" },
+    { icon: "💧", name: "Water Supply" },
+    { icon: "🏢", name: "Club House" },
+    { icon: "🎾", name: "Tennis Court" },
+    { icon: "🧘", name: "Yoga Center" },
+    { icon: "👶", name: "Kids Play Area" },
+    { icon: "🎯", name: "Indoor Games" },
+    { icon: "📚", name: "Library" },
+  ],
+  overview: {
+    projectType: "Residential",
+    units: "1, 2 BHK",
+    area: "394-639 sq.ft",
+    reraNumber: "P51800053230",
+  },
+  floorPlans: [
+    { type: "1BHK", area: "380 RCA Sq. Ft.", price: "Click for price", categoryKey: '1BHK' },
+    { type: "1BHK", area: "390 RCA Sq. Ft.", price: "Click for price", categoryKey: '1BHK' },
+    { type: "2BHK", area: "600 RCA Sq. Ft.", price: "Click for price", categoryKey: '2BHK' },
+    { type: "Typical", area: "Typical Layout", price: "Click for price", categoryKey: 'TYPICAL' },
+  ],
+  floorPlanCategoryImages: {
+    oneBhk: "",
+    twoBhk: "",
+    threeBhk: "",
+    typical: "",
+    brochure: "",
+  },
+  viewFloorplanImages: [],
+  virtualTours: [
+    { id: 1, image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop", alt: "Virtual Tour 1" },
+    { id: 2, image: "https://images.unsplash.com/photo-1517840901100-8179e9d84967?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "Virtual Tour 2" },
+    { id: 3, image: "https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "Virtual Tour 3" },
+  ],
+  locationInfo: {
+    location: "Vikhroli East",
+    zone: "Central Mumbai",
+    pincode: "400083",
+    mapEmbedUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.8!2d72.9!3d19.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzAwLjAiTiA3MsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1",
+    mapsCtaText: "View on Google Maps",
+  },
+  similarProjects: [
+    {
+      id: 1,
+      name: "RNA NG Royal Park",
+      type: "1 BHK, 2 BHK residential apartments",
+      location: "Kanjurmarg",
+      price: "Starting At ₹70 Lakhs +",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&h=200&fit=crop",
+    },
+    {
+      id: 2,
+      name: "RNA NG Royal Park",
+      type: "1 BHK, 2 BHK residential apartments",
+      location: "Kanjurmarg",
+      price: "Starting At ₹70 Lakhs +",
+      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=300&h=200&fit=crop",
+    },
+    {
+      id: 3,
+      name: "RNA NG Royal Park",
+      type: "1 BHK, 2 BHK residential apartments",
+      location: "Kanjurmarg",
+      price: "Starting At ₹70 Lakhs +",
+      image: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=300&h=200&fit=crop",
+    },
+  ],
+};
+
+const defaultProjectsData: ProjectDetailsData[] = [
+  defaultProjectDetailsData,
+  { ...defaultProjectDetailsData, id: 2 },
+  { ...defaultProjectDetailsData, id: 3 },
+];
+
 const defaultWebsiteData: WebsiteData = {
   heroSection: defaultHeroData,
   newlyLaunched: defaultNewlyLaunchedData,
@@ -532,6 +710,8 @@ const defaultWebsiteData: WebsiteData = {
   frequentlyAskedQuestions: defaultFrequentlyAskedQuestionsData,
   discoverNeighborhoods: defaultDiscoverNeighborhoodsData,
   mumbaiHomes: defaultMumbaiHomesData,
+  projectDetails: defaultProjectDetailsData,
+  projects: defaultProjectsData,
 };
 
 // Context
@@ -549,6 +729,10 @@ interface WebsiteDataContextType {
   updateFrequentlyAskedQuestions: (data: FrequentlyAskedQuestionsData) => void;
   updateDiscoverNeighborhoods: (data: DiscoverNeighborhoodsData) => void;
   updateMumbaiHomes: (data: MumbaiHomesData) => void;
+  updateProjectDetails: (data: ProjectDetailsData) => void;
+  addProject: (data?: Partial<ProjectDetailsData>) => ProjectDetailsData;
+  updateProjectById: (id: number, data: ProjectDetailsData) => void;
+  deleteProjectById: (id: number) => void;
   refreshData: () => void;
 }
 
@@ -578,6 +762,25 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
         const frequentlyAskedQuestionsData = localStorage.getItem('frequentlyAskedQuestionsData');
         const discoverNeighborhoodsData = localStorage.getItem('discoverNeighborhoodsData');
         const mumbaiHomesData = localStorage.getItem('mumbaiHomesData');
+        const projectDetailsData = localStorage.getItem('projectDetailsData');
+        const projectsData = localStorage.getItem('projectsData');
+
+        const normalizeProject = (p: any, fallbackId: number = Date.now()) => {
+          const base = { ...defaultProjectDetailsData } as any;
+          const merged = { ...base, ...(p || {}) };
+          merged.id = typeof merged.id === 'number' ? merged.id : fallbackId;
+          merged.statusBadges = Array.isArray(merged.statusBadges) ? merged.statusBadges : [];
+          merged.amenities = Array.isArray(merged.amenities) ? merged.amenities : base.amenities;
+          merged.floorPlans = Array.isArray(merged.floorPlans) ? merged.floorPlans : base.floorPlans;
+          merged.viewFloorplanImages = Array.isArray(merged.viewFloorplanImages) ? merged.viewFloorplanImages : [];
+          merged.virtualTours = Array.isArray(merged.virtualTours) ? merged.virtualTours : base.virtualTours;
+          merged.similarProjects = Array.isArray(merged.similarProjects) ? merged.similarProjects : base.similarProjects;
+          merged.overview = merged.overview ? { ...base.overview, ...merged.overview } : base.overview;
+          merged.locationInfo = merged.locationInfo ? { ...base.locationInfo, ...merged.locationInfo } : base.locationInfo;
+          merged.brochurePdf = typeof merged.brochurePdf === 'string' ? merged.brochurePdf : "";
+          merged.floorPlanCategoryImages = merged.floorPlanCategoryImages ? { ...base.floorPlanCategoryImages, ...merged.floorPlanCategoryImages } : base.floorPlanCategoryImages;
+          return merged as ProjectDetailsData;
+        };
 
         setWebsiteData({
           heroSection: heroData ? JSON.parse(heroData) : defaultHeroData,
@@ -600,6 +803,16 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
             ? JSON.parse(discoverNeighborhoodsData)
             : defaultDiscoverNeighborhoodsData,
           mumbaiHomes: mumbaiHomesData ? JSON.parse(mumbaiHomesData) : defaultMumbaiHomesData,
+          projectDetails: normalizeProject(projectDetailsData ? JSON.parse(projectDetailsData) : defaultProjectDetailsData, defaultProjectDetailsData.id),
+          projects: (() => {
+            try {
+              const parsed = projectsData ? JSON.parse(projectsData) : defaultProjectsData;
+              if (!Array.isArray(parsed)) return defaultProjectsData;
+              return parsed.map((p: any, idx: number) => normalizeProject(p, Date.now() + idx));
+            } catch {
+              return defaultProjectsData;
+            }
+          })(),
         });
       } catch (error) {
         console.error('Error loading website data:', error);
@@ -697,6 +910,49 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
     window.dispatchEvent(new CustomEvent('websiteDataUpdated'));
   };
 
+  const updateProjectDetails = (data: ProjectDetailsData) => {
+    setWebsiteData(prev => ({ ...prev, projectDetails: data }));
+    localStorage.setItem('projectDetailsData', JSON.stringify(data));
+    window.dispatchEvent(new CustomEvent('websiteDataUpdated'));
+  };
+
+  const addProject = (partial?: Partial<ProjectDetailsData>): ProjectDetailsData => {
+    const newId = Date.now();
+    const newProject: ProjectDetailsData = {
+      ...defaultProjectDetailsData,
+      id: newId,
+      projectName: partial?.projectName || `New Project ${newId}`,
+      ...partial,
+    };
+    setWebsiteData(prev => {
+      const next = { ...prev, projects: [...prev.projects, newProject] };
+      localStorage.setItem('projectsData', JSON.stringify(next.projects));
+      return next;
+    });
+    window.dispatchEvent(new CustomEvent('websiteDataUpdated'));
+    return newProject;
+  };
+
+  const updateProjectById = (id: number, data: ProjectDetailsData) => {
+    setWebsiteData(prev => {
+      const nextProjects = prev.projects.map(p => (p.id === id ? data : p));
+      const next = { ...prev, projects: nextProjects };
+      localStorage.setItem('projectsData', JSON.stringify(nextProjects));
+      return next;
+    });
+    window.dispatchEvent(new CustomEvent('websiteDataUpdated'));
+  };
+
+  const deleteProjectById = (id: number) => {
+    setWebsiteData(prev => {
+      const nextProjects = prev.projects.filter(p => p.id !== id);
+      const next = { ...prev, projects: nextProjects };
+      localStorage.setItem('projectsData', JSON.stringify(nextProjects));
+      return next;
+    });
+    window.dispatchEvent(new CustomEvent('websiteDataUpdated'));
+  };
+
   const refreshData = () => {
     const heroData = localStorage.getItem('heroSectionData');
     const newlyLaunchedData = localStorage.getItem('newlyLaunchedData');
@@ -710,6 +966,25 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
     const frequentlyAskedQuestionsData = localStorage.getItem('frequentlyAskedQuestionsData');
     const discoverNeighborhoodsData = localStorage.getItem('discoverNeighborhoodsData');
     const mumbaiHomesData = localStorage.getItem('mumbaiHomesData');
+    const projectDetailsData = localStorage.getItem('projectDetailsData');
+    const projectsData = localStorage.getItem('projectsData');
+
+    const normalizeProject = (p: any, fallbackId: number = Date.now()) => {
+      const base = { ...defaultProjectDetailsData } as any;
+      const merged = { ...base, ...(p || {}) };
+      merged.id = typeof merged.id === 'number' ? merged.id : fallbackId;
+      merged.statusBadges = Array.isArray(merged.statusBadges) ? merged.statusBadges : [];
+      merged.amenities = Array.isArray(merged.amenities) ? merged.amenities : base.amenities;
+      merged.floorPlans = Array.isArray(merged.floorPlans) ? merged.floorPlans : base.floorPlans;
+      merged.viewFloorplanImages = Array.isArray(merged.viewFloorplanImages) ? merged.viewFloorplanImages : [];
+      merged.virtualTours = Array.isArray(merged.virtualTours) ? merged.virtualTours : base.virtualTours;
+      merged.similarProjects = Array.isArray(merged.similarProjects) ? merged.similarProjects : base.similarProjects;
+      merged.overview = merged.overview ? { ...base.overview, ...merged.overview } : base.overview;
+      merged.locationInfo = merged.locationInfo ? { ...base.locationInfo, ...merged.locationInfo } : base.locationInfo;
+      merged.brochurePdf = typeof merged.brochurePdf === 'string' ? merged.brochurePdf : "";
+      merged.floorPlanCategoryImages = merged.floorPlanCategoryImages ? { ...base.floorPlanCategoryImages, ...merged.floorPlanCategoryImages } : base.floorPlanCategoryImages;
+      return merged as ProjectDetailsData;
+    };
 
     setWebsiteData({
       heroSection: heroData ? JSON.parse(heroData) : defaultHeroData,
@@ -728,6 +1003,16 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
         ? JSON.parse(discoverNeighborhoodsData)
         : defaultDiscoverNeighborhoodsData,
       mumbaiHomes: mumbaiHomesData ? JSON.parse(mumbaiHomesData) : defaultMumbaiHomesData,
+      projectDetails: normalizeProject(projectDetailsData ? JSON.parse(projectDetailsData) : defaultProjectDetailsData, defaultProjectDetailsData.id),
+      projects: (() => {
+        try {
+          const parsed = projectsData ? JSON.parse(projectsData) : defaultProjectsData;
+          if (!Array.isArray(parsed)) return defaultProjectsData;
+          return parsed.map((p: any, idx: number) => normalizeProject(p, Date.now() + idx));
+        } catch {
+          return defaultProjectsData;
+        }
+      })(),
     });
   };
 
@@ -747,6 +1032,10 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
         updateFrequentlyAskedQuestions,
         updateDiscoverNeighborhoods,
         updateMumbaiHomes,
+        updateProjectDetails,
+        addProject,
+        updateProjectById,
+        deleteProjectById,
         refreshData,
       }}
     >
