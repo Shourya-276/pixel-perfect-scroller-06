@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -22,14 +22,28 @@ interface FloorPlanItem {
 interface VirtualTourItem { id: number; image: string; alt: string }
 interface SimilarProjectItem { id: number; name: string; type: string; location: string; price: string; image: string }
 
-const ProjectDetailsAdmin = () => {
+interface ProjectDetailsAdminProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  /** When provided, select this project when the dialog opens */
+  initialProjectId?: number;
+}
+
+const ProjectDetailsAdmin = (props?: ProjectDetailsAdminProps) => {
+  const { open: openProp, onOpenChange, initialProjectId } = props || {};
   const { websiteData, updateProjectDetails, addProject, updateProjectById, deleteProjectById } = useWebsiteData();
+  // controlled/uncontrolled open
+  const [openLocal, setOpenLocal] = useState(false);
+  const open = typeof openProp === 'boolean' ? openProp : openLocal;
+  const setOpen = (v: boolean) => {
+    if (onOpenChange) onOpenChange(v);
+    else setOpenLocal(v);
+  };
   const { toast } = useToast();
 
   const safeProjects = Array.isArray(websiteData.projects) ? websiteData.projects : [];
   const initialSelected = safeProjects[0]?.id ?? websiteData.projectDetails?.id ?? Date.now();
   const [selectedId, setSelectedId] = useState<number>(initialSelected);
-  const [open, setOpen] = useState(false);
 
   // -------------------------------------------------------------
   // Migrate old floor-plans (strip the old `price` field)
@@ -47,6 +61,31 @@ const ProjectDetailsAdmin = () => {
     ...currentProject,
     floorPlans: migrateFloorPlans(currentProject.floorPlans || [])
   });
+
+  // Sync data when websiteData or selectedId changes
+  useEffect(() => {
+    const proj = safeProjects.find(p => p.id === selectedId) || websiteData.projectDetails;
+    setData({
+      ...proj,
+      heroImages: Array.isArray(proj.heroImages) ? proj.heroImages : [],
+      floorPlans: migrateFloorPlans(proj.floorPlans || [])
+    });
+  }, [websiteData, selectedId]);
+
+  // If opened programmatically with an initialProjectId, select that project
+  useEffect(() => {
+    if (initialProjectId && open) {
+      const proj = safeProjects.find(p => p.id === initialProjectId);
+      if (proj) {
+        setSelectedId(initialProjectId);
+        setData({
+          ...proj,
+          heroImages: Array.isArray(proj.heroImages) ? proj.heroImages : [],
+          floorPlans: migrateFloorPlans(proj.floorPlans || [])
+        });
+      }
+    }
+  }, [initialProjectId, open, safeProjects]);
 
   // Refs
   const heroRef = useRef<HTMLInputElement>(null);

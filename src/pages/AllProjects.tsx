@@ -5,7 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Heart, MapPin, Search, X, ChevronDown, Plus } from "lucide-react";
+import { Trash2, Heart, MapPin, Search, X, ChevronDown, Plus } from "lucide-react";
 import Header from "@/components/Header";
 import MumbaiHomesSection from "@/components/MumbaiHomesSection";
 import ProjectsInKandivaliSection from "@/components/ProjectsInKandivaliSection";
@@ -113,7 +113,7 @@ const limitedOffers = [
   }
 ];
 
-const ProjectCard = ({ project, onLikeToggle }) => {
+const ProjectCard = ({ project, onLikeToggle, onDelete }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       <div className="relative">
@@ -136,9 +136,10 @@ const ProjectCard = ({ project, onLikeToggle }) => {
           variant="ghost"
           size="sm"
           className="absolute top-3 right-3 p-1 h-7 w-7 bg-white/80 hover:bg-white"
-          onClick={() => onLikeToggle(project.id)}
+          onClick={() => onDelete && onDelete(project.id)}
+          aria-label="Delete project"
         >
-          <Heart className={`h-4 w-4 ${project.isLiked ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />
+          <Trash2 className="h-4 w-4 text-gray-600" />
         </Button>
         <div className="absolute bottom-3 left-3 right-3">
           <Badge variant="secondary" className="bg-black/70 text-white text-xs px-2 py-1">
@@ -202,7 +203,7 @@ const FilterSection = ({ title, children, isExpandable = false }) => {
 };
 
 const AllProjects = () => {
-  const { websiteData } = useWebsiteData();
+  const { websiteData, deleteProjectById } = useWebsiteData();
   const [searchParams] = useSearchParams();
   const mapFromContext = () => (
     (websiteData.projects && websiteData.projects.length > 0)
@@ -211,13 +212,25 @@ const AllProjects = () => {
           name: `${p.projectName} - Residential`,
           image: p.mainImage || p.heroImage || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop",
           type: p.cardType || p.overview?.projectType || "1BHK, 2 BHK Apartments available",
-          location: p.locationInfo?.location || p.locationText || "Mumbai",
+          // prefer locationText (what forms commonly set) then fallback to locationInfo.location
+          location: p.locationText || p.locationInfo?.location || "Mumbai",
           price: p.priceRange || "₹1.00 Cr",
           builder: p.builder || p.developerName || "Builder Name",
           status: p.status || (p.statusBadges?.[0] || "Under Construction"),
           isLiked: false,
           isViewed: false,
           reraApproved: !!p.reraApproved,
+          // extra fields to support filtering
+          amenities: Array.isArray(p.amenities) ? p.amenities.map((a: any) => (a && a.name) ? a.name : String(a)) : [],
+          purchaseType: (p as any).purchaseType || "",
+          furnishing: (p as any).furnishing || "",
+          postedBy: (p as any).postedBy || "",
+          beds: p.overview?.units || "",
+          areaNumeric: (() => {
+            const areaStr = p.overview?.area || "";
+            const m = (areaStr || "").match(/(\d{2,5})/);
+            return m ? Number(m[1]) : 0;
+          })(),
         }))
       : projectsFallback
   );
@@ -276,6 +289,15 @@ const AllProjects = () => {
     );
   };
 
+  const handleDelete = (projectId) => {
+    // Use context delete when available; otherwise fall back to local state
+    if (typeof deleteProjectById === 'function') {
+      deleteProjectById(projectId);
+    } else {
+      setProjectList(prev => prev.filter(p => p.id !== projectId));
+    }
+  };
+
   const handleOfferLikeToggle = (offerId) => {
     setOfferLikes((prev) => ({
       ...prev,
@@ -316,6 +338,20 @@ const AllProjects = () => {
     if (selectedProjects.length > 0) {
       filtered = filtered.filter(project => selectedProjects.includes(project.name));
     }
+    // Purchase type filter (best-effort: purchaseType may be empty)
+    if (selectedPurchaseType.length > 0) {
+      filtered = filtered.filter(project => selectedPurchaseType.includes(((project as any).purchaseType || "").toString()));
+    }
+    // Amenities: require every selected amenity to be present
+    if (selectedAmenities.length > 0) {
+      filtered = filtered.filter(project =>
+        selectedAmenities.every(amenity => (project as any).amenities && (project as any).amenities.map((a: any) => a.toLowerCase()).includes(amenity.toLowerCase()))
+      );
+    }
+    // Furnishing
+    if (selectedFurnishing.length > 0) {
+      filtered = filtered.filter(project => selectedFurnishing.includes(((project as any).furnishing || "").toString()));
+    }
     // Commented out filters for properties not in data structure
     // if (selectedPurchaseType.length > 0) {
     //   filtered = filtered.filter(project => selectedPurchaseType.includes(project.purchaseType));
@@ -331,11 +367,22 @@ const AllProjects = () => {
     if (selectedRera.length > 0) {
       filtered = filtered.filter(project => selectedRera.includes(project.reraApproved ? "Yes" : "No"));
     }
+    // Posted by
+    if (selectedPostedBy.length > 0) {
+      filtered = filtered.filter(project => selectedPostedBy.includes(((project as any).postedBy || "").toString()));
+    }
     // if (selectedPostedBy.length > 0) {
     //   filtered = filtered.filter(project => selectedPostedBy.includes(project.postedBy));
     // }
     if (selectedConstruction.length > 0) {
       filtered = filtered.filter(project => selectedConstruction.includes(project.status));
+    }
+    // Bedrooms
+    if (selectedBedrooms.length > 0) {
+      filtered = filtered.filter(project => {
+        const beds = (((project as any).beds || "").toString()).toLowerCase();
+        return selectedBedrooms.some(b => beds.includes(b.toLowerCase()));
+      });
     }
     // if (selectedBedrooms.length > 0) {
     //   filtered = filtered.filter(project => selectedBedrooms.some(bed => project.beds.includes(bed)));
@@ -345,21 +392,35 @@ const AllProjects = () => {
     }
     // Budget range filter
     if (budgetRange[0] > 0 || budgetRange[1] > 0) {
+      const minCr = (budgetRange[0] || 0);
+      const maxCr = (budgetRange[1] || budgetRange[0] || 0) || Number.MAX_SAFE_INTEGER;
       filtered = filtered.filter(project => {
-        const price = parseFloat(project.price.replace(/[^0-9.]/g, ''));
-        const unit = project.price.includes("Cr") ? 10000000 : 100000;
-        const minBudget = budgetRange[0] * unit;
-        const maxBudget = budgetRange[1] * unit;
-        return price >= minBudget && price <= maxBudget;
+        // Prefer numeric bounds if available
+        const minP = (project as any).priceMinCrore as number | undefined;
+        const maxP = (project as any).priceMaxCrore as number | undefined;
+        if (typeof minP === 'number' && typeof maxP === 'number') {
+          return maxP >= minCr && minP <= maxCr;
+        }
+        // Fallback: parse textual price (best-effort)
+        const text = (project.price || "").replace(/[,₹]/g, '');
+        const nums = Array.from(text.matchAll(/(\d+(?:\.\d+)?)/g)).map(m => parseFloat(m[1]));
+        if (nums.length === 0) return false;
+        // if number > 100 assume it's rupees or large number -> convert to crores
+        const approxCr = (n: number) => (n > 100 ? n / 10000000 : n / 100);
+        const minApprox = Math.min(...nums.map(approxCr));
+        const maxApprox = Math.max(...nums.map(approxCr));
+        return maxApprox >= minCr && minApprox <= maxCr;
       });
     }
-    // Area range filter - commented out as area property doesn't exist
-    // if (areaRange[0] > 0 || areaRange[1] > 0) {
-    //   filtered = filtered.filter(project => {
-    //     const area = parseFloat(project.area.replace(/[^0-9.]/g, ''));
-    //     return area >= areaRange[0] && area <= areaRange[1];
-    //   });
-    // }
+    // Area range filter (best-effort using areaNumeric derived from overview.area)
+    if ((areaRange && areaRange[0] > 0) || (areaRange && areaRange[1] > 0)) {
+      const minA = (areaRange && areaRange[0]) || 0;
+      const maxA = (areaRange && areaRange[1]) || Number.MAX_SAFE_INTEGER;
+      filtered = filtered.filter(project => {
+        const area = Number((project as any).areaNumeric || 0);
+        return area >= minA && area <= maxA;
+      });
+    }
 
     return filtered;
   }, [projectList, searchQuery, hideAlreadySeen, verifiedProperties, selectedLocalities, selectedProjects, selectedPurchaseType, selectedAmenities, selectedFurnishing, selectedRera, selectedPostedBy, selectedConstruction, selectedBedrooms, selectedPropertyType, budgetRange, areaRange]);
@@ -1367,6 +1428,7 @@ const AllProjects = () => {
                     key={project.id} 
                     project={project} 
                     onLikeToggle={handleLikeToggle}
+                    onDelete={handleDelete}
                   />
                 ))
               ) : (
@@ -1466,6 +1528,7 @@ const AllProjects = () => {
                     key={`bottom-${project.id}`} 
                     project={project} 
                     onLikeToggle={handleLikeToggle}
+                    onDelete={handleDelete}
                   />
                 ))}
               </div>

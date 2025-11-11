@@ -225,7 +225,11 @@ export interface ProjectDetailsData {
   projectName: string;
   statusBadges: string[];
   priceRange: string;
+  // derived numeric fields for filtering (crores)
+  priceMinCrore?: number;
+  priceMaxCrore?: number;
   heroImage: string;
+  heroImages?: string[];
   mainImage: string;
   aerialImage: string;
   brochurePdf?: string;
@@ -602,6 +606,7 @@ const defaultProjectDetailsData: ProjectDetailsData = {
   statusBadges: ["Under Construction", "RERA"],
   priceRange: "₹78 L - 1.24 Cr",
   heroImage: "",
+  heroImages: [],
   mainImage: "",
   aerialImage: "",
   brochurePdf: "",
@@ -773,6 +778,7 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
           merged.amenities = Array.isArray(merged.amenities) ? merged.amenities : base.amenities;
           merged.floorPlans = Array.isArray(merged.floorPlans) ? merged.floorPlans : base.floorPlans;
           merged.viewFloorplanImages = Array.isArray(merged.viewFloorplanImages) ? merged.viewFloorplanImages : [];
+          merged.heroImages = Array.isArray(merged.heroImages) ? merged.heroImages : [];
           merged.virtualTours = Array.isArray(merged.virtualTours) ? merged.virtualTours : base.virtualTours;
           merged.similarProjects = Array.isArray(merged.similarProjects) ? merged.similarProjects : base.similarProjects;
           merged.overview = merged.overview ? { ...base.overview, ...merged.overview } : base.overview;
@@ -921,7 +927,8 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
     const newProject: ProjectDetailsData = {
       ...defaultProjectDetailsData,
       id: newId,
-      projectName: partial?.projectName || `New Project ${newId}`,
+      // start with an empty projectName so the user can enter it freely
+      projectName: partial?.projectName ?? "",
       ...partial,
     };
     setWebsiteData(prev => {
@@ -937,7 +944,17 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
     setWebsiteData(prev => {
       const nextProjects = prev.projects.map(p => (p.id === id ? data : p));
       const next = { ...prev, projects: nextProjects };
-      localStorage.setItem('projectsData', JSON.stringify(nextProjects));
+      try {
+        localStorage.setItem('projectsData', JSON.stringify(nextProjects));
+      } catch (error) {
+        if (error instanceof Error && error.name === 'QuotaExceededError') {
+          console.error('LocalStorage quota exceeded. Image data is too large.');
+          alert('Storage limit exceeded. Please use smaller images or remove some images. Images should be under 2MB and will be compressed automatically.');
+        } else {
+          console.error('Error saving to localStorage:', error);
+        }
+        throw error;
+      }
       return next;
     });
     window.dispatchEvent(new CustomEvent('websiteDataUpdated'));
@@ -947,7 +964,17 @@ export const WebsiteDataProvider: React.FC<WebsiteDataProviderProps> = ({ childr
     setWebsiteData(prev => {
       const nextProjects = prev.projects.filter(p => p.id !== id);
       const next = { ...prev, projects: nextProjects };
-      localStorage.setItem('projectsData', JSON.stringify(nextProjects));
+      try {
+        localStorage.setItem('projectsData', JSON.stringify(nextProjects));
+      } catch (error) {
+        if (error instanceof Error && error.name === 'QuotaExceededError') {
+          console.error('LocalStorage quota exceeded. Image data is too large.');
+          alert('Storage limit exceeded. Please use smaller images or remove some images. Images should be under 2MB and will be compressed automatically.');
+        } else {
+          console.error('Error saving to localStorage:', error);
+        }
+        throw error;
+      }
       return next;
     });
     window.dispatchEvent(new CustomEvent('websiteDataUpdated'));

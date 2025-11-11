@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Menu, Home, Building, FileText, Briefcase, PlusCircle, Phone, User } from "lucide-react";
+import PostProjectModal from "@/components/PostProjectModal";
 import {
   Sheet,
   SheetContent,
@@ -9,6 +11,7 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   return (
     <header className="bg-background border-b border-gray-200 py-4 px-4 sm:px-6 sticky top-0 z-50">
@@ -26,13 +29,16 @@ const Header = () => {
         </nav>
         
         <div className="hidden md:flex items-center space-x-4">
-          <Button 
-            variant="outline" 
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            onClick={() => navigate("/admin")}
-          >
-            Post Project
-          </Button>
+          <PostProjectModal
+            trigger={
+              <Button
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                Post Project
+              </Button>
+            }
+          />
           <Button variant="default" className="bg-primary hover:bg-primary/90">
             Contact Us
           </Button>
@@ -47,7 +53,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center ml-auto">
-          <Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="-mr-6 sm:mr-0 text-gray-700 bg-white/90 border border-gray-200 rounded-full shadow-sm h-10 w-10">
                 <Menu className="h-6 w-6" aria-hidden="true" />
@@ -91,13 +97,17 @@ const Header = () => {
                   <Briefcase className="h-5 w-5" />
                   <span>Careers</span>
                 </a>
-                <button 
-                  onClick={() => navigate("/admin")}
-                  className="flex items-center space-x-3 text-white/90 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 w-full text-left"
-                >
-                  <PlusCircle className="h-5 w-5" />
-                  <span>Post Project</span>
-                </button>
+                <PostProjectModal
+                  trigger={
+                    <button
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center space-x-3 text-white/90 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 w-full text-left"
+                    >
+                      <PlusCircle className="h-5 w-5" />
+                      <span>Post Project</span>
+                    </button>
+                  }
+                />
               </nav>
               <div className="mt-auto p-4">
                 <Button className="w-full bg-white text-[#0D6ABC] hover:bg-gray-100 flex items-center space-x-2 py-3">
@@ -108,6 +118,7 @@ const Header = () => {
             </SheetContent>
           </Sheet>
         </div>
+  {/* nothing extra here */}
       </div>
     </header>
   );
