@@ -98,6 +98,7 @@ const ProjectDetails = () => {
     virtualTours: Array.isArray(rawPd?.virtualTours) ? rawPd.virtualTours : [],
     similarProjects: Array.isArray(rawPd?.similarProjects) ? rawPd.similarProjects : [],
     viewFloorplanImages: Array.isArray(rawPd?.viewFloorplanImages) ? rawPd.viewFloorplanImages : [],
+    heroImages: Array.isArray(rawPd?.heroImages) ? rawPd.heroImages : [],
     floorPlanCategoryImages: rawPd?.floorPlanCategoryImages || {},
     overview: rawPd?.overview || { projectType: "", units: "", area: "", reraNumber: "" },
     locationInfo: rawPd?.locationInfo || { location: "", zone: "", pincode: "", mapEmbedUrl: "", mapsCtaText: "View on Google Maps" },
@@ -131,8 +132,24 @@ const ProjectDetails = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden">
-        <img src={heroSrc} alt="Project Hero" className="w-full h-full object-cover object-center md:object-fill" />
+      <section className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden">
+        {pd.heroImages && pd.heroImages.length > 1 ? (
+          <Carousel plugins={[Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false })]} opts={{ loop: true, duration: 800 }} className="w-full h-full">
+            <CarouselContent className="h-full">
+              {pd.heroImages.map((src, idx) => (
+                <CarouselItem key={idx} className="basis-full h-full">
+                  <div className="w-full h-full">
+                    <img src={src || heroSrc} alt={`Project Hero ${idx + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        ) : (
+          <div className="w-full h-full">
+            <img src={heroSrc} alt="Project Hero" className="w-full h-full object-cover" />
+          </div>
+        )}
         <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-40">
           <Button
             className="bg-[#0D6ABC] hover:bg-[#0D6ABC]/90 text-white w-10 h-56 px-0 rounded-l-lg rounded-r-lg shadow-lg flex items-center justify-center enquiry-button-pointer sm:w-12 sm:h-64"
@@ -158,8 +175,8 @@ const ProjectDetails = () => {
                     ))}
                   </div>
                 </div>
-                <div className="relative">
-                  <img src={mainSrc} alt="Main Project" className="w-full h-48 sm:h-64 lg:h-[480px] object-cover rounded-lg" />
+                <div className="relative rounded-lg h-48 sm:h-64 lg:h-[480px] overflow-hidden">
+                  <img src={mainSrc} alt="Main Project" className="w-full h-full object-cover rounded-lg" />
                   <div className="absolute bottom-4 left-4">
                     <Button variant="secondary" size="sm" className="bg-white/90 hover:bg-white">View all</Button>
                   </div>
