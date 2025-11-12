@@ -81,11 +81,11 @@ const HeroSection = () => {
             />
           </div>
           {/* Circular badge with rotating animation */}
-          <div className="absolute bottom-0 left-0 w-[85px] h-[85px] animate-spin-slow md:w-[101px] md:h-[101px] z-10">
+          <div className="absolute -bottom-3 -left-3 w-[105px] h-[105px] md:w-[121px] md:h-[121px] z-20 rounded-full flex items-center justify-center drop-shadow-xl pointer-events-none select-none">
             <img
               src={exploreNowBadge}
               alt="Explore Now"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain origin-center animate-spin-slow select-none pointer-events-none"
             />
           </div>
         </div>

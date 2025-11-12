@@ -11,12 +11,12 @@ const SpotlightProjectSection = () => {
       <div className="relative w-full">
         {/* Main card with asymmetric design */}
         <div className="relative bg-primary overflow-hidden w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[800px] max-w-screen-2xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[650px] max-w-screen-2xl mx-auto px-6">
             {/* Left image panel with gradient border */}
-            <div className="relative w-full order-2 lg:order-1 mt-8 lg:mt-0 flex items-center justify-center lg:py-8">
+            <div className="relative w-full order-2 lg:order-1 mt-6 lg:mt-0 flex items-center justify-center lg:py-4">
               {/* Gradient border container */}
               <div 
-                className="relative max-w-[700px] h-[620px] mx-auto rounded-[200px] p-6 shadow-2xl w-full"
+                className="relative max-w-[700px] h-[520px] mx-auto rounded-[200px] p-6 shadow-2xl w-full"
                 style={{
                   background: 'linear-gradient(180deg, #D7EBFC 0%, #419FF2 100%)',
                 }}
@@ -35,7 +35,7 @@ const SpotlightProjectSection = () => {
             </div>
 
             {/* Right content panel */}
-            <div className="p-6 lg:p-12 text-white space-y-4 lg:space-y-6 relative z-10 text-center lg:text-left order-1 lg:order-2">
+            <div className="p-5 lg:p-8 text-white space-y-3 lg:space-y-4 relative z-10 text-center lg:text-left order-1 lg:order-2">
               {/* Spotlight badge */}
               <div className="inline-block">
                 <div className="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full font-semibold text-sm lg:text-base">
@@ -60,7 +60,7 @@ const SpotlightProjectSection = () => {
               </p>
 
               {/* Features container with price circle and info grid */}
-              <div className="relative backdrop-blur-md p-6 lg:p-8 mt-8" style={{ borderRadius: '24px 24px 24px 250px', backgroundColor: '#1A88DD' }}>
+              <div className="relative backdrop-blur-md p-5 lg:p-6 mt-6" style={{ borderRadius: '24px 24px 24px 250px', backgroundColor: '#1A88DD' }}>
                 {/* Project Type - standalone on left */}
                 <div className="flex items-start space-x-3 mb-6">
                   <Home className="h-7 w-7 text-white flex-shrink-0 mt-1" />
@@ -72,22 +72,22 @@ const SpotlightProjectSection = () => {
 
                 {/* Price circle positioned absolutely on the left, lower position */}
                 <div className="absolute left-8 bottom--1 hidden lg:block">
-                  <div className="bg-[#2C5F8D] rounded-full w-44 h-44 flex flex-col items-center justify-center text-white shadow-xl">
+                  <div className="bg-[#2C5F8D] rounded-full w-40 h-40 flex flex-col items-center justify-center text-white shadow-xl">
                     <div className="text-sm opacity-90">Starting At</div>
                     <div className="text-3xl font-bold">{websiteData.spotlightProject.price}</div>
                   </div>
                 </div>
 
                 {/* Mobile price circle */}
-                <div className="flex justify-center mb-6 lg:hidden">
-                  <div className="bg-[#2C5F8D] rounded-full w-36 h-36 flex flex-col items-center justify-center text-white shadow-xl">
+                <div className="flex justify-center mb-5 lg:hidden">
+                  <div className="bg-[#2C5F8D] rounded-full w-32 h-32 flex flex-col items-center justify-center text-white shadow-xl">
                     <div className="text-sm opacity-90">Starting At</div>
                     <div className="text-2xl font-bold">{websiteData.spotlightProject.price}</div>
                   </div>
                 </div>
 
                 {/* Right side features - all aligned with left margin */}
-                <div className="space-y-5 lg:ml-64 lg:-mt-20">
+                <div className="space-y-4 lg:ml-56 lg:-mt-16">
                   {/* Apartment Types */}
                   <div className="flex items-start space-x-3">
                     <Home className="h-7 w-7 text-white flex-shrink-0 mt-1" />
@@ -118,11 +118,11 @@ const SpotlightProjectSection = () => {
               </div>
 
               {/* CTA Button */}
-              <div className="pt-4 lg:pt-6 flex justify-center">
+              <div className="pt-2 lg:pt-4 flex justify-center">
                 <Button 
                   variant="secondary" 
                   size="lg"
-                  className="bg-white text-primary hover:bg-white/90 px-8 py-3 text-base font-semibold lg:px-10 lg:py-4 lg:text-lg"
+                  className="bg-white text-primary hover:bg-white/90 px-7 py-2.5 text-base font-semibold lg:px-9 lg:py-3.5 lg:text-lg"
                 >
                   {websiteData.spotlightProject.ctaText}
                 </Button>
