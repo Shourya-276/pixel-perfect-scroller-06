@@ -16,7 +16,7 @@ const SpotlightProjectSection = () => {
             <div className="relative w-full order-2 lg:order-1 mt-6 lg:mt-0 flex items-center justify-center lg:py-4">
               {/* Gradient border container */}
               <div 
-                className="relative max-w-[700px] h-[520px] mx-auto rounded-[200px] p-6 shadow-2xl w-full"
+                className="relative max-w-[700px] h-[590px] mx-auto rounded-[200px] p-6 shadow-2xl w-full"
                 style={{
                   background: 'linear-gradient(180deg, #D7EBFC 0%, #419FF2 100%)',
                 }}
