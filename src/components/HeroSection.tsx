@@ -63,37 +63,30 @@ const HeroSection = () => {
         </div>
       </div>
 
-          {/* Right content - Building image */}
-          <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 lg:h-full">
+      {/* Right content - Uploaded image with gradient border, moved OUTSIDE .container for true absolute positioning */}
+      <div className="hidden lg:flex lg:absolute lg:top-[20px] lg:bottom-[70px] lg:right-0 lg:w-[calc(58vw-130px)] lg:min-h-[500px] lg:max-h-[calc(100vh-140px)] lg:max-w-[900px] items-end justify-end z-20">
+        {/* Gradient border container */}
+        <div 
+          className="relative w-full h-full rounded-[64px] p-4 shadow-2xl"
+          style={{
+            background: 'linear-gradient(180deg, #68AFEE 0%, #D4EAFD 100%)',
+          }}
+        >
+          {/* Inner container with subtle gradient background */}
+          <div className="relative rounded-[60px] overflow-hidden bg-gradient-to-b from-[#F0F7FD] to-[#E8F4FD] h-full w-full">
             <img
               src={websiteData.heroSection.backgroundImage || buildingComplex}
               alt="Hero image"
               className="w-full h-full object-cover"
             />
-            
-            {/* Wavy border overlay */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              preserveAspectRatio="none"
-              viewBox="0 0 100 100"
-            >
-              <path
-                d="M 0,0 L 0,100 Q 15,95 30,100 L 100,100"
-                fill="none"
-                stroke="#1A88DD"
-                strokeWidth="1.2"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-            
-            {/* Circular badge with rotating animation - fixed at bottom-left */}
-            <div className="absolute bottom-8 left-8 w-24 h-24 animate-spin-slow md:w-28 md:h-28 z-10">
-              <img
-                src={exploreNowBadge}
-                alt="Explore Now"
-                className="w-full h-full object-contain"
-              />
-            </div>
+          </div>
+          {/* Circular badge with rotating animation */}
+          <div className="absolute bottom-0 left-0 w-[85px] h-[85px] animate-spin-slow md:w-[101px] md:h-[101px] z-10">
+            <img
+              src={exploreNowBadge}
+              alt="Explore Now"
+              className="w-full h-full object-contain"
+            />
           </div>
         </div>
       </div>
