@@ -4,8 +4,10 @@ import { Search, MapPin } from "lucide-react";
 import buildingComplex from "@/assets/building-complex.png";
 import exploreNowBadge from "@/assets/explore-now-badge.png";
 import trainImage from "@/assets/train.png";
+import { useWebsiteData } from "@/contexts/WebsiteDataContext";
 
 const HeroSection = () => {
+  const { websiteData } = useWebsiteData();
   return (
     <section className="relative bg-gradient-hero min-h-[600px] overflow-hidden">
       {/* Background wave shape */}
@@ -33,16 +35,14 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="text-primary-foreground text-center lg:text-left">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              Discover<br />
-              Mumbai Homes
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
+              {websiteData.heroSection.title}
             </h1>
-            
             {/* Search bar */}
             <div className="bg-white rounded-lg p-2 mb-6 flex flex-col sm:flex-row items-center shadow-lg">
               <Search className="text-gray-400 ml-3 h-5 w-5 mb-2 sm:mb-0" />
               <Input
-                placeholder="Enter Locality / Project / Society / Landmark"
+                placeholder={websiteData.heroSection.searchPlaceholder}
                 className="border-0 bg-transparent focus-visible:ring-0 text-gray-700 flex-1 w-full sm:w-auto mb-2 sm:mb-0"
               />
               <Button className="bg-primary hover:bg-primary/90 px-6 w-full sm:w-auto">
@@ -50,52 +50,43 @@ const HeroSection = () => {
                 Search
               </Button>
             </div>
-            
-            <p className="text-base lg:text-lg mb-4 opacity-90">
-              Discover the Perfect Residential Destination with Mumbai Homes,<br />
-              Offering a Variety of Options to Suit your Lifestyle Needs
+            <p className="text-base lg:text-lg mb-4 opacity-90 whitespace-pre-line">
+              {websiteData.heroSection.description}
             </p>
-            
             <p className="text-lg lg:text-xl font-semibold mb-8">
-              100% Happiness With 0% Brokerage
+              {websiteData.heroSection.subtitle}
             </p>
-            
             <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100 px-8 py-3 text-base lg:text-lg font-semibold">
-              Enquiry Now
+              {websiteData.heroSection.ctaText}
             </Button>
           </div>
+        </div>
+      </div>
 
-          {/* Right content - Building image */}
-          <div className="relative mt-8 lg:mt-0 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:w-1/2 lg:h-full">
+      {/* Right content - Uploaded image with gradient border, moved OUTSIDE .container for true absolute positioning */}
+      <div className="hidden lg:flex lg:absolute lg:top-[20px] lg:bottom-[70px] lg:right-0 lg:w-[calc(58vw-130px)] lg:min-h-[500px] lg:max-h-[calc(100vh-140px)] lg:max-w-[900px] items-end justify-end z-20">
+        {/* Gradient border container */}
+        <div 
+          className="relative w-full h-full rounded-[64px] p-4 shadow-2xl"
+          style={{
+            background: 'linear-gradient(180deg, #68AFEE 0%, #D4EAFD 100%)',
+          }}
+        >
+          {/* Inner container with subtle gradient background */}
+          <div className="relative rounded-[60px] overflow-hidden bg-gradient-to-b from-[#F0F7FD] to-[#E8F4FD] h-full w-full">
             <img
-              src={buildingComplex}
-              alt="Mumbai residential buildings"
+              src={websiteData.heroSection.backgroundImage || buildingComplex}
+              alt="Hero image"
               className="w-full h-full object-cover"
             />
-            
-            {/* Wavy border overlay */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none"
-              preserveAspectRatio="none"
-              viewBox="0 0 100 100"
-            >
-              <path
-                d="M 0,0 L 0,100 Q 15,95 30,100 L 100,100"
-                fill="none"
-                stroke="#1A88DD"
-                strokeWidth="1.2"
-                vectorEffect="non-scaling-stroke"
-              />
-            </svg>
-            
-            {/* Circular badge with rotating animation - fixed at bottom-left */}
-            <div className="absolute bottom-8 left-8 w-24 h-24 animate-spin-slow md:w-28 md:h-28 z-10">
-              <img
-                src={exploreNowBadge}
-                alt="Explore Now"
-                className="w-full h-full object-contain"
-              />
-            </div>
+          </div>
+          {/* Circular badge with rotating animation */}
+          <div className="absolute bottom-[-12px] left-[-12px] w-[105px] h-[105px] md:w-[121px] md:h-[121px] z-10">
+            <img
+              src={exploreNowBadge}
+              alt="Explore Now"
+              className="w-full h-full object-contain animate-spin-slow origin-center block"
+            />
           </div>
         </div>
       </div>
@@ -106,7 +97,7 @@ const HeroSection = () => {
           src={trainImage}
           alt="Mumbai Local Train"
           className="absolute bottom-0 h-12 w-auto animate-train-move"
-          style={{ minWidth: '200px' }}
+          style={{ minWidth: "200px" }}
         />
       </div>
     </section>
